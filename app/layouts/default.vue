@@ -1,5 +1,5 @@
 <template>
-  <header>Blog</header>
+  <Header />
   <main>
     <slot />
   </main>
