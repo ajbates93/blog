@@ -3,5 +3,5 @@
   <main>
     <slot />
   </main>
-  <footer>My footer</footer>
+  <Footer />
 </template>
