@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="bg-slate-300 dark:bg-slate-800 px-5 py-3 flex items-center justify-end gap-5 text-lg mb-10"
-  >
-    <ULink class="mr-auto" to="/">Alex Bates</ULink>
-    <ULink class="" to="/">Blogs</ULink>
-    <ULink class="" to="/about">About</ULink>
+  <div class="p-5 flex items-center justify-end gap-5 text-lg mb-10">
     <UIcon class="cursor-pointer" @click="toggleTheme" :name="themeIcon" />
   </div>
 </template>

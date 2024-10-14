@@ -5,6 +5,10 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   devtools: { enabled: true },
-  modules: ["@nuxt/content", "@nuxt/ui", "@nuxt/fonts"],
+  modules: [
+    "@nuxt/content",
+    "@nuxt/ui",
+    "@nuxt/fonts",
+    "@nuxt/image",
+  ],
 });
-

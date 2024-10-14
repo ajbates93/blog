@@ -6,6 +6,7 @@ export default <Partial<Config>>{
     extend: {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        mono: ["FiraCode Nerd Font Mono", ...defaultTheme.fontFamily.mono],
       },
     },
   },

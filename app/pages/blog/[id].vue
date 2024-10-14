@@ -8,12 +8,24 @@ const { data: article } = await useAsyncData("article", () =>
 
 <template>
   <div class="w-full pb-10">
-    <div class="w-full py-40 bg-gray-100 px-4">
-      <h1 class="text-6xl font-bold text-center">{{ article.title }}</h1>
-    </div>
     <div
-      class="max-w-7xl bg-white rounded-3xl flex flex-col items-center shadow-md -mt-20 mx-auto p-10 gap-10"
+      class="max-w-7xl rounded-3xl flex flex-col items-center shadow-md mx-auto p-10 gap-10"
     >
+      <!-- Blog avatar,  Author and date-->
+      <div class="flex flex-col justify-center items-center gap-5">
+        <ULink to="/">
+          <NuxtPicture
+            src="~/images/About.webp"
+            alt="Author"
+            class="rounded-full w-20 h-20 cover"
+          />
+        </ULink>
+        <ULink to="/" class="spacing-2 text-xl">Alex Bates</ULink>
+        <p class="text-gray-700 dark:text-gray-300">
+          {{ new Date(article.date).toLocaleString().split(",")[0] }}
+        </p>
+      </div>
+
       <ContentRenderer :value="article" class="prose" />
     </div>
   </div>

@@ -2,14 +2,18 @@
   <section
     class="grid md:grid-cols-[2fr_3fr] grid-cols-1 container mx-auto p-10 text-left"
   >
-    <picture class="rounded shadow-xl overflow-hidden">
+    <picture class="rounded shadow-2xl overflow-hidden">
       <img src="/images/About.webp" alt="Alex Bates" class="w-full" />
     </picture>
     <div class="py-5 px-10 flex flex-col justify-start">
-      <h1 class="text-4xl font-bold">what's up?</h1>
+      <h1 class="text-4xl text-slate-700 dark:text-white font-bold">
+        what's up?
+      </h1>
       <TextWrapper>
-        I'm <span class="font-bold text-gray-300">Alex Bates</span>. I'm a
-        software developer that's been working professionally for
+        I'm
+        <span class="font-bold text-slate-700 dark:text-gray-300"
+          >Alex Bates</span
+        >. I'm a software developer that's been working professionally for
         <span>{{ yearsSinceStartDate }}</span> years.
       </TextWrapper>
       <TextWrapper>
