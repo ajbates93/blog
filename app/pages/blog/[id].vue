@@ -8,17 +8,15 @@ const { data: article } = await useAsyncData("article", () =>
 
 <template>
   <div class="w-full pb-10">
-    <div
-      class="max-w-7xl rounded-3xl flex flex-col items-center shadow-md mx-auto p-10 gap-10"
-    >
+    <div class="flex flex-col items-center mx-auto p-10 gap-10">
       <!-- Blog avatar,  Author and date-->
       <div class="flex flex-col justify-center items-center gap-5">
         <ULink to="/">
-          <NuxtPicture
-            src="~/images/About.webp"
-            alt="Author"
-            class="rounded-full w-20 h-20 cover"
-          />
+          <div class="align-middle w-20 h-20 rounded-full overflow-hidden">
+            <picture>
+              <img class="scale-125" src="/images/About.webp" alt="Author" />
+            </picture>
+          </div>
         </ULink>
         <ULink to="/" class="spacing-2 text-xl">Alex Bates</ULink>
         <p class="text-gray-700 dark:text-gray-300">
@@ -26,7 +24,13 @@ const { data: article } = await useAsyncData("article", () =>
         </p>
       </div>
 
-      <ContentRenderer :value="article" class="prose" />
+      <ContentRenderer v-if="article" :value="article">
+        <h1>{{ article.title }}</h1>
+        <ContentRendererMarkdown
+          :value="article"
+          class="prose text-gray-700 dark:text-white"
+        />
+      </ContentRenderer>
     </div>
   </div>
 </template>
