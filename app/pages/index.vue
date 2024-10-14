@@ -1,37 +1,49 @@
 <template>
-  <div class="h-[calc(100dvh-52px)] grid grid-cols-1">
-    <div class="w-full py-10 bg-slate-100 dark:bg-slate-900 px-4 row-span-5">
-      <h1 class="text-6xl font-bold text-center">Alex Bates</h1>
-    </div>
-    <div
-      class="bg-white dark:bg-gray-600 rounded-t-3xl mx-auto p-10 grid grid-cols-3 gap-10 row-span-2"
-    >
-      <div class="max-w-7xl mx-auto">
-        <UCard v-for="item in blog">
-          <template #header>
-            <h2 class="text-2xl font-bold">{{ item.title }}</h2>
-          </template>
-          <picture>
-            <source :srcset="item.thumbnailSrc" />
-            <img :src="item.thumbnailSrc" alt="blog image" class="w-full" />
-          </picture>
-          <p class="font-light text-gray-500 mb-2">
-            {{ new Date(item.date).toLocaleString().split(",")[0] }}
-          </p>
-          <p class="font-medium text-gray-500">{{ item.description }}</p>
-          <template #footer>
-            <ULink :to="item._path" class="hover:underline hover:text-blue-500"
-              >Read More</ULink
-            >
-          </template>
-        </UCard>
+  <section
+    class="grid md:grid-cols-[2fr_3fr] grid-cols-1 container mx-auto p-10 text-left"
+  >
+    <picture class="rounded shadow-xl overflow-hidden">
+      <img src="/images/About.webp" alt="Alex Bates" class="w-full" />
+    </picture>
+    <div class="py-5 px-10 flex flex-col justify-start">
+      <h1 class="text-4xl font-bold">what's up?</h1>
+      <TextWrapper>
+        I'm <span class="font-bold text-gray-300">Alex Bates</span>. I'm a
+        software developer that's been working professionally for
+        <span>{{ yearsSinceStartDate }}</span> years.
+      </TextWrapper>
+      <TextWrapper>
+        I'm currently working at
+        <a class="text-[#e68937] font-bold" href="https://www.pocketworks.co.uk"
+          >Pocketworks</a
+        >
+        as a Full Stack Developer.
+      </TextWrapper>
+      <TextWrapper class="mt-auto">
+        I try and remember to write about things I learn or find interesting.
+        You can also follow me on Github (or LinkedIn, if that's your thing).
+      </TextWrapper>
+      <div class="flex gap-5 mt-5">
+        <ULink target="_blank" to="https://github.com/ajbates93"
+          ><UIcon name="uil:github" size="2em"
+        /></ULink>
+        <ULink
+          target="_blank"
+          to="https://www.linkedin.com/in/alex-bates-01b548a7"
+          ><UIcon name="uil:linkedin" size="2em"
+        /></ULink>
       </div>
     </div>
-  </div>
+  </section>
+  <Blog />
 </template>
 
 <script lang="ts" setup>
-const { data: blog } = await useAsyncData("blog", () =>
-  queryContent("/blog").find(),
-);
+const startDate = ref<Date>(new Date("2013-02-02"));
+
+const yearsSinceStartDate = computed(() => {
+  const now = new Date();
+  const diff = now.getTime() - startDate.value.getTime();
+  return Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+});
 </script>

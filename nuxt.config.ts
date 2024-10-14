@@ -5,11 +5,6 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   devtools: { enabled: true },
-  modules: ["@nuxt/content", "@nuxt/ui", "@nuxtjs/google-fonts"],
-  googleFonts: {
-    families: {
-      Roboto: true,
-    },
-  },
+  modules: ["@nuxt/content", "@nuxt/ui", "@nuxt/fonts"],
 });
 

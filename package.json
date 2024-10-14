@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@nuxt/content": "^2.13.2",
+    "@nuxt/fonts": "latest",
     "@nuxt/ui": "latest",
-    "@nuxtjs/google-fonts": "latest",
     "nuxt": "^3.13.0",
     "typescript": "^5.5.4",
     "vue": "latest",
