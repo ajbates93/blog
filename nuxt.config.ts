@@ -10,5 +10,14 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxt/fonts",
     "@nuxt/image",
+    "@nuxtjs/seo",
   ],
+  site: {
+    url: "https://alexbates.dev",
+    name: "Alex Bates - Web Developer",
+    description:
+      "Alex Bates is a web developer based in the UK. He specialises in building websites and web applications using modern technologies.",
+    defaultLocale: "en",
+  },
 });
+
