@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-slate-300 dark:bg-slate-800 px-5 py-3 flex items-center justify-end gap-5 text-lg"
+    class="bg-slate-300 dark:bg-slate-800 px-5 py-3 flex items-center justify-end gap-5 text-lg mb-10"
   >
     <ULink class="mr-auto" to="/">Alex Bates</ULink>
     <ULink class="" to="/">Blogs</ULink>
