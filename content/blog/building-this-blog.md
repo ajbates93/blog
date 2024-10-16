@@ -49,3 +49,5 @@ running from scratch which was really nice.
 
 The plan is to keep working on this site and adding more features as I go. I
 just wanted to get something out the door for now.
+
+Cheers!

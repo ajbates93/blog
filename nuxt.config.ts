@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/content", "@nuxt/ui", "@nuxt/fonts", "@nuxtjs/seo"],
   site: {
     url: "https://alexbates.dev",
-    name: "Alex Bates - Web Developer",
+    name: "Alex Bates | Software Developer",
     description:
       "Alex Bates is a web developer based in the UK. He specialises in building websites and web applications using modern technologies.",
     defaultLocale: "en",
