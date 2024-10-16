@@ -5,13 +5,7 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   devtools: { enabled: true },
-  modules: [
-    "@nuxt/content",
-    "@nuxt/ui",
-    "@nuxt/fonts",
-    "@nuxt/image",
-    "@nuxtjs/seo",
-  ],
+  modules: ["@nuxt/content", "@nuxt/ui", "@nuxt/fonts", "@nuxtjs/seo"],
   site: {
     url: "https://alexbates.dev",
     name: "Alex Bates - Web Developer",
@@ -20,4 +14,3 @@ export default defineNuxtConfig({
     defaultLocale: "en",
   },
 });
-

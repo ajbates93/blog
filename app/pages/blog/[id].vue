@@ -18,7 +18,11 @@ const { data: article } = await useAsyncData("article", () =>
             </picture>
           </div>
         </ULink>
-        <ULink to="/" class="spacing-2 text-xl">Alex Bates</ULink>
+        <ULink
+          to="/"
+          class="spacing-2 text-indigo-400 dark:text-indigo-500 text-xl"
+          >Alex Bates</ULink
+        >
         <p class="text-gray-700 dark:text-gray-300">
           {{ new Date(article.date).toLocaleString().split(",")[0] }}
         </p>
@@ -34,3 +38,9 @@ const { data: article } = await useAsyncData("article", () =>
     </div>
   </div>
 </template>
+
+<style>
+a {
+  color: #3182ce;
+}
+</style>

@@ -25,6 +25,9 @@
 
 <script setup lang="ts">
 const { data: blog } = await useAsyncData("blog", () =>
-  queryContent("/blog").find(),
+  queryContent("/blog")
+    .sort({ date: 1 })
+    .where({ $and: [{ isArchived: false }, { isPublished: true }] })
+    .find(),
 );
 </script>

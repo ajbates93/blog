@@ -28,10 +28,14 @@
         You can also follow me on Github (or LinkedIn, if that's your thing).
       </TextWrapper>
       <div class="flex gap-5 mt-5">
-        <ULink target="_blank" to="https://github.com/ajbates93"
+        <ULink
+          class="text-indigo-500 dark:text-indigo-400"
+          target="_blank"
+          to="https://github.com/ajbates93"
           ><UIcon name="uil:github" size="2em"
         /></ULink>
         <ULink
+          class="text-indigo-500 dark:text-indigo-400"
           target="_blank"
           to="https://www.linkedin.com/in/alex-bates-01b548a7"
           ><UIcon name="uil:linkedin" size="2em"
@@ -43,7 +47,7 @@
 </template>
 
 <script lang="ts" setup>
-const startDate = ref<Date>(new Date("2013-02-02"));
+const startDate = ref<Date>(new Date("2015-02-02"));
 
 const yearsSinceStartDate = computed(() => {
   const now = new Date();
