@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 flex items-center justify-end gap-5 text-lg mb-10">
+  <div class="p-5 flex items-center justify-end gap-5 text-lg sm:mb-10">
     <UIcon class="cursor-pointer" @click="toggleTheme" :name="themeIcon" />
   </div>
 </template>

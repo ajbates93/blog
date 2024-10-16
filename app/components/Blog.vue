@@ -1,5 +1,5 @@
 <template>
-  <section class="blogs container mx-auto p-10 text-left">
+  <section class="blogs container mx-auto p-5 sm:p-10 text-left">
     <h2 class="text-4xl font-bold text-slate-700 dark:text-white">
       what's been going on?
     </h2>
