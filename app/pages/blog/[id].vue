@@ -14,7 +14,11 @@ const { data: article } = await useAsyncData("article", () =>
         <ULink to="/">
           <div class="align-middle w-20 h-20 rounded-full overflow-hidden">
             <picture>
-              <img class="scale-125" src="/images/About.webp" alt="Author" />
+              <img
+                class="scale-125"
+                src="/images/home-about-small.webp"
+                alt="Author"
+              />
             </picture>
           </div>
         </ULink>

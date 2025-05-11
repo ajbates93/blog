@@ -3,7 +3,7 @@
     class="grid sm:grid-cols-[2fr_3fr] grid-cols-1 container mx-auto p-5 sm:p-10 text-left"
   >
     <picture class="rounded shadow-2xl overflow-hidden mb-5 sm:mb-0">
-      <img src="/images/About.webp" alt="Alex Bates" class="w-full" />
+      <img src="/images/home-about-small.webp" alt="Alex Bates" class="w-full" />
     </picture>
     <div class="py-5 px-0 sm:px-10 flex flex-col justify-start">
       <h1 class="text-4xl text-slate-700 dark:text-white font-bold">
