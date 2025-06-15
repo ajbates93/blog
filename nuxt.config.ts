@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
+  experimental: {
+    viewTransition: true,
+  },
   modules: ["@nuxt/content", "@nuxt/ui", "@nuxt/fonts"],
   ssr: true,
   css: ["~/assets/css/main.css"],

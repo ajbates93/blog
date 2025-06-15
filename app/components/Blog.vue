@@ -11,7 +11,9 @@
       >
         <ULink
           :to="item.path"
-          class="text-slate-700 dark:text-white text-2xl mb-3 block"
+          @click.native="active = item.id"
+          :class="{ 'blog--active': active === item.id }"
+          class="blog-title text-slate-700 dark:text-white text-2xl mb-3 block"
           >{{ item.title }}</ULink
         >
         <p class="text-gray-700 dark:text-gray-300 mb-2">
@@ -25,6 +27,7 @@
 
 <script setup lang="ts">
 const route = useRoute();
+const active = useState();
 const { data: blog } = await useAsyncData(route.path, () =>
   queryCollection("blog")
     .where("isArchived", "=", false)
@@ -33,3 +36,10 @@ const { data: blog } = await useAsyncData(route.path, () =>
     .all()
 );
 </script>
+
+<style scoped>
+.blog-title {
+  view-transition-name: blog-title;
+  contain: layout;
+}
+</style>
