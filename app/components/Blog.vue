@@ -7,10 +7,10 @@
       <li
         class="pl-5 my-5 border-l-4 border-indigo-500/50"
         v-for="item in blog"
-        :key="item._id"
+        :key="item.id"
       >
         <ULink
-          :to="item._path"
+          :to="item.path"
           class="text-slate-700 dark:text-white text-2xl mb-3 block"
           >{{ item.title }}</ULink
         >
@@ -24,10 +24,12 @@
 </template>
 
 <script setup lang="ts">
-const { data: blog } = await useAsyncData("blog", () =>
-  queryContent("/blog")
-    .sort({ date: 1 })
-    .where({ $and: [{ isArchived: false }, { isPublished: true }] })
-    .find(),
+const route = useRoute();
+const { data: blog } = await useAsyncData(route.path, () =>
+  queryCollection("blog")
+    .where("isArchived", "=", false)
+    .andWhere((group) => group.where("isPublished", "=", true))
+    .order("date", "DESC")
+    .all()
 );
 </script>

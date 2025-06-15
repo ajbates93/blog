@@ -2,8 +2,7 @@
 isArchived: false
 isPublished: true 
 title: "Building this blog"
-description: "A few notes on the stack I used to build this site, and some other
-stuff that's been going on."
+description: "A few notes on the stack I used to build this site, and some other stuff that's been going on."
 date: 2024-10-16 
 
 tags:
