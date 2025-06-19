@@ -5,13 +5,16 @@
     </h2>
     <ul class="my-10">
       <li
-        class="pl-5 my-5 border-l-4 border-indigo-500/50"
-        v-for="item in blog"
+        class="pl-5 my-10 border-l-4 border-indigo-500/50 dark:text-gray-300"
+        v-for="(item, id) in blog"
         :key="item.id"
       >
         <ULink
           :to="item.path"
-          class="text-slate-700 dark:text-white text-2xl mb-3 block"
+          @click.native="active = item.id"
+          :class="{ 'blog--active': active === item.id }"
+          :style="`view-transition-name: blog-title-${item.title.toLowerCase().replace(/ /g, '-')}`"
+          class="blog-title text-slate-700 dark:text-white text-2xl font-bold mb-3 block"
           >{{ item.title }}</ULink
         >
         <p class="text-gray-700 dark:text-gray-300 mb-2">
@@ -25,6 +28,8 @@
 
 <script setup lang="ts">
 const route = useRoute();
+const active = useState();
+
 const { data: blog } = await useAsyncData(route.path, () =>
   queryCollection("blog")
     .where("isArchived", "=", false)
@@ -33,3 +38,9 @@ const { data: blog } = await useAsyncData(route.path, () =>
     .all()
 );
 </script>
+
+<style scoped>
+.blog-title {
+  contain: layout;
+}
+</style>
