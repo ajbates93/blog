@@ -2,7 +2,7 @@
   <section
     class="grid sm:grid-cols-[2fr_3fr] grid-cols-1 container mx-auto p-5 sm:p-10 text-left"
   >
-    <picture class="rounded shadow-2xl overflow-hidden mb-5 sm:mb-0">
+    <picture class="rounded-xl shadow-2xl overflow-hidden mb-5 sm:mb-0">
       <img src="/images/home-about-small.webp" alt="Alex Bates" class="w-full" />
     </picture>
     <div class="py-5 px-0 sm:px-10 flex flex-col justify-start">
@@ -18,7 +18,7 @@
       </TextWrapper>
       <TextWrapper>
         I'm currently working at
-        <a class="text-[#e68937] font-bold" href="https://www.pocketworks.co.uk"
+        <a target="_blank" class="text-[#e68937] font-bold" href="https://www.pocketworks.co.uk"
           >Pocketworks</a
         >
         as a Full Stack Developer.
@@ -53,6 +53,9 @@
 </template>
 
 <script lang="ts" setup>
+definePageMeta({
+  viewTransition: false
+})
 const startDate = ref<Date>(new Date("2015-02-02"));
 
 const yearsSinceStartDate = computed(() => {

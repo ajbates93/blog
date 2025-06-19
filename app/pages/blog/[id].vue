@@ -27,24 +27,20 @@ const { data: blog } = await useAsyncData(route.path, () => {
         </p>
       </div>
 
-      <h1 style="view-transition-name: blog-title">{{ blog.title }}</h1>
+      <h1 class="text-4xl font-bold my-5 md:my-10" :style="`view-transition-name: blog-title-${blog.title.toLowerCase().replace(/ /g, '-')}`">{{ blog.title }}</h1>
 
       <div 
-        class="blog-article max-w-prose text-gray-700 dark:text-white"
+        class="blog-article max-w-prose text-gray-700 dark:text-gray-300"
         style="view-transition-name: blog-content"
       >
         <ContentRenderer v-if="blog" :value="blog" />
       </div>
-
-
     </div>
   </div>
 </template>
 
 <style>
-.blog-title {
-  view-transition-name: blog-title;
-}
+
 a {
   color: #3182ce;
 }
