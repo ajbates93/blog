@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const route = useRoute();
+
 const { data: blog } = await useAsyncData(route.path, () => {
   return queryCollection('blog').path(route.path).first()
 });
@@ -9,23 +10,29 @@ const { data: blog } = await useAsyncData(route.path, () => {
   <div class="w-full pb-10" v-if="blog">
     <div class="flex flex-col items-center mx-auto p-10 gap-10">
       <!-- Blog avatar,  Author and date-->
-      <div class="flex flex-col justify-center items-center gap-5">
-        <ULink to="/">
+      <div 
+        class="flex flex-col justify-center items-center gap-5" 
+        style="view-transition-name: author-section"
+      >
+        <ULink to="/" style="view-transition-name: none">
           <div class="align-middle w-20 h-20 rounded-full overflow-hidden">
             <picture>
               <img class="scale-125" src="/images/home-about-small.webp" alt="Author" />
             </picture>
           </div>
         </ULink>
-        <ULink to="/" class="spacing-2 text-indigo-400 dark:text-indigo-500 text-xl">Alex Bates</ULink>
+        <ULink to="/" class="spacing-2 text-indigo-400 dark:text-indigo-500 text-xl" style="view-transition-name: none">Alex Bates</ULink>
         <p class="text-gray-700 dark:text-gray-300">
           {{ new Date(blog.date).toLocaleString().split(",")[0] }}
         </p>
       </div>
 
-      <h1>{{ blog.title }}</h1>
+      <h1 style="view-transition-name: blog-title">{{ blog.title }}</h1>
 
-      <div class="blog-article max-w-prose text-gray-700 dark:text-white">
+      <div 
+        class="blog-article max-w-prose text-gray-700 dark:text-white"
+        style="view-transition-name: blog-content"
+      >
         <ContentRenderer v-if="blog" :value="blog" />
       </div>
 
@@ -35,6 +42,9 @@ const { data: blog } = await useAsyncData(route.path, () => {
 </template>
 
 <style>
+.blog-title {
+  view-transition-name: blog-title;
+}
 a {
   color: #3182ce;
 }
