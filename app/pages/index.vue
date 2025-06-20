@@ -46,7 +46,7 @@
   <Blog />
   <section class="container mx-auto p-5 !pt-0 sm:p-10 text-left">
     <div class="mt-10">
-      <ULink class="text-white dark:text-indigo-500" to="/blog">View all blog posts</ULink>
+      <ULink class="text-white underline" to="/blog">View all blog posts</ULink>
     </div>
   </section>
   

@@ -8,6 +8,11 @@ export default defineNuxtConfig({
   },
   modules: ["@nuxt/content", "@nuxt/ui", "@nuxt/fonts"],
   ssr: true,
+  // nitro: {
+  //   prerender: {
+  //     routes: ['/sitemap.xml']
+  //   }
+  // },
   css: ["~/assets/css/main.css"],
   app: {
     head: {
