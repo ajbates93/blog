@@ -8,6 +8,9 @@ export default defineNuxtConfig({
   },
   modules: ["@nuxt/content", "@nuxt/ui", "@nuxt/fonts"],
   ssr: true,
+  nitro: {
+    preset: 'netlify-static'
+  },
   // nitro: {
   //   prerender: {
   //     routes: ['/sitemap.xml']
