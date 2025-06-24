@@ -11,6 +11,9 @@ export default defineNuxtConfig({
   nitro: {
     preset: "netlify-static",
   },
+  site: {
+    url: "https://www.alexbates.dev",
+  },
   // nitro: {
   //   prerender: {
   //     routes: ['/sitemap.xml']
