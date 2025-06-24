@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 const route = useRoute();
 
-const { data: blog } = await useAsyncData(route.path, () => {
+const { data: blog } = await useAsyncData(`page-${route.path}`, () => {
   return queryCollection('blog').path(route.path).first()
 });
+
+// useHead(blog.value?.head || {})
+useSeoMeta(blog.value?.seo || {})
 </script>
 
 <template>

@@ -6,10 +6,10 @@ export default defineNuxtConfig({
   experimental: {
     viewTransition: true,
   },
-  modules: ["@nuxt/content", "@nuxt/ui", "@nuxt/fonts"],
+  modules: ["@nuxtjs/seo", "@nuxt/content", "@nuxt/ui", "@nuxt/fonts"],
   ssr: true,
   nitro: {
-    preset: 'netlify-static'
+    preset: "netlify-static",
   },
   // nitro: {
   //   prerender: {
@@ -21,7 +21,11 @@ export default defineNuxtConfig({
     head: {
       title: "Alex Bates | Software Developer",
       meta: [
-        { name: "description", content: "Alex Bates is a web developer based in the UK. He specialises in building websites and web applications using modern technologies." },
+        {
+          name: "description",
+          content:
+            "Alex Bates is a web developer based in the UK. He specialises in building websites and web applications using modern technologies.",
+        },
       ],
     },
   },
