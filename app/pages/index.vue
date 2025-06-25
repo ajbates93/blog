@@ -1,6 +1,6 @@
 <template>
   <section
-    class="grid sm:grid-cols-[2fr_3fr] grid-cols-1 container mx-auto p-5 sm:p-10 text-left"
+    class="grid sm:grid-cols-[2fr_3fr] grid-cols-1 container mx-auto p-5 sm:p-10 text-left mt-10"
   >
     <picture class="rounded-xl shadow-2xl overflow-hidden mb-5 sm:mb-0">
       <img src="/images/home-about-small.webp" alt="Alex Bates" class="w-full" />

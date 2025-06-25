@@ -1,5 +1,6 @@
 <template>
-  <div class="p-5 sm:px-10 flex items-center justify-between gap-5 text-lg sm:mb-10 container mx-auto">
+  <div
+    class="p-5 sm:px-10 flex items-center justify-between gap-5 text-lg sm:mb-10 container mx-auto fixed top-10 left-1/2 translate-[-50%]">
     <nav class="flex gap-2">
       <NuxtLink to="/">home</NuxtLink>
       <span>|</span>

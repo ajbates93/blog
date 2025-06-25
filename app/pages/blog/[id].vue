@@ -11,7 +11,17 @@ useSeoMeta(blog.value?.seo || {})
 
 <template>
   <div class="w-full pb-10" v-if="blog">
-    <NuxtImg :src="`/images/blog/${blog.bannerImgUrl}`" alt="Blog banner"  class="w-full max-w-[2000px] max-h-[400px] object-cover mx-auto mb-10 md:mb-20" />
+    <div class="relative w-full max-w-[2000px] max-h-[400px] mx-auto mb-10 md:mb-20">
+      <NuxtImg
+        :src="`/images/blog/${blog.bannerImgUrl}`"
+        alt="Blog banner"
+        class="w-full h-[400px] object-cover"
+        :width="1600"
+        :height="400"
+        sizes="(max-width: 768px) 100vw, 1600px"
+      />
+      <div class="absolute inset-0 bg-black opacity-40 pointer-events-none"></div>
+    </div>
     <div class="flex flex-col items-center mx-auto p-10 gap-10">
       <!-- Blog avatar,  Author and date-->
       <div 
