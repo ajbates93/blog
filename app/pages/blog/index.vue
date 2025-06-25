@@ -1,5 +1,5 @@
 <template>
-  <section class="container mx-auto p-5 sm:p-10 text-left">
+  <section class="container mx-auto p-5 sm:p-10 text-left mt-[68px]">
     <Blog />
   </section>
 </template>

@@ -10,7 +10,7 @@ useSeoMeta(blog.value?.seo || {})
 </script>
 
 <template>
-  <div class="w-full pb-10" v-if="blog">
+  <div class="w-full pb-10 mt-15" v-if="blog">
     <div class="relative w-full max-w-[2000px] max-h-[400px] mx-auto mb-10 md:mb-20">
       <NuxtImg
         :src="`/images/blog/${blog.bannerImgUrl}`"
@@ -22,7 +22,7 @@ useSeoMeta(blog.value?.seo || {})
       />
       <div class="absolute inset-0 bg-black opacity-40 pointer-events-none"></div>
     </div>
-    <div class="flex flex-col items-center mx-auto p-10 gap-10">
+    <div class="flex flex-col items-center mx-auto p-5 sm:p-10 gap-10">
       <!-- Blog avatar,  Author and date-->
       <div 
         class="flex flex-col justify-center items-center gap-5" 
