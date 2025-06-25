@@ -4,6 +4,7 @@ isPublished: true
 title: "Middlesbrough Frontend 2025"
 description: "Attending the MFE25 conference and a few key takeaways from some of the speakers."
 date: 2025-06-18 
+bannerImgUrl: middlesbrough-front-end.jpg
 
 tags:
   - blog
