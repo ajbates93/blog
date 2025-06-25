@@ -55,9 +55,7 @@ useSeoMeta(blog.value?.seo || {})
 
 <style>
 
-a {
-  color: #3182ce;
-}
+
 .blog-article {
   font-weight: semibold;
   line-height: 1.75;
