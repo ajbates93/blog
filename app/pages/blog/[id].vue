@@ -11,7 +11,7 @@ useSeoMeta(blog.value?.seo || {})
 
 <template>
   <div class="w-full pb-10 mt-15" v-if="blog">
-    <div class="relative w-full max-w-[2000px] max-h-[400px] mx-auto mb-10 md:mb-20">
+    <div v-if="blog.bannerImgUrl" class="relative w-full max-w-[2000px] max-h-[400px] mx-auto mb-10 md:mb-20">
       <NuxtImg
         :src="`/images/blog/${blog.bannerImgUrl}`"
         alt="Blog banner"
