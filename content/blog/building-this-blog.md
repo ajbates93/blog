@@ -1,10 +1,10 @@
 ---
 isArchived: false
-isPublished: true 
-title: "Building this blog"
-description: "A few notes on the stack I used to build this site, and some other stuff that's been going on."
-date: 2024-10-16 
-
+isPublished: true
+title: Building this blog
+description: A few notes on the stack I used to build this site, and some other
+  stuff that's been going on.
+date: 2024-10-16
 tags:
   - blog
   - tech
@@ -18,7 +18,7 @@ interesting things I've come across whilst building.
 
 A bit about me - I'm a software dev based in the UK that mainly works in web
 development. I've worked at a couple of different companies along the way. One
-of which for a _very_ long time and the other for about a year now.
+of which for a *very* long time and the other for about a year now.
 
 This site is built using Nuxt - a Vue.js meta-framework. I've been writing
 applications in Vue for about 4 years now and I love it.
