@@ -44,4 +44,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  content: {
+    preview: {
+      api: "https://alexbates.dev",
+    }
+  }
 });
