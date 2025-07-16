@@ -6,13 +6,13 @@ export default defineContentConfig({
     blog: defineCollection(
       asSeoCollection({
         type: "page",
-        source: "blog/**/*.md",
+        source: "blog/*.md",
         schema: z.object({
           title: z.string(),
-          date: z.string(),
+          date: z.date(),
           description: z.string().optional(),
-          isArchived: z.boolean().optional(),
-          isPublished: z.boolean().optional(),
+          isArchived: z.boolean().default(false),
+          isPublished: z.boolean().default(false),
           tags: z.array(z.string()).optional(),
           bannerImgUrl: z.string().optional(),
           content: z.string(),
