@@ -15,7 +15,7 @@
     <slot name="background" />
 
     <!-- Header slot for date -->
-    <div class="absolute top-4 left-4 md:top-6 md:left-6 z-20">
+    <div class="hidden sm:block absolute top-4 left-4 md:top-6 md:left-6 z-20">
       <slot name="header" />
     </div>
 
@@ -34,15 +34,26 @@
       <h3 class="text-lg md:text-xl font-semibold text-neutral-700 dark:text-neutral-300">
         {{ name }}
       </h3>
-      <p class="max-w-lg text-sm md:text-base text-neutral-400 dark:text-neutral-500">{{ description }}</p>
+      <p class="max-w-lg text-sm md:text-base text-neutral-400 dark:text-neutral-500 mb-4 md:mb-0">{{ description }}</p>
+    </div>
+    
+    <!-- Mobile Read More Link -->
+    <div class="md:hidden relative z-30 p-4 pt-0 md:p-6 md:pt-0">
+      <a
+        :href="href"
+        class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-800"
+      >
+        {{ cta }} →
+      </a>
     </div>
 
+    <!-- Desktop Read More Link (absolute positioned for hover effect) -->
     <div
-      class="pointer-events-none absolute bottom-0 flex w-full translate-y-10 transform-gpu flex-row items-center p-3 md:p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+      class="absolute bottom-0 hidden md:flex w-full transform-gpu flex-row items-center p-4 translate-y-10 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 z-30"
     >
       <a
         :href="href"
-        class="pointer-events-auto inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-800"
+        class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-800"
       >
         {{ cta }} →
       </a>
