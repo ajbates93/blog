@@ -36,12 +36,38 @@ useSeoMeta(blog.value?.seo || {})
           </div>
         </ULink>
         <ULink to="/" class="spacing-2 text-indigo-400 dark:text-indigo-500 text-xl" style="view-transition-name: none">Alex Bates</ULink>
-        <p class="text-gray-700 dark:text-gray-300">
-          {{ new Date(blog.date).toLocaleString().split(",")[0] }}
-        </p>
+        <div class="flex items-center gap-4 text-gray-700 dark:text-gray-300 text-sm">
+          <p>{{ new Date(blog.date).toLocaleString().split(",")[0] }}</p>
+          <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
+          <p>{{ Math.ceil(blog.body?.toc?.links?.length || 0) + 3 }} min read</p>
+        </div>
       </div>
 
       <h1 class="text-4xl font-bold my-5 md:my-10" :style="`view-transition-name: blog-title-${blog.title.toLowerCase().replace(/ /g, '-')}`">{{ blog.title }}</h1>
+
+      <!-- Description -->
+      <p 
+        v-if="blog.description" 
+        class="text-xl text-gray-600 dark:text-gray-400 text-center max-w-2xl mx-auto mb-6 leading-relaxed"
+        style="view-transition-name: blog-description"
+      >
+        {{ blog.description }}
+      </p>
+
+      <!-- Tags -->
+      <div 
+        v-if="blog.tags && blog.tags.length > 0" 
+        class="flex flex-wrap gap-2 justify-center mb-6"
+        style="view-transition-name: blog-tags"
+      >
+        <span 
+          v-for="tag in blog.tags" 
+          :key="tag"
+          class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full"
+        >
+          {{ tag }}
+        </span>
+      </div>
 
       <div 
         class="blog-article max-w-prose text-gray-700 dark:text-gray-300"

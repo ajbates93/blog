@@ -33,7 +33,9 @@
 } */
 
 ::view-transition-new(author-section),
-::view-transition-new(blog-content) {
+::view-transition-new(blog-content),
+::view-transition-new(blog-description),
+::view-transition-new(blog-tags) {
   animation: fade-in 0.4s ease-out forwards;
   animation-delay: 0.6s;
   opacity: 0;
