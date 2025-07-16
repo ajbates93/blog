@@ -46,17 +46,17 @@
       class="shadow-2xl"
       :gradient-color="'#C9C9C9'"
       :gradient-opacity="0.8"
-      slot-class="p-8"
+      slot-class="p-4 md:p-8"
     >
-      <h2 class="text-3xl font-bold text-slate-700 dark:text-white mb-4">Technologies & Skills</h2>
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-700 dark:text-white mb-4">Technologies & Skills</h2>
       <TextWrapper>
         I'm proficient in a range of languages and frameworks, from frontend technologies to backend systems and mobile development. 
         The connections show how these technologies relate and complement each other in modern development workflows.
       </TextWrapper>
 
       <div ref="containerRef"
-        class="relative flex h-[500px] px-10 mx-auto items-center justify-center overflow-hidden rounded-lg my-10 md:my-20">
-        <div class="flex size-full max-h-[500px] flex-col items-stretch justify-between gap-12">
+        class="relative flex h-[400px] sm:h-[500px] sm:px-10 mx-auto items-center justify-center overflow-hidden rounded-lg my-10 md:my-20">
+        <div class="flex size-full max-h-[400px] sm:max-h-[500px] flex-col items-stretch justify-between gap-12">
           <!-- Top row - Frameworks -->
           <div class="flex flex-row items-center justify-between">
             <UTooltip :delay-duration="0" text="Nuxt">
