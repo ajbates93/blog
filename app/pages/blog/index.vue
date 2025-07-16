@@ -48,7 +48,6 @@
         :href="post.path"
         cta="Read more"
         :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')"
-        class="col-span-1"
       >
         <template #background>
           <!-- Image takes precedence over icon -->

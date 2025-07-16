@@ -211,7 +211,7 @@
       <!-- Regular posts as BentoGridCards -->
       <BentoGridCard v-for="(post, index) in transformedBlog.slice(1, 3)" :key="post.id" :name="post.title"
         :description="post.description" :href="post.path" cta="Read more"
-        :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')" class="col-span-1">
+        :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')">
         <template #background>
           <!-- Image takes precedence over icon -->
           <NuxtImg v-if="post.image" :src="post.image" :alt="post.title"

@@ -3,7 +3,7 @@
     :key="name"
     :class="
       cn(
-        'group relative col-span-3 flex flex-col justify-end overflow-hidden rounded-xl',
+        'group relative col-span-1 flex flex-col justify-end overflow-hidden rounded-xl',
         // light styles
         'bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]',
         // dark styles - increased contrast
@@ -15,30 +15,30 @@
     <slot name="background" />
 
     <!-- Header slot for date -->
-    <div class="absolute top-6 left-6 z-20">
+    <div class="absolute top-4 left-4 md:top-6 md:left-6 z-20">
       <slot name="header" />
     </div>
 
     <div
-      class="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-10"
+      class="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-4 md:p-6 transition-all duration-300 group-hover:-translate-y-10"
     >
       <UIcon
         v-if="icon"
         :name="icon"
-        class="size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out group-hover:scale-75"
+        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out group-hover:scale-75"
       />
       <div
         v-else
-        class="size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out group-hover:scale-75"
+        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out group-hover:scale-75"
       ></div>
-      <h3 class="text-xl font-semibold text-neutral-700 dark:text-neutral-300">
+      <h3 class="text-lg md:text-xl font-semibold text-neutral-700 dark:text-neutral-300">
         {{ name }}
       </h3>
-      <p class="max-w-lg text-neutral-400 dark:text-neutral-500">{{ description }}</p>
+      <p class="max-w-lg text-sm md:text-base text-neutral-400 dark:text-neutral-500">{{ description }}</p>
     </div>
 
     <div
-      class="pointer-events-none absolute bottom-0 flex w-full translate-y-10 transform-gpu flex-row items-center p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+      class="pointer-events-none absolute bottom-0 flex w-full translate-y-10 transform-gpu flex-row items-center p-3 md:p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
     >
       <a
         :href="href"
