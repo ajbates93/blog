@@ -5,11 +5,12 @@ tags:
 ogImage:
   props: {}
 schemaOrg:
-  _125: Introduction to Mobile Development
-  '"@type"': _DELETED_
-  _137: _DELETED_
-  datePublished: 2025-07-16
-  "@type": BlogPosting
+  - "@type": "BlogPosting"
+    headline: "Introduction to Mobile Development"
+    author:
+      type: "Person"
+      name: "Alex Bates"
+    datePublished: "2025-07-16"
 head:
   script: []
 sitemap:

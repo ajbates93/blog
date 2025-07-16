@@ -8,6 +8,13 @@ date: 2024-10-16
 tags:
   - blog
   - tech
+schemaOrg:
+  - "@type": "BlogPosting"
+    headline: "Building this blog"
+    author:
+      type: "Person"
+      name: "Alex Bates"
+    datePublished: "2024-10-16"
 ---
 
 Hi there! 👋

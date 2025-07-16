@@ -9,6 +9,13 @@ bannerImgUrl: middlesbrough-front-end.jpg
 tags:
   - blog
   - tech
+schemaOrg:
+  - "@type": "BlogPosting"
+    headline: "Middlesbrough Frontend 2025"
+    author:
+      type: "Person"
+      name: "Alex Bates"
+    datePublished: "2025-06-18"
 ---
 
 What's up? I've not been very good at keeping this blog up to date but hopefully this is the start of a new routine.
