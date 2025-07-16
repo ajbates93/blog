@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="grid sm:grid-cols-[2fr_3fr] grid-cols-1 container mx-auto p-5 sm:p-10 text-left mt-[68px]"
-  >
+  <section class="grid sm:grid-cols-[2fr_3fr] grid-cols-1 container mx-auto p-5 sm:p-10 text-left mt-[68px]">
     <picture class="rounded-xl shadow-2xl overflow-hidden mb-5 sm:mb-0">
       <img src="/images/home-about-small.webp" alt="Alex Bates" class="w-full" />
     </picture>
@@ -11,95 +9,204 @@
       </h1>
       <TextWrapper>
         I'm
-        <span class="font-bold text-slate-700 dark:text-gray-300"
-          >Alex Bates</span
-        >. I'm a software developer that's been working professionally for
+        <span class="font-bold text-slate-700 dark:text-gray-300">Alex Bates</span>. I'm a software developer that's
+        been working professionally for
         <span>{{ yearsSinceStartDate }}</span> years.
       </TextWrapper>
       <TextWrapper>
         I'm currently working at
-        <a target="_blank" class="text-[#e68937] font-bold" href="https://www.pocketworks.co.uk"
-          >Pocketworks</a
-        >
-        as a Full Stack Developer, where I build mobile applications and web solutions for clients across various industries.
+        <a target="_blank" class="text-[#e68937] font-bold" href="https://www.pocketworks.co.uk">Pocketworks</a>
+        as a Full Stack Developer, where I build mobile applications and web solutions for clients across various
+        industries.
       </TextWrapper>
       <TextWrapper>
-        My expertise spans across modern web technologies including Vue.js, Astro, Elixir & Phoenix, and mobile development with Flutter. I'm passionate about creating user-friendly applications that solve real-world problems and deliver exceptional user experiences.
+        My expertise spans across modern web technologies including Vue.js, Astro, Elixir & Phoenix, and mobile
+        development with Flutter. I'm passionate about creating user-friendly applications that solve real-world
+        problems and deliver exceptional user experiences.
       </TextWrapper>
       <TextWrapper>
         I try and remember to write about things I learn or find interesting.
         You can also follow me on Github (or LinkedIn, if that's your thing).
       </TextWrapper>
       <div class="flex gap-5 mt-auto">
-        <ULink
-          class="text-indigo-500 dark:text-indigo-400"
-          target="_blank"
-          to="https://github.com/ajbates93"
-          ><UIcon name="uil:github" size="2em"
-        /></ULink>
-        <ULink
-          class="text-indigo-500 dark:text-indigo-400"
-          target="_blank"
-          to="https://www.linkedin.com/in/alex-bates-01b548a7"
-          ><UIcon name="uil:linkedin" size="2em"
-        /></ULink>
+        <ULink class="text-indigo-500 dark:text-indigo-400" target="_blank" to="https://github.com/ajbates93">
+          <UIcon name="uil:github" size="2em" />
+        </ULink>
+        <ULink class="text-indigo-500 dark:text-indigo-400" target="_blank"
+          to="https://www.linkedin.com/in/alex-bates-01b548a7">
+          <UIcon name="uil:linkedin" size="2em" />
+        </ULink>
       </div>
     </div>
   </section>
-  
-  <!-- Skills & Technologies Section -->
+
+  <!-- Technologies & Skills Section -->
   <section class="container mx-auto p-5 sm:p-10 text-left">
     <h2 class="text-3xl font-bold text-slate-700 dark:text-white mb-6">Technologies & Skills</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-semibold text-slate-700 dark:text-white mb-3">Frontend Development</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-3">Building responsive and interactive user interfaces with modern frameworks.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Vue</span>
-          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Nuxt</span>
-          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Astro</span>
-          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Alpine</span>
+
+    <div ref="containerRef"
+      class="relative flex h-[600px] w-full items-center justify-center overflow-hidden rounded-lg p-10">
+      <div class="flex size-full max-h-[300px] max-w-xl flex-col items-stretch justify-between gap-8">
+        <!-- Top row - Frameworks -->
+        <div class="flex flex-row items-center justify-between">
+          <div ref="nuxtRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-nuxt-icon" size="24" />
+          </div>
+          <div ref="vueRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-vue" size="24" />
+          </div>
+          <div ref="alpineRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-alpinejs-icon" size="24" />
+          </div>
+          <div ref="astroRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-astro" size="24" />
+          </div>
+        </div>
+
+        <!-- Middle row - Languages and Central -->
+        <div class="flex flex-row items-center justify-between">
+
+          <div ref="phoenixRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-phoenix" size="24" />
+          </div>
+          <div ref="elixirRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <Icon name="vscode-icons:file-type-elixir" size="24" />
+          </div>
+          <div ref="centralRef"
+            class="z-10 flex size-16 items-center justify-center rounded-full border-2 bg-white p-2 text-black shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]">
+            <img src="/favicon.svg" alt="Alex Bates" class="w-8 h-8" />
+          </div>
+
+          <div ref="csharpRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-c-sharp" size="24" />
+          </div>
+          <div ref="dotnetRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-dotnet" size="24" />
+          </div>
+        </div>
+
+        <!-- Bottom row - Frameworks and Tools -->
+        <div class="flex flex-row items-center justify-between">
+          <div ref="nodeRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-nodejs-icon" size="24" />
+          </div>
+          <div ref="postgresRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-postgresql" size="24" />
+          </div>
+          <div ref="dartRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-dart" size="24" />
+          </div>
+          <div ref="flutterRef"
+            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
+            <UIcon name="i-logos-flutter" size="24" />
+          </div>
         </div>
       </div>
-      
-      <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-semibold text-slate-700 dark:text-white mb-3">Backend & APIs</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-3">Creating robust server-side applications and RESTful APIs.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Node.js</span>
-          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Elixir</span>
-          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Phoenix</span>
-          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Go</span>
-        </div>
-      </div>
-      
-      <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-semibold text-slate-700 dark:text-white mb-3">Mobile Development</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-3">Building cross-platform mobile applications for iOS and Android.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Flutter</span>
-          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Dart</span>
-        </div>
-      </div>
+
+      <!-- Framework to Language connections -->
+      <AnimatedBeam :container-ref="containerRef" :from-ref="nuxtRef" :to-ref="vueRef" :curvature="20" :duration="2" />
+      <AnimatedBeam :container-ref="containerRef" :from-ref="phoenixRef" :to-ref="elixirRef" :curvature="20"
+        :duration="2" />
+      <AnimatedBeam :container-ref="containerRef" :from-ref="flutterRef" :to-ref="dartRef" :curvature="30"
+        :duration="2" />
+      <AnimatedBeam :container-ref="containerRef" :from-ref="dotnetRef" :to-ref="csharpRef" :curvature="20"
+        :duration="2" />
+
+      <!-- Direct connections to central -->
+      <AnimatedBeam :container-ref="containerRef" :from-ref="vueRef" :to-ref="centralRef" :curvature="-40"
+        :end-y-offset="-10" :duration="2" />
+      <AnimatedBeam :container-ref="containerRef" :from-ref="alpineRef" :to-ref="centralRef" :curvature="-20"
+        :end-y-offset="-5" :duration="2" />
+      <AnimatedBeam :container-ref="containerRef" :from-ref="astroRef" :to-ref="centralRef" :curvature="-10"
+        :end-y-offset="-5" :duration="2" />
+      <AnimatedBeam :container-ref="containerRef" :from-ref="nodeRef" :to-ref="centralRef" :curvature="-30"
+        :end-y-offset="10" :duration="2" />
+      <AnimatedBeam :container-ref="containerRef" :from-ref="elixirRef" :to-ref="centralRef" :curvature="-30"
+        :duration="2" />
+      <AnimatedBeam :container-ref="containerRef" :from-ref="dartRef" :to-ref="centralRef" :curvature="30"
+        :duration="2" />
+      <AnimatedBeam :container-ref="containerRef" :from-ref="csharpRef" :to-ref="centralRef" :curvature="40"
+        :duration="2" />
+
+      <!-- Direct tool connections to central -->
+      <AnimatedBeam :container-ref="containerRef" :from-ref="postgresRef" :to-ref="centralRef" :curvature="-20"
+        :end-y-offset="5" :duration="2" />
     </div>
   </section>
-  
-  <section class="container mx-auto p-5 sm:p-10 text-left mt-[68px]">
-    <h2 class="text-4xl font-bold text-slate-700 dark:text-white mb-4">Blog Posts</h2>
-    <Blog />
-  </section>
-  <section class="container mx-auto p-5 !pt-0 sm:p-10 text-left">
-    <div class="mt-[68px]">
-      <ULink class="text-white underline" to="/blog">View all blog posts</ULink>
+
+  <!-- Blog Posts Section -->
+  <section class="container mx-auto p-5 sm:p-10 text-left">
+    <h2 class="text-4xl font-bold text-slate-700 dark:text-white mb-4">Latest Blog Posts</h2>
+    <BentoGrid class="w-full">
+      <!-- Featured post (spans 2 columns) -->
+      <BentoGridCard v-if="transformedBlog.length > 0" :name="transformedBlog[0]!.title"
+        :description="transformedBlog[0]!.description" :href="transformedBlog[0]!.path" cta="Read more"
+        :icon="transformedBlog[0]!.image ? undefined : (transformedBlog[0]!.icon || 'i-heroicons-document-text')"
+        class="md:col-span-2">
+        <template #background>
+          <!-- Image takes precedence over icon -->
+          <NuxtImg v-if="transformedBlog[0]!.image" :src="transformedBlog[0]!.image" :alt="transformedBlog[0]!.title"
+            class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+          <!-- Fallback gradient background - better for light mode -->
+          <div v-else
+            class="absolute inset-0 bg-gradient-to-br from-slate-100 to-gray-200 dark:from-indigo-500/10 dark:to-purple-500/10" />
+        </template>
+
+        <!-- Add date to main card -->
+        <template #header>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            {{ formatDate(transformedBlog[0]!.date) }}
+          </p>
+        </template>
+      </BentoGridCard>
+
+      <!-- Regular posts as BentoGridCards -->
+      <BentoGridCard v-for="(post, index) in transformedBlog.slice(1, 3)" :key="post.id" :name="post.title"
+        :description="post.description" :href="post.path" cta="Read more"
+        :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')" class="col-span-1">
+        <template #background>
+          <!-- Image takes precedence over icon -->
+          <NuxtImg v-if="post.image" :src="post.image" :alt="post.title"
+            class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+          <!-- Fallback gradient background - lighter for smaller cards -->
+          <div v-else
+            class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
+        </template>
+
+        <!-- Add date to smaller cards -->
+        <template #header>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            {{ formatDate(post.date) }}
+          </p>
+        </template>
+      </BentoGridCard>
+    </BentoGrid>
+
+    <div class="mt-6 text-center">
+      <ULink to="/blog" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">
+        View all blog posts →
+      </ULink>
     </div>
   </section>
-  
+
 </template>
 
 <script lang="ts" setup>
 definePageMeta({
   viewTransition: false
 })
+
 const startDate = ref<Date>(new Date("2015-02-02"));
 
 const yearsSinceStartDate = computed(() => {
@@ -107,8 +214,58 @@ const yearsSinceStartDate = computed(() => {
   const diff = now.getTime() - startDate.value.getTime();
   return Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
 });
+
+// Refs for AnimatedBeam component
+const containerRef = ref<HTMLElement | null>(null);
+const nuxtRef = ref<HTMLElement | null>(null);
+const vueRef = ref<HTMLElement | null>(null);
+const alpineRef = ref<HTMLElement | null>(null);
+const astroRef = ref<HTMLElement | null>(null);
+const elixirRef = ref<HTMLElement | null>(null);
+const phoenixRef = ref<HTMLElement | null>(null);
+const centralRef = ref<HTMLElement | null>(null);
+const flutterRef = ref<HTMLElement | null>(null);
+const dartRef = ref<HTMLElement | null>(null);
+const nodeRef = ref<HTMLElement | null>(null);
+const postgresRef = ref<HTMLElement | null>(null);
+const csharpRef = ref<HTMLElement | null>(null);
+const dotnetRef = ref<HTMLElement | null>(null);
+
+// Blog data
+const { data: blog } = await useAsyncData('homepage-blog', () =>
+  queryCollection("blog")
+    .where("isArchived", "<>", true)
+    .andWhere((group) => group.where("isPublished", "=", true))
+    .order("date", "DESC")
+    .limit(3)
+    .all()
+);
+
+// Transform the blog data to match the BlogPost interface
+const transformedBlog = computed(() => {
+  if (!blog.value) return [];
+
+  return blog.value.map((item: any) => ({
+    id: item.id || item._id || item._path,
+    title: item.title || 'Untitled',
+    description: item.description || 'No description available',
+    date: item.date || new Date().toISOString(),
+    path: item._path || item.path || '/',
+    tags: item.tags || [],
+    image: item.image, // Add image to the transformed data
+    icon: item.icon // Add icon to the transformed data
+  }));
+});
+
+
+
+const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
