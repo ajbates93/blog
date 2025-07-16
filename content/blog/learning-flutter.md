@@ -43,6 +43,7 @@ I'm a fan of tutorials in general, especially when you're lucky enough to find o
 
 ---
 
+
 Working through the tutorials really helped build the fundamental knowledge of working with Dart and Flutter, and at this point I was lucky enough to get to spend some time building out a proof of concept using Flutter for a colleague of mine's project. The app is called [SoonCall](https://sooncall.com/), and iOS users can check it out right now. It's invaluable for keeping track of relationships with your friends, especially if you're someone like me where you could easily let days and weeks go by where you keep meaning to check in with someone but never get round to it. It's also really well built with an awesome UI and UX. More news to follow down the line about a potential Android release!
 
 ![image of sooncall ui](/images/blog/sooncall-promo.png)
@@ -50,6 +51,7 @@ Working through the tutorials really helped build the fundamental knowledge of w
 Thanks to Mark for letting me be a part of this!
 
 ---
+
 
 In general I've been pleasantly surprised by my brief foray into App Development. There's a lot more learning to be done, especially around the whole deployment side of things. I've been working on my own app, something that probably warrants it's own blog post down the line, and I've been pretty surprised at just how involved it is at getting something released onto the Play Store in production. I've not tried releasing for iOS yet 😅.
 

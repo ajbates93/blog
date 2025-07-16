@@ -61,8 +61,11 @@ useSeoMeta(blog.value?.seo || {})
   line-height: 1.75;
 }
 
-.blog-article p {
+.blog-article p, .blog-article hr {
   margin-bottom: 1.25rem;
+}
+.blog-article hr {
+  opacity: 0.2;
 }
 
 .blog-article ul, .blog-article ol {
@@ -80,5 +83,12 @@ useSeoMeta(blog.value?.seo || {})
 .blog-article a {
   font-weight: bold;
   text-decoration: underline;
+}
+
+.blog-article img {
+  margin: 2.5em auto;
+  text-align: center;
+  border-radius: 0.75em;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
 </style>

@@ -32,7 +32,7 @@ const active = useState();
 
 const { data: blog } = await useAsyncData(route.path, () =>
   queryCollection("blog")
-    .where("isArchived", "=", false)
+    .where("isArchived", "<>", true)
     .andWhere((group) => group.where("isPublished", "=", true))
     .order("date", "DESC")
     .all()
@@ -43,4 +43,5 @@ const { data: blog } = await useAsyncData(route.path, () =>
 .blog-title {
   contain: layout;
 }
+
 </style>
