@@ -7,6 +7,54 @@ const { data: blog } = await useAsyncData(`page-${route.path}`, () => {
 
 useHead(blog.value?.head || {})
 useSeoMeta(blog.value?.seo || {})
+
+const calculateReadingTime = (body: any) => {
+  console.log('🔍 calculateReadingTime called with body:', body);
+  
+  if (!body) {
+    console.log('❌ No body found, returning 3');
+    return 3;
+  }
+  
+  // Extract text content from the body
+  let text = '';
+  
+  // If body has a _value property (Nuxt Content structure), use that
+  if (body._value) {
+    text = body._value;
+    console.log('📝 Using body._value:', text.substring(0, 100) + '...');
+  } else if (typeof body === 'string') {
+    text = body;
+    console.log('📝 Using body as string:', text.substring(0, 100) + '...');
+  } else {
+    // Fallback: try to extract text from the body object
+    text = JSON.stringify(body);
+    console.log('📝 Using JSON.stringify fallback:', text.substring(0, 100) + '...');
+  }
+  
+  // Remove markdown syntax and count words
+  const cleanText = text
+    .replace(/[#*`\[\]()]/g, '') // Remove markdown syntax
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    .trim();
+  
+  const wordCount = cleanText.split(' ').filter(word => word.length > 0).length;
+  
+  console.log('📊 Clean text length:', cleanText.length);
+  console.log('📊 Word count:', wordCount);
+  
+  // Average reading speed is about 200-250 words per minute
+  // Using 225 as a middle ground
+  const readingTime = Math.ceil(wordCount / 225);
+  
+  console.log('⏱️ Calculated reading time:', readingTime);
+  
+  // Ensure minimum reading time of 1 minute
+  const finalReadingTime = Math.max(1, readingTime);
+  console.log('✅ Final reading time:', finalReadingTime);
+  
+  return finalReadingTime;
+};
 </script>
 
 <template>
@@ -35,11 +83,11 @@ useSeoMeta(blog.value?.seo || {})
             </picture>
           </div>
         </ULink>
-        <ULink to="/" class="spacing-2 text-indigo-400 dark:text-indigo-500 text-xl" style="view-transition-name: none">Alex Bates</ULink>
+        <ULink to="/" class="spacing-2 text-indigo-400 dark:text-indigo-500 text-2xl font-serif font-bold" style="view-transition-name: none">Alex Bates</ULink>
         <div class="flex items-center gap-4 text-gray-700 dark:text-gray-300 text-sm">
           <p>{{ new Date(blog.date).toLocaleString().split(",")[0] }}</p>
           <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
-          <p>{{ Math.ceil(blog.body?.toc?.links?.length || 0) + 3 }} min read</p>
+          <p>{{ calculateReadingTime(blog.body) }} min read</p>
         </div>
       </div>
 

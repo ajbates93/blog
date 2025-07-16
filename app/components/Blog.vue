@@ -51,6 +51,7 @@ const { data: blog } = await useAsyncData(route.path, () =>
 <style scoped>
 .blog-title {
   contain: layout;
+  font-family: 'Lora', serif;
 }
 
 </style>

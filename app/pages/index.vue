@@ -6,8 +6,8 @@
       <img src="/images/home-about-small.webp" alt="Alex Bates" class="w-full" />
     </picture>
     <div class="py-5 px-0 sm:px-10 flex flex-col justify-start">
-      <h1 class="text-4xl text-slate-700 dark:text-white font-bold">
-        what's up?
+      <h1 class="text-5xl text-slate-700 dark:text-white font-bold mb-5">
+        Hello there.
       </h1>
       <TextWrapper>
         I'm
@@ -23,11 +23,11 @@
         >
         as a Full Stack Developer.
       </TextWrapper>
-      <TextWrapper class="mt-auto">
+      <TextWrapper>
         I try and remember to write about things I learn or find interesting.
         You can also follow me on Github (or LinkedIn, if that's your thing).
       </TextWrapper>
-      <div class="flex gap-5 mt-5">
+      <div class="flex gap-5 mt-auto">
         <ULink
           class="text-indigo-500 dark:text-indigo-400"
           target="_blank"
