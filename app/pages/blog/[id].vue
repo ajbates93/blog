@@ -75,12 +75,12 @@ const calculateReadingTime = (body: any) => {
         </div>
       </div>
 
-      <h1 class="text-4xl font-bold my-5 md:my-10" :style="`view-transition-name: blog-title-${blog.title.toLowerCase().replace(/ /g, '-')}`">{{ blog.title }}</h1>
+      <h1 class="text-4xl font-bold" :style="`view-transition-name: blog-title-${blog.title.toLowerCase().replace(/ /g, '-')}`">{{ blog.title }}</h1>
 
       <!-- Description -->
       <p 
         v-if="blog.description" 
-        class="text-xl text-gray-600 dark:text-gray-400 text-center max-w-2xl mx-auto mb-6 leading-relaxed"
+        class="text-xl text-gray-600 dark:text-gray-400 text-center max-w-2xl mx-auto leading-relaxed"
         style="view-transition-name: blog-description"
       >
         {{ blog.description }}
@@ -89,7 +89,7 @@ const calculateReadingTime = (body: any) => {
       <!-- Tags -->
       <div 
         v-if="blog.tags && blog.tags.length > 0" 
-        class="flex flex-wrap gap-2 justify-center mb-6"
+        class="flex flex-wrap gap-2 justify-center"
         style="view-transition-name: blog-tags"
       >
         <span 
