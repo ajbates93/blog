@@ -42,107 +42,144 @@
 
   <!-- Technologies & Skills Section -->
   <section class="container mx-auto p-5 sm:p-10 text-left">
-    <h2 class="text-3xl font-bold text-slate-700 dark:text-white mb-6">Technologies & Skills</h2>
+    <CardSpotlight
+      class="shadow-2xl"
+      :gradient-color="'#C9C9C9'"
+      :gradient-opacity="0.8"
+      slot-class="p-8"
+    >
+      <h2 class="text-3xl font-bold text-slate-700 dark:text-white mb-4">Technologies & Skills</h2>
+      <TextWrapper>
+        I'm proficient in a range of languages and frameworks, from frontend technologies to backend systems and mobile development. 
+        The connections show how these technologies relate and complement each other in modern development workflows.
+      </TextWrapper>
 
-    <div ref="containerRef"
-      class="relative flex h-[600px] w-full items-center justify-center overflow-hidden rounded-lg p-10">
-      <div class="flex size-full max-h-[300px] max-w-xl flex-col items-stretch justify-between gap-8">
-        <!-- Top row - Frameworks -->
-        <div class="flex flex-row items-center justify-between">
-          <div ref="nuxtRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-nuxt-icon" size="24" />
+      <div ref="containerRef"
+        class="relative flex h-[500px] px-10 mx-auto items-center justify-center overflow-hidden rounded-lg my-10 md:my-20">
+        <div class="flex size-full max-h-[500px] flex-col items-stretch justify-between gap-12">
+          <!-- Top row - Frameworks -->
+          <div class="flex flex-row items-center justify-between">
+            <UTooltip :delay-duration="0" text="Nuxt">
+              <div ref="nuxtRef"
+                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+                <UIcon name="i-logos-nuxt-icon" size="28" class="sm:w-8 sm:h-8" />
+              </div>
+            </UTooltip>
+            <UTooltip :delay-duration="0" text="Vue">
+              <div ref="vueRef"
+                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+                <UIcon name="i-logos-vue" size="28" class="sm:w-8 sm:h-8" />
+              </div>
+            </UTooltip>
+            <UTooltip :delay-duration="0" text="Alpine">
+              <div ref="alpineRef"
+                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+                <UIcon name="i-logos-alpinejs-icon" size="28" class="sm:w-8 sm:h-8" />
+              </div>
+            </UTooltip>
+            <UTooltip :delay-duration="0" text="Astro">
+              <div ref="astroRef"
+                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+                <UIcon name="i-logos-astro" size="28" class="sm:w-8 sm:h-8" />
+              </div>
+            </UTooltip>
           </div>
-          <div ref="vueRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-vue" size="24" />
+
+          <!-- Middle row - Languages and Central -->
+          <div class="flex flex-row items-center justify-between">
+
+                      <UTooltip :delay-duration="0" text="Phoenix">
+            <div ref="phoenixRef"
+              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+              <UIcon name="i-logos-phoenix" size="28" class="sm:w-8 sm:h-8" />
+            </div>
+          </UTooltip>
+          <UTooltip :delay-duration="0" text="Elixir">
+            <div ref="elixirRef"
+              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+              <Icon name="vscode-icons:file-type-elixir" size="28" class="sm:w-8 sm:h-8" />
+            </div>
+          </UTooltip>
+          <UTooltip :delay-duration="0" text="Alex Bates">
+            <div ref="centralRef"
+              class="z-10 flex size-18 sm:size-20 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+              <img src="/favicon.svg" alt="Alex Bates" class="w-10 h-10 sm:w-12 sm:h-12" />
+            </div>
+          </UTooltip>
+
+          <UTooltip :delay-duration="0" text="C#">
+            <div ref="csharpRef"
+              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+              <UIcon name="i-logos-c-sharp" size="28" class="sm:w-8 sm:h-8" />
+            </div>
+          </UTooltip>
+          <UTooltip :delay-duration="0" text="ASP.NET">
+            <div ref="dotnetRef"
+              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+              <UIcon name="i-logos-dotnet" size="28" class="sm:w-8 sm:h-8" />
+            </div>
+          </UTooltip>
           </div>
-          <div ref="alpineRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-alpinejs-icon" size="24" />
-          </div>
-          <div ref="astroRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-astro" size="24" />
+
+          <!-- Bottom row - Frameworks and Tools -->
+          <div class="flex flex-row items-center justify-between">
+                      <UTooltip :delay-duration="0" text="Node.js">
+            <div ref="nodeRef"
+              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+              <UIcon name="i-logos-nodejs-icon" size="28" class="sm:w-8 sm:h-8" />
+            </div>
+          </UTooltip>
+          <UTooltip :delay-duration="0" text="PostgreSQL">
+            <div ref="postgresRef"
+              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+              <UIcon name="i-logos-postgresql" size="28" class="sm:w-8 sm:h-8" />
+            </div>
+          </UTooltip>
+          <UTooltip :delay-duration="0" text="Dart">
+            <div ref="dartRef"
+              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+              <UIcon name="i-logos-dart" size="28" class="sm:w-8 sm:h-8" />
+            </div>
+          </UTooltip>
+          <UTooltip :delay-duration="0" text="Flutter">
+            <div ref="flutterRef"
+              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
+              <UIcon name="i-logos-flutter" size="28" class="sm:w-8 sm:h-8" />
+            </div>
+          </UTooltip>
           </div>
         </div>
 
-        <!-- Middle row - Languages and Central -->
-        <div class="flex flex-row items-center justify-between">
+        <!-- Framework to Language connections -->
+        <AnimatedBeam :container-ref="containerRef" :from-ref="nuxtRef" :to-ref="vueRef" :curvature="20" :duration="6" />
+        <AnimatedBeam :container-ref="containerRef" :from-ref="phoenixRef" :to-ref="elixirRef" :curvature="20"
+          :duration="6" />
+        <AnimatedBeam :container-ref="containerRef" :from-ref="flutterRef" :to-ref="dartRef" :curvature="30"
+          :duration="6" />
+        <AnimatedBeam :container-ref="containerRef" :from-ref="dotnetRef" :to-ref="csharpRef" :curvature="20"
+          :duration="6" />
 
-          <div ref="phoenixRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-phoenix" size="24" />
-          </div>
-          <div ref="elixirRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <Icon name="vscode-icons:file-type-elixir" size="24" />
-          </div>
-          <div ref="centralRef"
-            class="z-10 flex size-16 items-center justify-center rounded-full border-2 bg-white p-2 text-black shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]">
-            <img src="/favicon.svg" alt="Alex Bates" class="w-8 h-8" />
-          </div>
+        <!-- Direct connections to central -->
+        <AnimatedBeam :container-ref="containerRef" :from-ref="vueRef" :to-ref="centralRef" :curvature="-40"
+          :end-y-offset="-10" :duration="6" />
+        <AnimatedBeam :container-ref="containerRef" :from-ref="alpineRef" :to-ref="centralRef" :curvature="-20"
+          :end-y-offset="-5" :duration="6" />
+        <AnimatedBeam :container-ref="containerRef" :from-ref="astroRef" :to-ref="centralRef" :curvature="-10"
+          :end-y-offset="-5" :duration="6" />
+        <AnimatedBeam :container-ref="containerRef" :from-ref="nodeRef" :to-ref="centralRef" :curvature="-30"
+          :end-y-offset="10" :duration="6" />
+        <AnimatedBeam :container-ref="containerRef" :from-ref="elixirRef" :to-ref="centralRef" :curvature="-30"
+          :duration="6" />
+        <AnimatedBeam :container-ref="containerRef" :from-ref="dartRef" :to-ref="centralRef" :curvature="30"
+          :duration="6" />
+        <AnimatedBeam :container-ref="containerRef" :from-ref="csharpRef" :to-ref="centralRef" :curvature="40"
+          :duration="6" />
 
-          <div ref="csharpRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-c-sharp" size="24" />
-          </div>
-          <div ref="dotnetRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-dotnet" size="24" />
-          </div>
-        </div>
-
-        <!-- Bottom row - Frameworks and Tools -->
-        <div class="flex flex-row items-center justify-between">
-          <div ref="nodeRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-nodejs-icon" size="24" />
-          </div>
-          <div ref="postgresRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-postgresql" size="24" />
-          </div>
-          <div ref="dartRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-dart" size="24" />
-          </div>
-          <div ref="flutterRef"
-            class="z-10 flex size-12 items-center justify-center rounded-full border-1 bg-white p-2 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] dark:text-black">
-            <UIcon name="i-logos-flutter" size="24" />
-          </div>
-        </div>
+        <!-- Direct tool connections to central -->
+        <AnimatedBeam :container-ref="containerRef" :from-ref="postgresRef" :to-ref="centralRef" :curvature="-20"
+          :end-y-offset="5" :duration="6" />
       </div>
-
-      <!-- Framework to Language connections -->
-      <AnimatedBeam :container-ref="containerRef" :from-ref="nuxtRef" :to-ref="vueRef" :curvature="20" :duration="2" />
-      <AnimatedBeam :container-ref="containerRef" :from-ref="phoenixRef" :to-ref="elixirRef" :curvature="20"
-        :duration="2" />
-      <AnimatedBeam :container-ref="containerRef" :from-ref="flutterRef" :to-ref="dartRef" :curvature="30"
-        :duration="2" />
-      <AnimatedBeam :container-ref="containerRef" :from-ref="dotnetRef" :to-ref="csharpRef" :curvature="20"
-        :duration="2" />
-
-      <!-- Direct connections to central -->
-      <AnimatedBeam :container-ref="containerRef" :from-ref="vueRef" :to-ref="centralRef" :curvature="-40"
-        :end-y-offset="-10" :duration="2" />
-      <AnimatedBeam :container-ref="containerRef" :from-ref="alpineRef" :to-ref="centralRef" :curvature="-20"
-        :end-y-offset="-5" :duration="2" />
-      <AnimatedBeam :container-ref="containerRef" :from-ref="astroRef" :to-ref="centralRef" :curvature="-10"
-        :end-y-offset="-5" :duration="2" />
-      <AnimatedBeam :container-ref="containerRef" :from-ref="nodeRef" :to-ref="centralRef" :curvature="-30"
-        :end-y-offset="10" :duration="2" />
-      <AnimatedBeam :container-ref="containerRef" :from-ref="elixirRef" :to-ref="centralRef" :curvature="-30"
-        :duration="2" />
-      <AnimatedBeam :container-ref="containerRef" :from-ref="dartRef" :to-ref="centralRef" :curvature="30"
-        :duration="2" />
-      <AnimatedBeam :container-ref="containerRef" :from-ref="csharpRef" :to-ref="centralRef" :curvature="40"
-        :duration="2" />
-
-      <!-- Direct tool connections to central -->
-      <AnimatedBeam :container-ref="containerRef" :from-ref="postgresRef" :to-ref="centralRef" :curvature="-20"
-        :end-y-offset="5" :duration="2" />
-    </div>
+    </CardSpotlight>
   </section>
 
   <!-- Blog Posts Section -->
@@ -206,6 +243,9 @@
 definePageMeta({
   viewTransition: false
 })
+
+// Dark mode detection for CardSpotlight
+const isDark = computed(() => useColorMode().value === "dark");
 
 const startDate = ref<Date>(new Date("2015-02-02"));
 

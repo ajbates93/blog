@@ -1,11 +1,13 @@
 <template>
-  <div class="bg-slate-100 dark:bg-slate-900">
-    <Header />
-    <main class="min-h-[calc(100dvh_-_150px)]">
-      <slot />
-    </main>
-    <Footer />
-  </div>
+  <UApp>
+    <div class="bg-gray-50 dark:bg-slate-900">
+      <Header />
+      <main class="min-h-[calc(100dvh_-_150px)]">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </UApp>
 </template>
 
 <script setup>
