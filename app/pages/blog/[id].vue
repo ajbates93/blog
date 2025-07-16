@@ -9,12 +9,7 @@ useHead(blog.value?.head || {})
 useSeoMeta(blog.value?.seo || {})
 
 const calculateReadingTime = (body: any) => {
-  console.log('🔍 calculateReadingTime called with body:', body);
-  
-  if (!body) {
-    console.log('❌ No body found, returning 3');
-    return 3;
-  }
+  if (!body) return 3;
   
   // Extract text content from the body
   let text = '';
@@ -22,14 +17,11 @@ const calculateReadingTime = (body: any) => {
   // If body has a _value property (Nuxt Content structure), use that
   if (body._value) {
     text = body._value;
-    console.log('📝 Using body._value:', text.substring(0, 100) + '...');
   } else if (typeof body === 'string') {
     text = body;
-    console.log('📝 Using body as string:', text.substring(0, 100) + '...');
   } else {
     // Fallback: try to extract text from the body object
     text = JSON.stringify(body);
-    console.log('📝 Using JSON.stringify fallback:', text.substring(0, 100) + '...');
   }
   
   // Remove markdown syntax and count words
@@ -40,20 +32,12 @@ const calculateReadingTime = (body: any) => {
   
   const wordCount = cleanText.split(' ').filter(word => word.length > 0).length;
   
-  console.log('📊 Clean text length:', cleanText.length);
-  console.log('📊 Word count:', wordCount);
-  
   // Average reading speed is about 200-250 words per minute
   // Using 225 as a middle ground
   const readingTime = Math.ceil(wordCount / 225);
   
-  console.log('⏱️ Calculated reading time:', readingTime);
-  
   // Ensure minimum reading time of 1 minute
-  const finalReadingTime = Math.max(1, readingTime);
-  console.log('✅ Final reading time:', finalReadingTime);
-  
-  return finalReadingTime;
+  return Math.max(1, readingTime);
 };
 </script>
 
@@ -123,6 +107,13 @@ const calculateReadingTime = (body: any) => {
       >
         <ContentRenderer v-if="blog" :value="blog" />
       </div>
+      
+      <!-- Social Sharing -->
+      <SocialShare 
+        :title="blog.title" 
+        :description="blog.description" 
+        :url="`https://www.alexbates.dev${route.path}`"
+      />
     </div>
   </div>
 </template>

@@ -21,7 +21,10 @@
         <a target="_blank" class="text-[#e68937] font-bold" href="https://www.pocketworks.co.uk"
           >Pocketworks</a
         >
-        as a Full Stack Developer.
+        as a Full Stack Developer, where I build mobile applications and web solutions for clients across various industries.
+      </TextWrapper>
+      <TextWrapper>
+        My expertise spans across modern web technologies including Vue.js, Astro, Elixir & Phoenix, and mobile development with Flutter. I'm passionate about creating user-friendly applications that solve real-world problems and deliver exceptional user experiences.
       </TextWrapper>
       <TextWrapper>
         I try and remember to write about things I learn or find interesting.
@@ -43,6 +46,44 @@
       </div>
     </div>
   </section>
+  
+  <!-- Skills & Technologies Section -->
+  <section class="container mx-auto p-5 sm:p-10 text-left">
+    <h2 class="text-3xl font-bold text-slate-700 dark:text-white mb-6">Technologies & Skills</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold text-slate-700 dark:text-white mb-3">Frontend Development</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-3">Building responsive and interactive user interfaces with modern frameworks.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Vue</span>
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Nuxt</span>
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Astro</span>
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Alpine</span>
+        </div>
+      </div>
+      
+      <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold text-slate-700 dark:text-white mb-3">Backend & APIs</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-3">Creating robust server-side applications and RESTful APIs.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Node.js</span>
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Elixir</span>
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Phoenix</span>
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Go</span>
+        </div>
+      </div>
+      
+      <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold text-slate-700 dark:text-white mb-3">Mobile Development</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-3">Building cross-platform mobile applications for iOS and Android.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Flutter</span>
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full">Dart</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <section class="container mx-auto p-5 sm:p-10 text-left mt-[68px]">
     <h2 class="text-4xl font-bold text-slate-700 dark:text-white mb-4">Blog Posts</h2>
     <Blog />
