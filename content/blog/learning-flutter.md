@@ -19,6 +19,7 @@ date: 2025-07-16
 navigation:
   title: Introduction to Mobile Development
   description: It's never too late to learn a new skill!
+isPublished: true
 ---
 
 #
