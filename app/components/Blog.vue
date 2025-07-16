@@ -1,8 +1,5 @@
 <template>
-  <section class="blogs container mx-auto p-5 sm:p-10 text-left">
-    <h1 class="text-4xl font-bold text-slate-700 dark:text-white mb-4">
-      Blog Posts
-    </h1>
+    
     <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg">
       Thoughts on web development, mobile development, and the tech industry.
     </p>
@@ -32,7 +29,6 @@
         </ULink>
       </li>
     </ul>
-  </section>
 </template>
 
 <script setup lang="ts">

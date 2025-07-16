@@ -43,7 +43,10 @@
       </div>
     </div>
   </section>
-  <Blog />
+  <section class="container mx-auto p-5 sm:p-10 text-left mt-[68px]">
+    <h2 class="text-4xl font-bold text-slate-700 dark:text-white mb-4">Blog Posts</h2>
+    <Blog />
+  </section>
   <section class="container mx-auto p-5 !pt-0 sm:p-10 text-left">
     <div class="mt-[68px]">
       <ULink class="text-white underline" to="/blog">View all blog posts</ULink>

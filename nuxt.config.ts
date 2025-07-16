@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     preset: "netlify-static",
   },
   site: {
-    url: "https://www.alexbates.dev",
+    url: "https://alexbates.dev",
   },
   image: {
     quality: 80,
@@ -36,7 +36,7 @@ export default defineNuxtConfig({
         {
           name: "description",
           content:
-            "Alex Bates is a web developer based in the UK. He specialises in building websites and web applications using modern technologies.",
+            "Alex Bates is a web developer based in the UK. He specialises in building websites, web applications and mobile applications using modern technologies.",
         },
       ],
     },
