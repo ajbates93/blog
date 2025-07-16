@@ -1,6 +1,6 @@
 <template>
   <section class="container mx-auto p-5 sm:p-10 text-left mt-[68px]">
-    <h1 class="text-4xl font-bold text-slate-700 dark:text-white mb-4">Blog Posts</h1>
+    <h1 class="text-5xl font-bold text-slate-700 dark:text-white mb-8">Blog Posts</h1>
     <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg max-w-3xl">
       Welcome to my blog! Here you'll find thoughts, tutorials, and insights about web development, mobile development, and the tech industry. I write about things I learn, interesting projects I work on, and share knowledge that might help other developers on their journey.
     </p>
@@ -39,31 +39,36 @@
         </template>
       </BentoGridCard>
       
-      <!-- Regular posts -->
-      <BentoGridItem
+      <!-- Regular posts as BentoGridCards -->
+      <BentoGridCard
         v-for="(post, index) in transformedBlogPosts.slice(1)"
         :key="post.id"
+        :name="post.title"
+        :description="post.description"
+        :href="post.path"
+        cta="Read more"
+        :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')"
+        class="col-span-1"
       >
+        <template #background>
+          <!-- Image takes precedence over icon -->
+          <NuxtImg 
+            v-if="post.image" 
+            :src="post.image" 
+            :alt="post.title"
+            class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+          />
+          <!-- Fallback gradient background - lighter for smaller cards -->
+          <div v-else class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
+        </template>
+        
+        <!-- Add date to smaller cards -->
         <template #header>
-          <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          <p class="text-sm text-neutral-500 dark:text-neutral-400">
             {{ formatDate(post.date) }}
           </p>
         </template>
-        
-        <template #icon>
-          <UIcon name="i-heroicons-document-text" class="w-6 h-6 text-indigo-500" />
-        </template>
-        
-        <template #title>
-          <ULink :to="post.path" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-            {{ post.title }}
-          </ULink>
-        </template>
-        
-        <template #description>
-          {{ post.description }}
-        </template>
-      </BentoGridItem>
+      </BentoGridCard>
       
       <!-- Empty state -->
       <BentoGridItem v-if="transformedBlogPosts.length === 0" class="col-span-full text-center">

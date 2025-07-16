@@ -6,8 +6,8 @@
         'group relative col-span-3 flex flex-col justify-end overflow-hidden rounded-xl',
         // light styles
         'bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]',
-        // dark styles
-        'transform-gpu dark:bg-black dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]',
+        // dark styles - increased contrast
+        'transform-gpu dark:bg-slate-800 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_4px_12px_rgba(0,0,0,.3),0_-20px_80px_-20px_#ffffff1f_inset]',
         props.class,
       )
     "
@@ -29,7 +29,7 @@
       />
       <div
         v-else
-        class="size-12 origin-left transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out group-hover:scale-75"
+        class="size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out group-hover:scale-75"
       ></div>
       <h3 class="text-xl font-semibold text-neutral-700 dark:text-neutral-300">
         {{ name }}
