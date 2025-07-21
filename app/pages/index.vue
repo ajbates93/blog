@@ -230,10 +230,29 @@
       </BentoGridCard>
     </BentoGrid>
 
-    <div class="mt-6 text-center">
-      <ULink to="/blog" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">
-        View all blog posts →
-      </ULink>
+    <!-- View All Blog Posts Card -->
+    <div class="mt-6">
+      <div class="group relative flex flex-col justify-end overflow-hidden rounded-xl bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:bg-slate-800 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_4px_12px_rgba(0,0,0,.3),0_-20px_80px_-20px_#ffffff1f_inset]">
+        <!-- Background gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
+        
+        <!-- Content -->
+        <div class="relative z-10 flex items-center justify-between p-4 md:p-6">
+          <div class="flex items-center gap-3">
+            <UIcon name="i-heroicons-document-text" class="size-6 md:size-8 text-neutral-700 dark:text-neutral-300" />
+            <span class="text-lg md:text-xl font-semibold text-neutral-700 dark:text-neutral-300">
+              View all blog posts
+            </span>
+          </div>
+          <UIcon name="i-heroicons-arrow-right" class="size-5 md:size-6 text-neutral-700 dark:text-neutral-300 transition-transform duration-300 group-hover:translate-x-1" />
+        </div>
+        
+        <!-- Hover overlay -->
+        <div class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10" />
+        
+        <!-- Clickable overlay -->
+        <ULink to="/blog" class="z-20" />
+      </div>
     </div>
   </section>
 

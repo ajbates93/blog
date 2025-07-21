@@ -20,16 +20,16 @@
     </div>
 
     <div
-      class="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-4 md:p-6 transition-all duration-300 group-hover:-translate-y-10"
+      class="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-4 pb-2 md:p-6 md:pb-6 transition-all duration-300 lg:group-hover:-translate-y-10"
     >
       <UIcon
         v-if="icon"
         :name="icon"
-        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out group-hover:scale-75"
+        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out lg:group-hover:scale-75"
       />
       <div
         v-else
-        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out group-hover:scale-75"
+        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out lg:group-hover:scale-75"
       ></div>
       <h3 class="text-lg md:text-xl font-semibold text-neutral-700 dark:text-neutral-300">
         {{ name }}
@@ -38,10 +38,10 @@
     </div>
     
     <!-- Mobile Read More Link -->
-    <div class="md:hidden relative z-30 p-4 pt-0 md:p-6 md:pt-0">
+    <div class="lg:hidden relative z-30 p-4 pt-2 md:p-6 md:pt-6">
       <a
         :href="href"
-        class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-800"
+        class="inline-flex items-center rounded-md text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-800"
       >
         {{ cta }} →
       </a>
@@ -49,7 +49,7 @@
 
     <!-- Desktop Read More Link (absolute positioned for hover effect) -->
     <div
-      class="absolute bottom-0 hidden md:flex w-full transform-gpu flex-row items-center p-4 translate-y-10 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 z-30"
+      class="absolute bottom-0 hidden lg:flex w-full transform-gpu flex-row items-center p-4 translate-y-10 opacity-0 transition-all duration-300 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 z-30"
     >
       <a
         :href="href"
@@ -59,7 +59,7 @@
       </a>
     </div>
     <div
-      class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10"
+      class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 lg:group-hover:bg-black/[.03] lg:group-hover:dark:bg-neutral-800/10"
     />
   </div>
 </template>
