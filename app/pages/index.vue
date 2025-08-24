@@ -237,7 +237,7 @@
         <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
         
         <!-- Content -->
-        <div class="relative z-10 flex items-center justify-between p-4 md:p-6">
+        <ULink to="/blog" class="relative z-10 flex items-center justify-between p-4 md:p-6">
           <div class="flex items-center gap-3">
             <UIcon name="i-heroicons-document-text" class="size-6 md:size-8 text-neutral-700 dark:text-neutral-300" />
             <span class="text-lg md:text-xl font-semibold text-neutral-700 dark:text-neutral-300">
@@ -245,13 +245,10 @@
             </span>
           </div>
           <UIcon name="i-heroicons-arrow-right" class="size-5 md:size-6 text-neutral-700 dark:text-neutral-300 transition-transform duration-300 group-hover:translate-x-1" />
-        </div>
+        </ULink>
         
         <!-- Hover overlay -->
         <div class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10" />
-        
-        <!-- Clickable overlay -->
-        <ULink to="/blog" class="z-20" />
       </div>
     </div>
   </section>
