@@ -1,14 +1,15 @@
 <template>
-  <section class="container mx-auto p-5 sm:p-10 text-left mt-[68px]">
-    <h1 class="text-5xl font-bold text-slate-700 dark:text-white mb-8">Blog Posts</h1>
-    <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg max-w-3xl">
-      Welcome to my blog! Here you'll find thoughts, tutorials, and insights about web development, mobile development, and the tech industry. I write about things I learn, interesting projects I work on, and share knowledge that might help other developers on their journey.
-    </p>
-    <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg max-w-3xl">
+  <section class="container mx-auto text-left md:max-w-3/5 lg:max-w-screen-xl px-0 sm:px-10">
+    <Header />
+    <h1 class="text-7xl font-bold text-slate-700 dark:text-white mb-10">Blog</h1>
+    <TextWrapper>
+      Here you'll find thoughts, tutorials, and insights about web development, mobile development, and the tech industry. I write about things I learn, interesting projects I work on, and share knowledge that might help other developers on their journey.
+    </TextWrapper>
+    <TextWrapper class="mb-10">
       Whether you're interested in Vue.js, React, Flutter, or general software development practices, I hope you'll find something useful here. Feel free to reach out if you have questions or want to discuss any of the topics I cover.
-    </p>
+    </TextWrapper>
     
-    <BentoGrid class="w-full">
+    <BentoGrid class="w-full mb-10">
       <!-- Featured post (spans 2 columns) -->
       <BentoGridCard
         v-if="transformedBlogPosts.length > 0"

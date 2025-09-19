@@ -19,11 +19,11 @@
           I'm currently working at
           <a target="_blank" class="font-bold text-white hover:text-gray-200 transition-colors"
             href="https://www.pocketworks.co.uk">Pocketworks</a>
-          as a Full Stack Developer, where I build mobile applications and web solutions for clients across various
+          as a Full Stack Developer, where I build web and mobile applications for clients across various
           industries.
         </TextWrapper>
         <TextWrapper>
-          I try and remember to write about things I learn or find interesting.
+          Take a look at my <ULink to="/blog" class="font-bold text-white hover:text-gray-200 transition-colors">blog</ULink> to see what I've been working on. I try and remember to write about things I learn or find interesting.
           You can also follow me on <a target="_blank"
             class="font-bold text-white hover:text-gray-200 transition-colors"
             href="https://github.com/ajbates93">Github</a> (or <a target="_blank"
@@ -65,102 +65,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Technologies & Skills Section with Gray Background -->
-  <!-- <section class="w-full h-screen bg-[#8899a8] flex items-center">
-    <div
-      class="md:max-w-3/5 lg:max-w-screen-xl mx-auto text-left sm:grid-cols-[3fr_2fr] grid-cols-1 grid min-h-[100dvh]">
-      <div class="px-0 sm:px-10 flex flex-col justify-start py-20">
-        <h2 class="text-2xl md:text-7xl font-bold text-white mb-4">My Work</h2>
-        <TextWrapper class="text-white">
-          I'm proficient in a range of languages and frameworks, from frontend technologies to backend systems and
-          mobile
-          development.
-          The connections show how these technologies relate and complement each other in modern development workflows.
-        </TextWrapper>
-      </div>
-    </div>
-  </section> -->
-
-  <!-- Blog Posts Section with Dark Background -->
-  <section class="w-full min-h-screen bg-[#3b3e44] py-16">
-    <div class="container mx-auto p-5 sm:p-10 text-left">
-      <h2 class="text-7xl font-bold text-white mb-10">Some thoughts</h2>
-      <TextWrapper class="text-white mb-10">I write about things I learn or find interesting.</TextWrapper>
-      
-      <BentoGrid class="w-full">
-        <!-- Featured post (spans 2 columns) -->
-        <BentoGridCard v-if="transformedBlog.length > 0" :name="transformedBlog[0]!.title"
-          :description="transformedBlog[0]!.description" :href="transformedBlog[0]!.path" cta="Read more"
-          :icon="transformedBlog[0]!.image ? undefined : (transformedBlog[0]!.icon || 'i-heroicons-document-text')"
-          class="md:col-span-2">
-          <template #background>
-            <!-- Image takes precedence over icon -->
-            <NuxtImg v-if="transformedBlog[0]!.image" :src="transformedBlog[0]!.image" :alt="transformedBlog[0]!.title"
-              class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
-            <!-- Fallback gradient background - better for light mode -->
-            <div v-else
-              class="absolute inset-0 bg-gradient-to-br from-slate-100 to-gray-200 dark:from-indigo-500/10 dark:to-purple-500/10" />
-          </template>
-
-          <!-- Add date to main card -->
-          <template #header>
-            <p class="text-sm text-neutral-500 dark:text-neutral-400">
-              {{ formatDate(transformedBlog[0]!.date) }}
-            </p>
-          </template>
-        </BentoGridCard>
-
-        <!-- Regular posts as BentoGridCards -->
-        <BentoGridCard v-for="(post, index) in transformedBlog.slice(1, 3)" :key="post.id" :name="post.title"
-          :description="post.description" :href="post.path" cta="Read more"
-          :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')">
-          <template #background>
-            <!-- Image takes precedence over icon -->
-            <NuxtImg v-if="post.image" :src="post.image" :alt="post.title"
-              class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
-            <!-- Fallback gradient background - lighter for smaller cards -->
-            <div v-else
-              class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
-          </template>
-
-          <!-- Add date to smaller cards -->
-          <template #header>
-            <p class="text-sm text-neutral-500 dark:text-neutral-400">
-              {{ formatDate(post.date) }}
-            </p>
-          </template>
-        </BentoGridCard>
-      </BentoGrid>
-
-      <!-- View All Blog Posts Card -->
-      <div class="mt-6">
-        <div
-          class="group relative flex flex-col justify-end overflow-hidden rounded-xl bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:bg-slate-800 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_4px_12px_rgba(0,0,0,.3),0_-20px_80px_-20px_#ffffff1f_inset]">
-          <!-- Background gradient -->
-          <div
-            class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
-
-          <!-- Content -->
-          <ULink to="/blog" class="relative z-10 flex items-center justify-between p-4 md:p-6">
-            <div class="flex items-center gap-3">
-              <UIcon name="i-heroicons-document-text" class="size-6 md:size-8 text-neutral-700 dark:text-neutral-300" />
-              <span class="text-lg md:text-xl font-semibold font-serif text-neutral-700 dark:text-neutral-300">
-                View all blog posts
-              </span>
-            </div>
-            <UIcon name="i-heroicons-arrow-right"
-              class="size-5 md:size-6 text-neutral-700 dark:text-neutral-300 transition-transform duration-300 group-hover:translate-x-1" />
-          </ULink>
-
-          <!-- Hover overlay -->
-          <div
-            class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10" />
-        </div>
-      </div>
-    </div>
-  </section>
-
 </template>
 
 <script lang="ts" setup>
