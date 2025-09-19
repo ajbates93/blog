@@ -1,9 +1,7 @@
 <template>
   <UApp>
-    <div class="bg-[#5385c2]">
-      <div class="min-h-[calc(100dvh_-_150px)]">
-        <slot />
-      </div>
+    <div>
+      <slot />
       <Footer />
     </div>
   </UApp>

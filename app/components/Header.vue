@@ -5,7 +5,7 @@
       <span>|</span>
       <NuxtLink to="/blog">blog</NuxtLink>
     </nav>
-    <UIcon class="cursor-pointer ml-auto" @click="toggleTheme" :name="themeIcon" />
+    <!--<UIcon class="cursor-pointer ml-auto" @click="toggleTheme" :name="themeIcon" />-->
   </div>
 </template>
 
