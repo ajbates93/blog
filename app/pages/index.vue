@@ -1,185 +1,53 @@
 <template>
-  <section class="grid sm:grid-cols-[2fr_3fr] grid-cols-1 container mx-auto p-5 sm:p-10 text-left mt-[68px]">
-    <picture class="rounded-xl shadow-2xl overflow-hidden mb-5 sm:mb-0">
-      <img src="/images/home-about-small.webp" alt="Alex Bates" class="w-full" />
-    </picture>
-    <div class="py-5 px-0 sm:px-10 flex flex-col justify-start">
-      <h1 class="text-5xl text-slate-700 dark:text-white font-bold mb-5">
+  <section
+    class="grid md:max-w-3/5 lg:max-w-screen-xl h-[100dvh] max-h-[1000px] sm:grid-cols-[3fr_2fr] grid-cols-1 mx-auto text-left sm:pr-10 md:pr-20">
+    <div class="px-0 sm:px-10 flex flex-col justify-start">
+      <Header />
+      <h1 class="text-7xl text-[#2b2b2b] font-bold mb-10">
         Hello there.
       </h1>
       <TextWrapper>
         I'm
-        <span class="font-bold text-slate-700 dark:text-gray-300">Alex Bates</span>. I'm a software developer that's
-        been working professionally for
-        <span>{{ yearsSinceStartDate }}</span> years.
+        <span class="font-bold underline text-[#2b2b2b] ">Alex Bates</span>. I'm a software developer with over <span>{{
+          yearsSinceStartDate }}</span> years of industry experience.
       </TextWrapper>
+      <div class="italic text-5xl py-5 text-white text-center block">~</div>
       <TextWrapper>
         I'm currently working at
-        <a target="_blank" class="text-[#e68937] font-bold" href="https://www.pocketworks.co.uk">Pocketworks</a>
+        <a target="_blank" class="font-bold" href="https://www.pocketworks.co.uk">Pocketworks</a>
         as a Full Stack Developer, where I build mobile applications and web solutions for clients across various
         industries.
       </TextWrapper>
       <TextWrapper>
-        My expertise spans across modern web technologies including Vue.js, Astro, Elixir & Phoenix, and mobile
-        development with Flutter. I'm passionate about creating user-friendly applications that solve real-world
-        problems and deliver exceptional user experiences.
-      </TextWrapper>
-      <TextWrapper>
         I try and remember to write about things I learn or find interesting.
-        You can also follow me on Github (or LinkedIn, if that's your thing).
+        You can also follow me on <a target="_blank" class="font-bold" href="https://github.com/ajbates93">Github</a> (or <a target="_blank" class="font-bold" href="https://www.linkedin.com/in/alex-bates-01b548a7">LinkedIn</a>, if that's your thing).
       </TextWrapper>
-      <div class="flex gap-5 mt-auto">
-        <ULink class="text-indigo-500 dark:text-indigo-400" target="_blank" to="https://github.com/ajbates93">
+      <div class="flex gap-5 justify-center py-10">
+        <ULink class="text-[#ffffff]" target="_blank" to="https://github.com/ajbates93">
           <UIcon name="uil:github" size="2em" />
         </ULink>
-        <ULink class="text-indigo-500 dark:text-indigo-400" target="_blank"
-          to="https://www.linkedin.com/in/alex-bates-01b548a7">
+        <ULink class="text-[#ffffff]" target="_blank" to="https://www.linkedin.com/in/alex-bates-01b548a7">
           <UIcon name="uil:linkedin" size="2em" />
         </ULink>
       </div>
     </div>
+    <div class="absolute right-0 top-0">
+      <img src="/images/home-about-small.webp" alt="Alex Bates"
+        class="object-cover w-full h-60 rounded-[0_0_0_20rem] xs:h-72 sm:h-80 md:h-full lg:w-full lg:h-full md:max-h-144 lg:max-h-200 2xl:max-h-full transition-opacity delay-500 duration-1000 ease-out" />
+    </div>
   </section>
 
   <!-- Technologies & Skills Section -->
-  <section class="container mx-auto p-5 sm:p-10 text-left">
-    <CardSpotlight
-      class="shadow-2xl"
-      :gradient-color="'#C9C9C9'"
-      :gradient-opacity="0.8"
-      slot-class="p-4 md:p-8"
-    >
-      <h2 class="text-2xl md:text-3xl font-bold text-slate-700 dark:text-white mb-4">Technologies & Skills</h2>
+  <section
+    class="md:max-w-3/5 lg:max-w-screen-xl mx-auto text-left sm:grid-cols-[3fr_2fr] grid-cols-1 grid min-h-[100dvh]">
+    <div class="px-0 sm:px-10 flex flex-col justify-start">
+      <h2 class="text-2xl md:text-7xl font-bold text-[#2b2b2b] mb-4">My Work</h2>
       <TextWrapper>
-        I'm proficient in a range of languages and frameworks, from frontend technologies to backend systems and mobile development. 
+        I'm proficient in a range of languages and frameworks, from frontend technologies to backend systems and mobile
+        development.
         The connections show how these technologies relate and complement each other in modern development workflows.
       </TextWrapper>
-
-      <div ref="containerRef"
-        class="relative flex h-[400px] sm:h-[500px] sm:px-10 mx-auto items-center justify-center overflow-hidden rounded-lg my-10 md:my-20">
-        <div class="flex size-full max-h-[400px] sm:max-h-[500px] flex-col items-stretch justify-between gap-12">
-          <!-- Top row - Frameworks -->
-          <div class="flex flex-row items-center justify-between">
-            <UTooltip :delay-duration="0" text="Nuxt">
-              <div ref="nuxtRef"
-                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-                <UIcon name="i-logos-nuxt-icon" size="28" class="sm:w-8 sm:h-8" />
-              </div>
-            </UTooltip>
-            <UTooltip :delay-duration="0" text="Vue">
-              <div ref="vueRef"
-                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-                <UIcon name="i-logos-vue" size="28" class="sm:w-8 sm:h-8" />
-              </div>
-            </UTooltip>
-            <UTooltip :delay-duration="0" text="Alpine">
-              <div ref="alpineRef"
-                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-                <UIcon name="i-logos-alpinejs-icon" size="28" class="sm:w-8 sm:h-8" />
-              </div>
-            </UTooltip>
-            <UTooltip :delay-duration="0" text="Astro">
-              <div ref="astroRef"
-                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-                <UIcon name="i-logos-astro" size="28" class="sm:w-8 sm:h-8" />
-              </div>
-            </UTooltip>
-          </div>
-
-          <!-- Middle row - Languages and Central -->
-          <div class="flex flex-row items-center justify-between">
-
-                      <UTooltip :delay-duration="0" text="Phoenix">
-            <div ref="phoenixRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-phoenix" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="Elixir">
-            <div ref="elixirRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <Icon name="vscode-icons:file-type-elixir" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="Alex Bates">
-            <div ref="centralRef"
-              class="z-10 flex size-18 sm:size-20 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <img src="/favicon.svg" alt="Alex Bates" class="w-10 h-10 sm:w-12 sm:h-12" />
-            </div>
-          </UTooltip>
-
-          <UTooltip :delay-duration="0" text="C#">
-            <div ref="csharpRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-c-sharp" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="ASP.NET">
-            <div ref="dotnetRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-dotnet" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          </div>
-
-          <!-- Bottom row - Frameworks and Tools -->
-          <div class="flex flex-row items-center justify-between">
-                      <UTooltip :delay-duration="0" text="Node.js">
-            <div ref="nodeRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-nodejs-icon" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="PostgreSQL">
-            <div ref="postgresRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-postgresql" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="Dart">
-            <div ref="dartRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-dart" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="Flutter">
-            <div ref="flutterRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-flutter" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          </div>
-        </div>
-
-        <!-- Framework to Language connections -->
-        <AnimatedBeam :container-ref="containerRef" :from-ref="nuxtRef" :to-ref="vueRef" :curvature="20" :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="phoenixRef" :to-ref="elixirRef" :curvature="20"
-          :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="flutterRef" :to-ref="dartRef" :curvature="30"
-          :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="dotnetRef" :to-ref="csharpRef" :curvature="20"
-          :duration="6" />
-
-        <!-- Direct connections to central -->
-        <AnimatedBeam :container-ref="containerRef" :from-ref="vueRef" :to-ref="centralRef" :curvature="-40"
-          :end-y-offset="-10" :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="alpineRef" :to-ref="centralRef" :curvature="-20"
-          :end-y-offset="-5" :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="astroRef" :to-ref="centralRef" :curvature="-10"
-          :end-y-offset="-5" :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="nodeRef" :to-ref="centralRef" :curvature="-30"
-          :end-y-offset="10" :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="elixirRef" :to-ref="centralRef" :curvature="-30"
-          :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="dartRef" :to-ref="centralRef" :curvature="30"
-          :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="csharpRef" :to-ref="centralRef" :curvature="40"
-          :duration="6" />
-
-        <!-- Direct tool connections to central -->
-        <AnimatedBeam :container-ref="containerRef" :from-ref="postgresRef" :to-ref="centralRef" :curvature="-20"
-          :end-y-offset="5" :duration="6" />
-      </div>
-    </CardSpotlight>
+    </div>
   </section>
 
   <!-- Blog Posts Section -->
@@ -232,10 +100,12 @@
 
     <!-- View All Blog Posts Card -->
     <div class="mt-6">
-      <div class="group relative flex flex-col justify-end overflow-hidden rounded-xl bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:bg-slate-800 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_4px_12px_rgba(0,0,0,.3),0_-20px_80px_-20px_#ffffff1f_inset]">
+      <div
+        class="group relative flex flex-col justify-end overflow-hidden rounded-xl bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:bg-slate-800 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_4px_12px_rgba(0,0,0,.3),0_-20px_80px_-20px_#ffffff1f_inset]">
         <!-- Background gradient -->
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
-        
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
+
         <!-- Content -->
         <ULink to="/blog" class="relative z-10 flex items-center justify-between p-4 md:p-6">
           <div class="flex items-center gap-3">
@@ -244,11 +114,13 @@
               View all blog posts
             </span>
           </div>
-          <UIcon name="i-heroicons-arrow-right" class="size-5 md:size-6 text-neutral-700 dark:text-neutral-300 transition-transform duration-300 group-hover:translate-x-1" />
+          <UIcon name="i-heroicons-arrow-right"
+            class="size-5 md:size-6 text-neutral-700 dark:text-neutral-300 transition-transform duration-300 group-hover:translate-x-1" />
         </ULink>
-        
+
         <!-- Hover overlay -->
-        <div class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10" />
+        <div
+          class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10" />
       </div>
     </div>
   </section>

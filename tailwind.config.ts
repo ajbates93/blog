@@ -7,7 +7,7 @@ export default <Partial<Config>>{
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
         serif: ["Lora", ...defaultTheme.fontFamily.serif],
-        mono: ["FiraCode Nerd Font Mono", ...defaultTheme.fontFamily.mono],
+        mono: ["Roboto Mono", ...defaultTheme.fontFamily.mono],
       },
     },
   },

@@ -1,13 +1,11 @@
 <template>
-  <div class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 z-99">
-    <div class="container mx-auto p-5 sm:px-10 flex items-center justify-between gap-5 text-lg">
-      <nav class="flex gap-2 font-serif text-xl">
-        <NuxtLink to="/">home</NuxtLink>
-        <span>|</span>
-        <NuxtLink to="/blog">blog</NuxtLink>
-      </nav>
-      <UIcon class="cursor-pointer" @click="toggleTheme" :name="themeIcon" />
-    </div>
+  <div class="text-left mx-auto py-5 md:py-10 flex items-center justify-start w-full gap-5 text-lg">
+    <nav class="flex gap-2 font-mono text-xl">
+      <NuxtLink to="/">home</NuxtLink>
+      <span>|</span>
+      <NuxtLink to="/blog">blog</NuxtLink>
+    </nav>
+    <UIcon class="cursor-pointer ml-auto" @click="toggleTheme" :name="themeIcon" />
   </div>
 </template>
 
