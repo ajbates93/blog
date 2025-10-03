@@ -30,3 +30,9 @@ interface Props {
 
 const props = defineProps<Props>();
 </script> 
+
+<style scoped>
+.font-serif {
+  font-family: 'Lora', serif;
+}
+</style>

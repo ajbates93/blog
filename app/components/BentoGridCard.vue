@@ -1,5 +1,6 @@
 <template>
-  <div
+  <a
+    :href="href"
     :key="name"
     :class="
         cn(
@@ -61,7 +62,7 @@
     <div
       class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 lg:group-hover:bg-slate-100/50 lg:group-hover:dark:bg-slate-600/20"
     />
-  </div>
+  </a>
 </template>
 
 <script lang="ts" setup>

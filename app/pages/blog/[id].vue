@@ -156,4 +156,8 @@ const calculateReadingTime = (body: any) => {
   border-radius: 0.75em;
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
+
+.font-serif {
+  font-family: 'Lora', serif;
+}
 </style>
