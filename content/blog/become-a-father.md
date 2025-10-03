@@ -12,19 +12,19 @@ sitemap:
   videos: []
   images: []
 title: Becoming a Father
-description: A major life milestone and serious change of pace
+description: A major life milestone and serious change of pace.
 seo:
   title: Becoming a Father
-  description: A major life milestone and serious change of pace
-date: 2025-07-16
+  description: A major life milestone and serious change of pace.
+date: 2025-10-03
 navigation:
   title: Becoming a Father
-  description: A major life milestone and serious change of pace
-isPublished: false
+  description: A major life milestone and serious change of pace.
+isPublished: true 
 isArchived: false
 ---
 
-#
+Hello, everyone!
 
 A bit of a different topic for this blog post - a major life event unfolded for me back in August, my partner Vicky and I welcomed our little boy, Noah, into the world! I'm going to keep this one short because there's not a lot to say other than that becoming a parent & experiencing paternity leave (which I was fortunate enough to get a full month off - a lot compared to most in the UK) has been the most incredible experience of my life.
 

@@ -1,21 +1,22 @@
 <template>
-  <div
+  <a
+    :href="href"
     :key="name"
     :class="
-      cn(
-        'group relative col-span-1 flex flex-col justify-end overflow-hidden rounded-xl',
-        // light styles
-        'bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]',
-        // dark styles - increased contrast
-        'transform-gpu dark:bg-slate-800 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_4px_12px_rgba(0,0,0,.3),0_-20px_80px_-20px_#ffffff1f_inset]',
-        props.class,
-      )
+        cn(
+          'group relative col-span-1 flex flex-col justify-end overflow-hidden rounded-xl h-full',
+          // light styles - softer background and shadows
+          'bg-slate-50 border border-slate-200 [box-shadow:0_1px_3px_rgba(0,0,0,.05),0_4px_12px_rgba(0,0,0,.08)]',
+          // dark styles - softer contrast for dark backgrounds
+          'transform-gpu dark:bg-slate-700/80 dark:border-slate-600/50 dark:[box-shadow:0_2px_8px_rgba(0,0,0,.15),0_8px_24px_rgba(0,0,0,.1)]',
+          props.class,
+        )
     "
   >
     <slot name="background" />
 
     <!-- Header slot for date -->
-    <div class="hidden sm:block absolute top-4 left-4 md:top-6 md:left-6 z-20">
+    <div class="hidden sm:block absolute font-mono top-4 left-4 md:top-6 md:left-6 z-20">
       <slot name="header" />
     </div>
 
@@ -25,23 +26,23 @@
       <UIcon
         v-if="icon"
         :name="icon"
-        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out lg:group-hover:scale-75"
+        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-slate-700 dark:text-slate-200 transition-all duration-300 ease-in-out lg:group-hover:scale-75"
       />
       <div
         v-else
-        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-neutral-700 dark:text-neutral-300 transition-all duration-300 ease-in-out lg:group-hover:scale-75"
+        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-slate-700 dark:text-slate-200 transition-all duration-300 ease-in-out lg:group-hover:scale-75"
       ></div>
-      <h3 class="text-lg md:text-xl font-semibold text-neutral-700 dark:text-neutral-300">
+      <h3 class="text-lg md:text-xl font-semibold text-slate-700 dark:text-slate-200">
         {{ name }}
       </h3>
-      <p class="max-w-lg text-sm md:text-base text-neutral-400 dark:text-neutral-500 mb-4 md:mb-0">{{ description }}</p>
+      <p class="max-w-lg text-sm font-mono tracking-tight md:text-base text-slate-500 dark:text-slate-300 mb-4 md:mb-0">{{ description }}</p>
     </div>
     
     <!-- Mobile Read More Link -->
     <div class="lg:hidden relative z-30 p-4 pt-2 md:p-6 md:pt-6">
       <a
         :href="href"
-        class="inline-flex items-center rounded-md text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-800"
+        class="inline-flex items-center rounded-md text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-600"
       >
         {{ cta }} →
       </a>
@@ -53,15 +54,15 @@
     >
       <a
         :href="href"
-        class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-800"
+        class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-600"
       >
         {{ cta }} →
       </a>
     </div>
     <div
-      class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 lg:group-hover:bg-black/[.03] lg:group-hover:dark:bg-neutral-800/10"
+      class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 lg:group-hover:bg-slate-100/50 lg:group-hover:dark:bg-slate-600/20"
     />
-  </div>
+  </a>
 </template>
 
 <script lang="ts" setup>

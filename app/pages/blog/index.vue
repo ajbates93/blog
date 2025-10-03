@@ -1,24 +1,54 @@
 <template>
-  <section class="container mx-auto p-5 sm:p-10 text-left mt-[68px]">
-    <h1 class="text-5xl font-bold text-slate-700 dark:text-white mb-8">Blog Posts</h1>
-    <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg max-w-3xl">
-      Welcome to my blog! Here you'll find thoughts, tutorials, and insights about web development, mobile development, and the tech industry. I write about things I learn, interesting projects I work on, and share knowledge that might help other developers on their journey.
-    </p>
-    <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg max-w-3xl">
-      Whether you're interested in Vue.js, React, Flutter, or general software development practices, I hope you'll find something useful here. Feel free to reach out if you have questions or want to discuss any of the topics I cover.
-    </p>
+  <!-- Loading Spinner -->
+  <div v-if="pending" class="fixed inset-0 bg-slate-50 dark:bg-slate-900 flex items-center justify-center z-50">
+    <div class="text-center">
+      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-slate-700 dark:text-white animate-spin" />
+    </div>
+  </div>
+
+  <section v-else class="bg-[#5385c2] min-h-screen mx-auto text-left ">
+    <div class="lg:max-w-screen-xl px-4 sm:px-10 mx-auto">
+
+    <!-- Header and Title Group -->
+    <motion.div
+      :initial="{ opacity: 0, y: 30 }"
+      :animate="{ opacity: 1, y: 0 }"
+      :transition="{ duration: 0.6, ease: 'easeOut' }"
+    >
+      <Header />
+      <h1 class="text-7xl font-bold text-[#2b2b2b] dark:text-white mb-10">Blog</h1>
+    </motion.div>
+
+    <!-- Intro Text Group -->
+    <motion.div
+      :initial="{ opacity: 0, y: 30 }"
+      :animate="{ opacity: 1, y: 0 }"
+      :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }"
+    >
+      <TextWrapper>
+        Here you'll find thoughts, tutorials, and insights about web development, mobile development, and the tech industry. I write about things I learn, interesting projects I work on, and share knowledge that might help other developers on their journey.
+      </TextWrapper>
+      <TextWrapper class="mb-10">
+        Whether you're interested in Vue.js, React, Flutter, or general software development practices, I hope you'll find something useful here. Feel free to reach out if you have questions or want to discuss any of the topics I cover.
+      </TextWrapper>
+    </motion.div>
     
-    <BentoGrid class="w-full">
+    <BentoGrid class="w-full mb-10">
       <!-- Featured post (spans 2 columns) -->
-      <BentoGridCard
+      <motion.div
         v-if="transformedBlogPosts.length > 0"
-        :name="transformedBlogPosts[0]!.title"
-        :description="transformedBlogPosts[0]!.description"
-        :href="transformedBlogPosts[0]!.path"
-        cta="Read more"
-        :icon="transformedBlogPosts[0]!.image ? undefined : (transformedBlogPosts[0]!.icon || 'i-heroicons-document-text')"
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
         class="md:col-span-2"
       >
+        <BentoGridCard
+          :name="transformedBlogPosts[0]!.title"
+          :description="transformedBlogPosts[0]!.description"
+          :href="transformedBlogPosts[0]!.path"
+          cta="Read more"
+          :icon="transformedBlogPosts[0]!.image ? undefined : (transformedBlogPosts[0]!.icon || 'i-heroicons-document-text')"
+        >
         <template #background>
           <!-- Image takes precedence over icon -->
           <NuxtImg 
@@ -37,18 +67,24 @@
             {{ formatDate(transformedBlogPosts[0]!.date) }}
           </p>
         </template>
-      </BentoGridCard>
+        </BentoGridCard>
+      </motion.div>
       
       <!-- Regular posts as BentoGridCards -->
-      <BentoGridCard
+      <motion.div
         v-for="(post, index) in transformedBlogPosts.slice(1)"
         :key="post.id"
-        :name="post.title"
-        :description="post.description"
-        :href="post.path"
-        cta="Read more"
-        :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')"
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 + (index * 0.1) }"
       >
+        <BentoGridCard
+          :name="post.title"
+          :description="post.description"
+          :href="post.path"
+          cta="Read more"
+          :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')"
+        >
         <template #background>
           <!-- Image takes precedence over icon -->
           <NuxtImg 
@@ -67,10 +103,18 @@
             {{ formatDate(post.date) }}
           </p>
         </template>
-      </BentoGridCard>
+        </BentoGridCard>
+      </motion.div>
       
       <!-- Empty state -->
-      <BentoGridItem v-if="transformedBlogPosts.length === 0" class="col-span-full text-center">
+      <motion.div
+        v-if="transformedBlogPosts.length === 0"
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
+        class="col-span-full text-center"
+      >
+        <BentoGridItem>
         <template #icon>
           <UIcon name="i-heroicons-document-text" class="w-12 h-12 mx-auto text-neutral-400" />
         </template>
@@ -82,14 +126,33 @@
         <template #description>
           Check back soon for new content!
         </template>
-      </BentoGridItem>
+        </BentoGridItem>
+      </motion.div>
     </BentoGrid>
+
+    </div>
   </section>
 </template>
 
 <script lang="ts" setup>
+import { motion } from 'motion-v'
+
 definePageMeta({
   viewTransition: false
+})
+
+// Loading state - show spinner until page is ready
+const pending = ref(true)
+
+// Hide loading spinner when page is fully loaded
+onMounted(() => {
+  // Wait for next tick to ensure all content is rendered
+  nextTick(() => {
+    // Small delay to ensure smooth transition
+    setTimeout(() => {
+      pending.value = false
+    }, 100)
+  })
 })
 
 const { data: blogPosts } = await useAsyncData('blog-posts', () =>

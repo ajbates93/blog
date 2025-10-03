@@ -1,0 +1,147 @@
+---
+description: WCAG 2.2 Level AA accessibility checklist for web development - ensures compliance with Web Content Accessibility Guidelines
+alwaysApply: true
+---
+
+# WCAG 2.2 AA Accessibility Checklist for Web Development
+
+This checklist ensures compliance with WCAG 2.2 Level AA for web applications built with HTML, CSS, and JavaScript. Apply these standards to all interactive web content.
+
+---
+
+## Text Alternatives & Images
+
+- **Alt Text:** All `<img>` elements MUST have meaningful `alt` attributes. Use empty `alt=""` for decorative images.
+- **Complex Images:** Provide detailed descriptions for charts, graphs, and diagrams in nearby text or via `aria-describedby`.
+- **Functional Images:** Images used as links/buttons MUST have alt text describing the function, not just the image.
+- **Background Images:** Use CSS background images for decorative content only. Meaningful images MUST use `<img>` tags.
+- **Icons:** Icon fonts or SVG icons MUST have accessible names via `aria-label` or screen reader text.
+
+---
+
+## Keyboard Navigation & Focus
+
+- **Keyboard Accessibility:** All interactive elements MUST be reachable and operable via keyboard alone.
+- **Focus Indicators:** Visible focus indicators MUST have 3:1 contrast ratio with at least 2px outline or equivalent.
+- **Focus Order:** Tab order MUST follow logical reading sequence. Use `tabindex="0"` for custom interactive elements.
+- **Focus Management:** When content changes, manage focus appropriately. Don't trap focus without escape mechanism.
+- **Focus Not Obscured:** Focused elements MUST remain at least partially visible (not hidden by sticky headers/footers).
+- **Skip Links:** Provide "Skip to main content" links for keyboard users.
+
+---
+
+## Color & Visual Design
+
+- **Color Contrast:** 
+  - Normal text: minimum 4.5:1 contrast ratio
+  - Large text (18pt/24px+ or 14pt/18.66px+ bold): minimum 3:1 contrast ratio
+  - Non-text elements (UI components, graphics): minimum 3:1 contrast ratio
+- **Color Information:** Never use color alone to convey information. Always provide additional indicators (text, icons, patterns).
+- **Link Identification:** Links MUST be visually distinguishable from surrounding text (underline, 3:1 contrast difference, or other visual cues).
+
+---
+
+## Forms & Input
+
+- **Labels:** All form inputs MUST have associated `<label>` elements or `aria-label` attributes.
+- **Required Fields:** Mark required fields with `required` attribute AND visual/text indicators.
+- **Error Identification:** Form errors MUST be clearly identified with specific, helpful error messages.
+- **Error Suggestions:** Provide correction suggestions when input format is required.
+- **Input Purpose:** Use appropriate `autocomplete` attributes for user information fields.
+- **Help Text:** Associate help text with inputs using `aria-describedby`.
+- **Fieldsets:** Group related form controls with `<fieldset>` and `<legend>` elements.
+
+---
+
+## Semantic HTML & Structure
+
+- **Headings:** Use proper heading hierarchy (`<h1>` to `<h6>`) to structure content logically.
+- **Lists:** Use `<ul>`, `<ol>`, and `<dl>` for actual lists. Don't use for layout.
+- **Tables:** Use tables for tabular data only. Include `<th>` headers with `scope` attributes.
+- **Landmarks:** Use semantic HTML5 elements (`<main>`, `<nav>`, `<aside>`, `<header>`, `<footer>`) or ARIA landmarks.
+- **Button vs Link:** Use `<button>` for actions, `<a>` for navigation. Don't use `<div>` or `<span>` for interactive elements.
+- **Reading Order:** Source code order MUST match visual reading order.
+
+---
+
+## Interactive Elements & Controls
+
+- **Target Size:** Interactive targets MUST be at least 24x24 CSS pixels (including padding/margin).
+- **Button Labels:** Buttons MUST have accessible names that describe their function.
+- **Link Purpose:** Link text or accessible name MUST describe the link's purpose.
+- **Status Messages:** Use ARIA live regions (`aria-live`, `role="status"`, `role="alert"`) for dynamic content changes.
+- **Custom Controls:** Implement proper ARIA roles, states, and properties for custom UI components.
+
+---
+
+## Media & Content
+
+- **Video Captions:** All video content MUST have accurate synchronized captions.
+- **Audio Descriptions:** Provide audio descriptions for video where visual information is important.
+- **Auto-playing Media:** Don't auto-play audio/video for more than 3 seconds without user control.
+- **Media Controls:** Provide accessible play/pause controls for all media.
+- **Animation Control:** Provide mechanisms to pause/stop animations that last longer than 5 seconds.
+
+---
+
+## Language & Content
+
+- **Page Language:** Set document language with `<html lang="en">` or appropriate language code.
+- **Language Changes:** Mark content in different languages with `lang` attribute.
+- **Unusual Words:** Provide definitions or explanations for jargon, technical terms, or idioms.
+- **Reading Level:** Write content clearly and concisely for intended audience.
+
+---
+
+## Responsive & Mobile
+
+- **Reflow:** Content MUST reflow without horizontal scrolling at 320px width (or 256px height for horizontal content).
+- **Orientation:** Don't restrict content to single orientation unless essential.
+- **Zoom:** Support zoom up to 200% without loss of functionality.
+- **Text Spacing:** Content MUST remain readable when text spacing is adjusted by users.
+
+---
+
+## JavaScript & Dynamic Content
+
+- **Progressive Enhancement:** Ensure basic functionality works without JavaScript.
+- **ARIA Updates:** Update ARIA attributes when content changes dynamically.
+- **Screen Reader Announcements:** Use `aria-live` regions to announce important changes.
+- **Error Prevention:** Prevent serious errors through confirmation dialogs or reversible actions.
+- **Session Timeout:** Warn users before sessions expire and allow extensions.
+
+---
+
+## WCAG 2.2 New Requirements
+
+- **Focus Not Obscured (Minimum):** Ensure focused elements aren't completely hidden by other content.
+- **Dragging Movements:** Provide alternatives to dragging gestures (single pointer alternatives).
+- **Target Size (Minimum):** 24x24 CSS pixel minimum for interactive targets (with exceptions for inline targets).
+- **Consistent Help:** Place help content in consistent locations across pages.
+- **Redundant Entry:** Don't require users to re-enter information already provided in same process.
+- **Accessible Authentication:** Don't require cognitive function tests (like remembering passwords) without alternatives.
+
+---
+
+## Testing Checklist
+
+- **Keyboard Testing:** Navigate entire interface using only keyboard.
+- **Screen Reader Testing:** Test with screen readers (NVDA, JAWS, VoiceOver).
+- **Color Blindness Testing:** Verify usability for color vision deficiencies.
+- **Zoom Testing:** Test at 200% zoom level.
+- **Mobile Testing:** Test on actual mobile devices with various screen readers.
+- **Automated Testing:** Use tools like axe-core, WAVE, or Lighthouse accessibility audits.
+
+---
+
+## Implementation Notes
+
+- Use semantic HTML as the foundation before adding ARIA
+- Test early and often with real assistive technology users
+- Validate HTML and ensure clean, standards-compliant code
+- Document accessibility features and provide user guidance
+- Train team members on accessibility principles and testing methods
+
+---
+
+This checklist covers WCAG 2.2 Level AA success criteria specifically adapted for modern web development practices. Reference the official WCAG documentation for complete technical specifications.

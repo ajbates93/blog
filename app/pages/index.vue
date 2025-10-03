@@ -1,263 +1,149 @@
 <template>
-  <section class="grid sm:grid-cols-[2fr_3fr] grid-cols-1 container mx-auto p-5 sm:p-10 text-left mt-[68px]">
-    <picture class="rounded-xl shadow-2xl overflow-hidden mb-5 sm:mb-0">
-      <img src="/images/home-about-small.webp" alt="Alex Bates" class="w-full" />
-    </picture>
-    <div class="py-5 px-0 sm:px-10 flex flex-col justify-start">
-      <h1 class="text-5xl text-slate-700 dark:text-white font-bold mb-5">
-        Hello there.
-      </h1>
-      <TextWrapper>
-        I'm
-        <span class="font-bold text-slate-700 dark:text-gray-300">Alex Bates</span>. I'm a software developer that's
-        been working professionally for
-        <span>{{ yearsSinceStartDate }}</span> years.
-      </TextWrapper>
-      <TextWrapper>
-        I'm currently working at
-        <a target="_blank" class="text-[#e68937] font-bold" href="https://www.pocketworks.co.uk">Pocketworks</a>
-        as a Full Stack Developer, where I build mobile applications and web solutions for clients across various
-        industries.
-      </TextWrapper>
-      <TextWrapper>
-        My expertise spans across modern web technologies including Vue.js, Astro, Elixir & Phoenix, and mobile
-        development with Flutter. I'm passionate about creating user-friendly applications that solve real-world
-        problems and deliver exceptional user experiences.
-      </TextWrapper>
-      <TextWrapper>
-        I try and remember to write about things I learn or find interesting.
-        You can also follow me on Github (or LinkedIn, if that's your thing).
-      </TextWrapper>
-      <div class="flex gap-5 mt-auto">
-        <ULink class="text-indigo-500 dark:text-indigo-400" target="_blank" to="https://github.com/ajbates93">
-          <UIcon name="uil:github" size="2em" />
-        </ULink>
-        <ULink class="text-indigo-500 dark:text-indigo-400" target="_blank"
-          to="https://www.linkedin.com/in/alex-bates-01b548a7">
-          <UIcon name="uil:linkedin" size="2em" />
-        </ULink>
-      </div>
+  <!-- Loading Spinner -->
+  <div v-if="pending" class="fixed inset-0 bg-[#5385c2] flex items-center justify-center z-50">
+    <div class="text-center">
+      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#2b2b2b] animate-spin" />
     </div>
-  </section>
+  </div>
 
-  <!-- Technologies & Skills Section -->
-  <section class="container mx-auto p-5 sm:p-10 text-left">
-    <CardSpotlight
-      class="shadow-2xl"
-      :gradient-color="'#C9C9C9'"
-      :gradient-opacity="0.8"
-      slot-class="p-4 md:p-8"
-    >
-      <h2 class="text-2xl md:text-3xl font-bold text-slate-700 dark:text-white mb-4">Technologies & Skills</h2>
-      <TextWrapper>
-        I'm proficient in a range of languages and frameworks, from frontend technologies to backend systems and mobile development. 
-        The connections show how these technologies relate and complement each other in modern development workflows.
-      </TextWrapper>
+  <!-- Hero Section with Blue Background -->
+  <section v-else class="w-full min-h-screen bg-[#5385c2] flex items-center py-10 px-4 md:px-10 xl:px-20">
+    <div
+      class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_2fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left xl:pr-10">
+      <div class="flex flex-col justify-start">
+        <!-- Group 1: Header, Heading, and Intro -->
+        <motion.div
+          :initial="{ opacity: 0, y: 30 }"
+          :animate="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut' }"
+        >
+          <Header />
+          <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#2b2b2b] font-bold sm:mb-10">
+            Hello there.
+          </h1>
+          <TextWrapper>
+            I'm
+            <span class="font-bold underline text-[#2b2b2b]">Alex Bates</span>. I'm a software developer with over
+            <span>{{
+              yearsSinceStartDate }}</span> years of industry experience.
+          </TextWrapper>
+          <div class="italic text-5xl sm:py-5 text-[#2b2b2b] text-center block">~</div>
+        </motion.div>
 
-      <div ref="containerRef"
-        class="relative flex h-[400px] sm:h-[500px] sm:px-10 mx-auto items-center justify-center overflow-hidden rounded-lg my-10 md:my-20">
-        <div class="flex size-full max-h-[400px] sm:max-h-[500px] flex-col items-stretch justify-between gap-12">
-          <!-- Top row - Frameworks -->
-          <div class="flex flex-row items-center justify-between">
-            <UTooltip :delay-duration="0" text="Nuxt">
-              <div ref="nuxtRef"
-                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-                <UIcon name="i-logos-nuxt-icon" size="28" class="sm:w-8 sm:h-8" />
-              </div>
-            </UTooltip>
-            <UTooltip :delay-duration="0" text="Vue">
-              <div ref="vueRef"
-                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-                <UIcon name="i-logos-vue" size="28" class="sm:w-8 sm:h-8" />
-              </div>
-            </UTooltip>
-            <UTooltip :delay-duration="0" text="Alpine">
-              <div ref="alpineRef"
-                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-                <UIcon name="i-logos-alpinejs-icon" size="28" class="sm:w-8 sm:h-8" />
-              </div>
-            </UTooltip>
-            <UTooltip :delay-duration="0" text="Astro">
-              <div ref="astroRef"
-                class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-                <UIcon name="i-logos-astro" size="28" class="sm:w-8 sm:h-8" />
-              </div>
-            </UTooltip>
+
+        <!-- Group 2: Work Description, Blog/Social Links, and Social Icons -->
+        <motion.div
+          :initial="{ opacity: 0, y: 30 }"
+          :animate="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }"
+        >
+          <TextWrapper>
+            I'm currently working at
+            <a target="_blank" class="font-bold text-white hover:text-gray-200 transition-colors"
+              href="https://www.pocketworks.co.uk">Pocketworks</a>
+            as a Full Stack Developer, where I build web and mobile applications for clients across various
+            industries.
+          </TextWrapper>
+          <TextWrapper>
+            Take a look at my <ULink to="/blog" class="font-bold text-white hover:text-gray-200 transition-colors">blog</ULink> to see what I've been working on. I try and remember to write about things I learn or find interesting.
+            You can also follow me on <a target="_blank"
+              class="font-bold text-white hover:text-gray-200 transition-colors"
+              href="https://github.com/ajbates93">Github</a> (or <a target="_blank"
+              class="font-bold text-white hover:text-gray-200 transition-colors"
+              href="https://www.linkedin.com/in/alex-bates-01b548a7">LinkedIn</a>, if that's your thing).
+          </TextWrapper>
+          <div class="flex gap-5 justify-center py-5 sm:py-10">
+            <ULink class="text-white hover:text-gray-200 transition-colors" target="_blank"
+              to="https://github.com/ajbates93" aria-label="Visit Alex's GitHub profile">
+              <UIcon name="uil:github" size="2em" />
+            </ULink>
+            <ULink class="text-white hover:text-gray-200 transition-colors" target="_blank"
+              to="https://www.linkedin.com/in/alex-bates-01b548a7" aria-label="Visit Alex's LinkedIn profile">
+              <UIcon name="uil:linkedin" size="2em" />
+            </ULink>
           </div>
+        </motion.div>
 
-          <!-- Middle row - Languages and Central -->
-          <div class="flex flex-row items-center justify-between">
-
-                      <UTooltip :delay-duration="0" text="Phoenix">
-            <div ref="phoenixRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-phoenix" size="28" class="sm:w-8 sm:h-8" />
+        <!-- Group 3: Availability Status -->
+        <motion.div
+          :initial="{ opacity: 0, y: 30 }"
+          :animate="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
+        >
+          <div class="hidden md:flex bg-[#4278ba] p-5 rounded-md gap-3">
+            <!-- <p class="font-bold mb-2 text-md text-[#ffffff] font-mono rounded-md">Availability:</p> -->
+            <p aria-hidden="true">
+              <span class="inline-block animate-pulse w-3 h-3 bg-green-500 rounded-full"></span>
+            </p>
+            <div>
+              <p class="text-md text-[#ffffff] font-mono rounded-md mt-0 mb-1">
+                Hooray! I'm currently available for new freelance work!<br />
+              Drop me an email at <a
+                  href="mailto:hello@alexbates.dev"
+                  class="font-bold text-white hover:text-gray-200 transition-colors">hello@alexbates.dev</a> to discuss
+                your project.</p>
             </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="Elixir">
-            <div ref="elixirRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <Icon name="vscode-icons:file-type-elixir" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="Alex Bates">
-            <div ref="centralRef"
-              class="z-10 flex size-18 sm:size-20 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <img src="/favicon.svg" alt="Alex Bates" class="w-10 h-10 sm:w-12 sm:h-12" />
-            </div>
-          </UTooltip>
-
-          <UTooltip :delay-duration="0" text="C#">
-            <div ref="csharpRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-c-sharp" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="ASP.NET">
-            <div ref="dotnetRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-dotnet" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
           </div>
+        </motion.div>
 
-          <!-- Bottom row - Frameworks and Tools -->
-          <div class="flex flex-row items-center justify-between">
-                      <UTooltip :delay-duration="0" text="Node.js">
-            <div ref="nodeRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-nodejs-icon" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="PostgreSQL">
-            <div ref="postgresRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-postgresql" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="Dart">
-            <div ref="dartRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-dart" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          <UTooltip :delay-duration="0" text="Flutter">
-            <div ref="flutterRef"
-              class="z-10 flex size-14 sm:size-16 items-center justify-center rounded-full border border-gray-200 bg-gray-50 p-2 shadow-sm dark:border-gray-700 dark:bg-gray-500 dark:shadow-gray-900/50">
-              <UIcon name="i-logos-flutter" size="28" class="sm:w-8 sm:h-8" />
-            </div>
-          </UTooltip>
-          </div>
         </div>
 
-        <!-- Framework to Language connections -->
-        <AnimatedBeam :container-ref="containerRef" :from-ref="nuxtRef" :to-ref="vueRef" :curvature="20" :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="phoenixRef" :to-ref="elixirRef" :curvature="20"
-          :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="flutterRef" :to-ref="dartRef" :curvature="30"
-          :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="dotnetRef" :to-ref="csharpRef" :curvature="20"
-          :duration="6" />
-
-        <!-- Direct connections to central -->
-        <AnimatedBeam :container-ref="containerRef" :from-ref="vueRef" :to-ref="centralRef" :curvature="-40"
-          :end-y-offset="-10" :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="alpineRef" :to-ref="centralRef" :curvature="-20"
-          :end-y-offset="-5" :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="astroRef" :to-ref="centralRef" :curvature="-10"
-          :end-y-offset="-5" :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="nodeRef" :to-ref="centralRef" :curvature="-30"
-          :end-y-offset="10" :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="elixirRef" :to-ref="centralRef" :curvature="-30"
-          :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="dartRef" :to-ref="centralRef" :curvature="30"
-          :duration="6" />
-        <AnimatedBeam :container-ref="containerRef" :from-ref="csharpRef" :to-ref="centralRef" :curvature="40"
-          :duration="6" />
-
-        <!-- Direct tool connections to central -->
-        <AnimatedBeam :container-ref="containerRef" :from-ref="postgresRef" :to-ref="centralRef" :curvature="-20"
-          :end-y-offset="5" :duration="6" />
-      </div>
-    </CardSpotlight>
-  </section>
-
-  <!-- Blog Posts Section -->
-  <section class="container mx-auto p-5 sm:p-10 text-left">
-    <h2 class="text-4xl font-bold text-slate-700 dark:text-white mb-4">Latest Blog Posts</h2>
-    <BentoGrid class="w-full">
-      <!-- Featured post (spans 2 columns) -->
-      <BentoGridCard v-if="transformedBlog.length > 0" :name="transformedBlog[0]!.title"
-        :description="transformedBlog[0]!.description" :href="transformedBlog[0]!.path" cta="Read more"
-        :icon="transformedBlog[0]!.image ? undefined : (transformedBlog[0]!.icon || 'i-heroicons-document-text')"
-        class="md:col-span-2">
-        <template #background>
-          <!-- Image takes precedence over icon -->
-          <NuxtImg v-if="transformedBlog[0]!.image" :src="transformedBlog[0]!.image" :alt="transformedBlog[0]!.title"
-            class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
-          <!-- Fallback gradient background - better for light mode -->
-          <div v-else
-            class="absolute inset-0 bg-gradient-to-br from-slate-100 to-gray-200 dark:from-indigo-500/10 dark:to-purple-500/10" />
-        </template>
-
-        <!-- Add date to main card -->
-        <template #header>
-          <p class="text-sm text-neutral-500 dark:text-neutral-400">
-            {{ formatDate(transformedBlog[0]!.date) }}
-          </p>
-        </template>
-      </BentoGridCard>
-
-      <!-- Regular posts as BentoGridCards -->
-      <BentoGridCard v-for="(post, index) in transformedBlog.slice(1, 3)" :key="post.id" :name="post.title"
-        :description="post.description" :href="post.path" cta="Read more"
-        :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')">
-        <template #background>
-          <!-- Image takes precedence over icon -->
-          <NuxtImg v-if="post.image" :src="post.image" :alt="post.title"
-            class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
-          <!-- Fallback gradient background - lighter for smaller cards -->
-          <div v-else
-            class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
-        </template>
-
-        <!-- Add date to smaller cards -->
-        <template #header>
-          <p class="text-sm text-neutral-500 dark:text-neutral-400">
-            {{ formatDate(post.date) }}
-          </p>
-        </template>
-      </BentoGridCard>
-    </BentoGrid>
-
-    <!-- View All Blog Posts Card -->
-    <div class="mt-6">
-      <div class="group relative flex flex-col justify-end overflow-hidden rounded-xl bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:bg-slate-800 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_4px_12px_rgba(0,0,0,.3),0_-20px_80px_-20px_#ffffff1f_inset]">
-        <!-- Background gradient -->
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
-        
-        <!-- Content -->
-        <ULink to="/blog" class="relative z-10 flex items-center justify-between p-4 md:p-6">
-          <div class="flex items-center gap-3">
-            <UIcon name="i-heroicons-document-text" class="size-6 md:size-8 text-neutral-700 dark:text-neutral-300" />
-            <span class="text-lg md:text-xl font-semibold text-neutral-700 dark:text-neutral-300">
-              View all blog posts
-            </span>
-          </div>
-          <UIcon name="i-heroicons-arrow-right" class="size-5 md:size-6 text-neutral-700 dark:text-neutral-300 transition-transform duration-300 group-hover:translate-x-1" />
-        </ULink>
-        
-        <!-- Hover overlay -->
-        <div class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10" />
-      </div>
+        <!-- Image with fade-in-fade-left animation (happens last) -->
+        <motion.div
+          :initial="{ opacity: 0, x: 30 }"
+          :animate="{ opacity: 1, x: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
+          class="mx-auto my-10 xl:m-0 overflow-hidden max-w-[600px]"
+        >
+          <NuxtImg 
+            src="/images/home-about-small.webp" 
+            alt="Alex Bates, a software developer"
+            class="w-full h-full object-cover border-5 border-gray-800 xl:rounded-r-3xl"
+            loading="eager"
+            fetchpriority="high"
+            preload
+            :width="600"
+            :height="800"
+            format="webp"
+            quality="85"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+          />
+        </motion.div>
     </div>
   </section>
-
 </template>
 
 <script lang="ts" setup>
+import { motion } from 'motion-v'
+
 definePageMeta({
   viewTransition: false
+})
+
+// Preload the hero image for better LCP
+useHead({
+  link: [
+    {
+      rel: 'preload',
+      as: 'image',
+      href: '/images/home-about-small.webp',
+      fetchpriority: 'high'
+    }
+  ]
+})
+
+// Loading state - show spinner until page is ready
+const pending = ref(true)
+
+// Hide loading spinner when page is fully loaded
+onMounted(() => {
+  // Wait for next tick to ensure all content is rendered
+  nextTick(() => {
+    // Small delay to ensure smooth transition
+    setTimeout(() => {
+      pending.value = false
+    }, 100)
+  })
 })
 
 // Dark mode detection for CardSpotlight
@@ -270,6 +156,7 @@ const yearsSinceStartDate = computed(() => {
   const diff = now.getTime() - startDate.value.getTime();
   return Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
 });
+
 
 // Refs for AnimatedBeam component
 const containerRef = ref<HTMLElement | null>(null);
@@ -324,4 +211,31 @@ const formatDate = (dateString: string) => {
 };
 </script>
 
-<style></style>
+<style scoped>
+/* Ensure proper focus indicators for accessibility */
+input:focus,
+button:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* High contrast for better readability */
+.text-white {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure minimum touch target size */
+button {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+.font-serif {
+  font-family: 'Lora', serif;
+}
+</style>
