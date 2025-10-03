@@ -5,7 +5,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
         <!-- About section -->
         <div>
-          <h3 class="text-xl font-semibold text-slate-200 mb-3">Alex Bates</h3>
+          <h3 class="text-xl font-bold text-slate-200 mb-3">Alex Bates</h3>
           <p class="text-slate-400 font-mono">
             Web developer based in the UK, specialising in building websites, web applications and mobile applications using modern technologies.
           </p>
@@ -13,7 +13,7 @@
 
         <!-- Quick links -->
         <div class="text-right">
-          <h3 class="text-xl font-semibold text-slate-200 mb-3">Quick Links</h3>
+          <h3 class="text-xl font-bold text-slate-200 mb-3">Quick Links</h3>
           <ul class="space-y-2 text-sm">
             <li>
               <ULink to="/" class="text-slate-400 hover:underline font-mono transition-colors">
@@ -35,7 +35,7 @@
 
         <!-- Social & External -->
         <div class="text-right">
-          <h3 class="text-xl font-semibold text-slate-200 mb-3">Connect</h3>
+          <h3 class="text-xl font-bold text-slate-200 mb-3">Connect</h3>
           <ul class="space-y-2 text-sm">
             <li>
               <a href="https://github.com/alexbates" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:underline font-mono transition-colors">
