@@ -7,7 +7,7 @@
         @click="shareOnTwitter"
         class="flex items-center gap-2 px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white rounded-lg transition-colors"
       >
-        <UIcon name="i-simple-icons-twitter" class="w-5 h-5" />
+        <UIcon name="i-mdi-twitter" class="w-5 h-5" />
         <span class="hidden sm:inline">Twitter</span>
       </button>
       
@@ -16,7 +16,7 @@
         @click="shareOnLinkedIn"
         class="flex items-center gap-2 px-4 py-2 bg-[#0077B5] hover:bg-[#006097] text-white rounded-lg transition-colors"
       >
-        <UIcon name="i-simple-icons-linkedin" class="w-5 h-5" />
+        <UIcon name="i-mdi-linkedin" class="w-5 h-5" />
         <span class="hidden sm:inline">LinkedIn</span>
       </button>
       
@@ -25,7 +25,7 @@
         @click="shareOnFacebook"
         class="flex items-center gap-2 px-4 py-2 bg-[#4267B2] hover:bg-[#365899] text-white rounded-lg transition-colors"
       >
-        <UIcon name="i-simple-icons-facebook" class="w-5 h-5" />
+        <UIcon name="i-mdi-facebook" class="w-5 h-5" />
         <span class="hidden sm:inline">Facebook</span>
       </button>
       

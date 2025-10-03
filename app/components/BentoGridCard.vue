@@ -3,7 +3,7 @@
     :key="name"
     :class="
         cn(
-          'group relative col-span-1 flex flex-col justify-end overflow-hidden rounded-xl',
+          'group relative col-span-1 flex flex-col justify-end overflow-hidden rounded-xl h-full',
           // light styles - softer background and shadows
           'bg-slate-50 border border-slate-200 [box-shadow:0_1px_3px_rgba(0,0,0,.05),0_4px_12px_rgba(0,0,0,.08)]',
           // dark styles - softer contrast for dark backgrounds
