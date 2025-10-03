@@ -1,11 +1,11 @@
 <template>
   <!-- Hero Section with Blue Background -->
-  <section class="w-full h-screen bg-[#5385c2] flex items-center">
+  <section class="w-full xl:h-screen bg-[#5385c2] flex items-center py-10">
     <div
-      class="grid md:max-w-3/5 lg:max-w-screen-xl h-full max-h-[1000px] sm:grid-cols-[3fr_2fr] grid-cols-1 mx-auto text-left sm:pr-10 md:pr-20">
-      <div class="px-0 sm:px-10 flex flex-col justify-start">
+      class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_2fr] grid-cols-1 mx-auto text-left xl:pr-10">
+      <div class="px-4 md:px-10 flex flex-col justify-start">
         <Header />
-        <h1 class="text-7xl text-[#2b2b2b] font-bold mb-10">
+        <h1 class="mt-20 sm:mt-0 text-4xl sm:text-7xl text-[#2b2b2b] font-bold sm:mb-10">
           Hello there.
         </h1>
         <TextWrapper>
@@ -14,7 +14,7 @@
           <span>{{
             yearsSinceStartDate }}</span> years of industry experience.
         </TextWrapper>
-        <div class="italic text-5xl py-5 text-[#2b2b2b] text-center block">~</div>
+        <div class="italic text-5xl sm:py-5 text-[#2b2b2b] text-center block">~</div>
         <TextWrapper>
           I'm currently working at
           <a target="_blank" class="font-bold text-white hover:text-gray-200 transition-colors"
@@ -30,7 +30,7 @@
             class="font-bold text-white hover:text-gray-200 transition-colors"
             href="https://www.linkedin.com/in/alex-bates-01b548a7">LinkedIn</a>, if that's your thing).
         </TextWrapper>
-        <div class="flex gap-5 justify-center py-10">
+        <div class="flex gap-5 justify-center py-5 sm:py-10">
           <ULink class="text-white hover:text-gray-200 transition-colors" target="_blank"
             to="https://github.com/ajbates93" aria-label="Visit Alex's GitHub profile">
             <UIcon name="uil:github" size="2em" />
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Availability Status -->
-        <div class="bg-[#4278ba] p-5 rounded-md flex gap-3">
+        <div class="hidden md:flex bg-[#4278ba] p-5 rounded-md gap-3">
           <!-- <p class="font-bold mb-2 text-md text-[#ffffff] font-mono rounded-md">Availability:</p> -->
           <p aria-hidden="true">
             <span class="inline-block animate-pulse w-3 h-3 bg-green-500 rounded-full"></span>
@@ -59,9 +59,9 @@
         </div>
 
       </div>
-      <div class="absolute right-0 top-0">
+      <div class="border-5 border-gray-800 my-10 mx-auto xl:m-0 xl:rounded-r-3xl overflow-hidden max-w-[600px]">
         <img src="/images/home-about-small.webp" alt="Alex Bates, a software developer"
-          class="object-cover w-full h-60 rounded-[0_0_0_20rem] xs:h-72 sm:h-80 md:h-full lg:w-full lg:h-full md:max-h-144 lg:max-h-200 2xl:max-h-full transition-opacity delay-500 duration-1000 ease-out" />
+          class="w-full h-full object-cover" />
       </div>
     </div>
   </section>

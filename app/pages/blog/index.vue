@@ -1,5 +1,5 @@
 <template>
-  <section class="container mx-auto text-left md:max-w-3/5 lg:max-w-screen-xl px-0 sm:px-10">
+  <section class="container mx-auto text-left md:max-w-3/5 lg:max-w-screen-xl px-4 sm:px-10">
     <Header />
     <h1 class="text-7xl font-bold text-slate-700 dark:text-white mb-10">Blog</h1>
     <TextWrapper>
