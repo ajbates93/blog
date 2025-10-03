@@ -7,10 +7,10 @@
   </div>
 
   <!-- Hero Section with Blue Background -->
-  <section v-else class="w-full xl:h-screen bg-[#5385c2] flex items-center py-10">
+  <section v-else class="w-full min-h-screen bg-[#5385c2] flex items-center py-10 px-4 md:px-10 xl:px-20">
     <div
       class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_2fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left xl:pr-10">
-      <div class="px-4 md:px-10 xl:px-0 flex flex-col justify-start">
+      <div class="flex flex-col justify-start">
         <!-- Group 1: Header, Heading, and Intro -->
         <motion.div
           :initial="{ opacity: 0, y: 30 }"
@@ -93,7 +93,7 @@
           :initial="{ opacity: 0, x: 30 }"
           :animate="{ opacity: 1, x: 0 }"
           :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
-          class="mx-auto my-10 xl:m-0 px-4 xl:px-0 overflow-hidden max-w-[600px]"
+          class="mx-auto my-10 xl:m-0 overflow-hidden max-w-[600px]"
         >
           <NuxtImg 
             src="/images/home-about-small.webp" 
