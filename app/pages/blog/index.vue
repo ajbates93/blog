@@ -6,7 +6,9 @@
     </div>
   </div>
 
-  <section v-else class="container min-h-screen mx-auto text-left md:max-w-3/5 lg:max-w-screen-xl px-4 sm:px-10">
+  <section v-else class="bg-[#5385c2] min-h-screen mx-auto text-left ">
+    <div class="lg:max-w-screen-xl px-4 sm:px-10 mx-auto">
+
     <!-- Header and Title Group -->
     <motion.div
       :initial="{ opacity: 0, y: 30 }"
@@ -14,7 +16,7 @@
       :transition="{ duration: 0.6, ease: 'easeOut' }"
     >
       <Header />
-      <h1 class="text-7xl font-bold text-slate-700 dark:text-white mb-10">Blog</h1>
+      <h1 class="text-7xl font-bold text-[#2b2b2b] dark:text-white mb-10">Blog</h1>
     </motion.div>
 
     <!-- Intro Text Group -->
@@ -127,6 +129,8 @@
         </BentoGridItem>
       </motion.div>
     </BentoGrid>
+
+    </div>
   </section>
 </template>
 
