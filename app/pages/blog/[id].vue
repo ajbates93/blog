@@ -38,11 +38,11 @@ const calculateReadingTime = (body: any) => {
   
   // Ensure minimum reading time of 1 minute
   return Math.max(1, readingTime);
-};
+}; 
 </script>
 
 <template>
-  <div class="w-full pb-10 mt-15" v-if="blog">
+  <div class="w-full pb-10 bg-[#5385c2]" v-if="blog">
     <div v-if="blog.bannerImgUrl" class="relative w-full max-w-[2000px] max-h-[400px] mx-auto mb-10 md:mb-20">
       <NuxtImg
         :src="`/images/blog/${blog.bannerImgUrl}`"
@@ -67,8 +67,8 @@ const calculateReadingTime = (body: any) => {
             </picture>
           </div>
         </ULink>
-        <ULink to="/" class="spacing-2 text-indigo-400 dark:text-indigo-500 text-2xl font-serif font-bold" style="view-transition-name: none">Alex Bates</ULink>
-        <div class="flex items-center gap-4 text-gray-700 dark:text-gray-300 text-sm">
+        <ULink to="/" class="spacing-2 text-[#4278ba] text-2xl font-serif font-bold" style="view-transition-name: none">Alex Bates</ULink>
+        <div class="flex items-center gap-4 text-gray-700 text-sm">
           <p>{{ new Date(blog.date).toLocaleString().split(",")[0] }}</p>
           <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
           <p>{{ calculateReadingTime(blog.body) }} min read</p>
@@ -80,7 +80,7 @@ const calculateReadingTime = (body: any) => {
       <!-- Description -->
       <p 
         v-if="blog.description" 
-        class="text-xl text-gray-600 dark:text-gray-400 text-center max-w-2xl mx-auto leading-relaxed"
+        class="text-xl text-gray-600 text-center max-w-2xl mx-auto leading-relaxed"
         style="view-transition-name: blog-description"
       >
         {{ blog.description }}
@@ -95,14 +95,14 @@ const calculateReadingTime = (body: any) => {
         <span 
           v-for="tag in blog.tags" 
           :key="tag"
-          class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm rounded-full"
+          class="px-3 py-1 bg-[#4278ba] text-white text-sm rounded-full"
         >
           {{ tag }}
         </span>
       </div>
 
       <div 
-        class="blog-article max-w-prose text-gray-700 dark:text-gray-300"
+        class="blog-article max-w-prose text-gray-700"
         style="view-transition-name: blog-content"
       >
         <ContentRenderer v-if="blog" :value="blog" />

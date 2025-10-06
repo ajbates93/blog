@@ -8,7 +8,7 @@
           // light styles - softer background and shadows
           'bg-slate-50 border border-slate-200 [box-shadow:0_1px_3px_rgba(0,0,0,.05),0_4px_12px_rgba(0,0,0,.08)]',
           // dark styles - softer contrast for dark backgrounds
-          'transform-gpu dark:[box-shadow:0_2px_8px_rgba(0,0,0,.15),0_8px_24px_rgba(0,0,0,.1)]',
+          'transform-gpu',
           props.class,
         )
     "

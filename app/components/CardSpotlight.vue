@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'group relative flex size-full overflow-hidden rounded-xl border border-gray-200/50 bg-gradient-to-br from-slate-100 to-gray-200 dark:from-indigo-500/10 dark:to-purple-500/10 text-black dark:border-gray-700/30 dark:text-white',
+      'group relative flex size-full overflow-hidden rounded-xl border border-gray-200/50 bg-gradient-to-br from-slate-100 to-gray-200 text-black',
       $props.class,
     ]"
     @mousemove="handleMouseMove"
