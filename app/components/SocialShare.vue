@@ -1,6 +1,6 @@
 <template>
-  <div class="social-share mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-    <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-4">Share this post</h3>
+  <div class="social-share mt-8 pt-6 border-t border-gray-200 ">
+    <h3 class="text-lg font-semibold text-slate-700 mb-4">Share this post</h3>
     <div class="flex flex-wrap gap-3">
       <!-- Twitter/X -->
       <button
