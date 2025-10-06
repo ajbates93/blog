@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <section v-else class="bg-[#5385c2] min-h-screen mx-auto text-left ">
+  <section v-else class="bg-[#5385c2] min-h-screen mx-auto text-left pb-5 sm:pb-10">
     <div class="lg:max-w-screen-xl px-4 sm:px-10 mx-auto">
 
     <!-- Header and Title Group -->
@@ -33,7 +33,7 @@
       </TextWrapper>
     </motion.div>
     
-    <BentoGrid class="w-full mb-10">
+    <BentoGrid class="w-full">
       <!-- Featured post (spans 2 columns) -->
       <motion.div
         v-if="transformedBlogPosts.length > 0"

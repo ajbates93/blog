@@ -78,7 +78,7 @@ const calculateReadingTime = (body: any) => {
           </div>
         </div>
       </div>
-      <h1 class="text-4xl sm:text-7xl font-bold text-[#2b2b2b] px-5 sm:px-10"
+      <h1 class="text-4xl sm:text-5xl font-bold text-[#2b2b2b] px-5 sm:px-10"
         :style="`view-transition-name: blog-title-${blog.title.toLowerCase().replace(/ /g, '-')}`">{{ blog.title }}</h1>
 
       <!-- Description -->
