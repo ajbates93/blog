@@ -1,7 +1,7 @@
 <template>
   <div 
     ref="cardRef"
-    class="relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full rounded-xl border bg-white p-6 transition-all duration-300 hover:shadow-xl hover:shadow-black/[0.1]"
+    class="relative group/card border-black/[0.1] w-full rounded-xl border bg-white p-6 transition-all duration-300 hover:shadow-xl hover:shadow-black/[0.1]"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
@@ -15,12 +15,12 @@
     <!-- Content -->
     <div class="relative z-10">
       <!-- Date -->
-      <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">
+      <p class="text-sm text-gray-500 mb-3">
         {{ formatDate(blog.date) }}
       </p>
       
       <!-- Title -->
-      <h3 class="text-xl font-bold text-slate-700 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+      <h3 class="text-xl font-bold text-slate-700 mb-3 group-hover:text-[#4278ba] transition-colors">
         <ULink 
           :to="blog.path"
           class="block"
@@ -30,7 +30,7 @@
       </h3>
       
       <!-- Description -->
-      <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+      <p class="text-gray-600 mb-4 line-clamp-3">
         {{ blog.description }}
       </p>
       
@@ -39,11 +39,11 @@
         <span 
           v-for="tag in blog.tags.slice(0, 3)" 
           :key="tag"
-          class="px-2 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 text-xs rounded-full"
+          class="px-2 py-1 bg-[#4278ba] text-white text-xs rounded-full"
         >
           {{ tag }}
         </span>
-        <span v-if="blog.tags.length > 3" class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs rounded-full">
+        <span v-if="blog.tags.length > 3" class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
           +{{ blog.tags.length - 3 }}
         </span>
       </div>
@@ -51,7 +51,7 @@
       <!-- Read more link -->
       <ULink
         :to="blog.path"
-        class="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium text-sm transition-colors group/link"
+        class="inline-flex items-center gap-2 text-[#4278ba] hover:text-[#4278ba] hover:underline font-medium text-sm transition-colors group/link"
       >
         Read more
         <UIcon 

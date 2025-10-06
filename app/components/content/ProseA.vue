@@ -2,7 +2,7 @@
   <NuxtLink
     :href="href"
     :target="target"
-    class="text-indigo-500 dark:text-indigo-400"
+    class="text-[#4278ba]"
     ><slot
   /></NuxtLink>
 </template>

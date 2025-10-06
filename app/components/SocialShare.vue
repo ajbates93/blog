@@ -1,11 +1,11 @@
 <template>
-  <div class="social-share mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-    <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-4">Share this post</h3>
-    <div class="flex flex-wrap gap-3">
+  <div class="social-share mb-8">
+    <h3 class="text-lg font-semibold text-white mb-4 text-center font-mono">Share this post</h3>
+    <div class="flex flex-wrap gap-3 justify-center">
       <!-- Twitter/X -->
       <button
         @click="shareOnTwitter"
-        class="flex items-center gap-2 px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white rounded-lg transition-colors"
+        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:cursor-pointer text-[#2b2b2b] rounded-lg transition-all duration-200 font-mono"
       >
         <UIcon name="i-mdi-twitter" class="w-5 h-5" />
         <span class="hidden sm:inline">Twitter</span>
@@ -14,7 +14,7 @@
       <!-- LinkedIn -->
       <button
         @click="shareOnLinkedIn"
-        class="flex items-center gap-2 px-4 py-2 bg-[#0077B5] hover:bg-[#006097] text-white rounded-lg transition-colors"
+        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:cursor-pointer text-[#2b2b2b] rounded-lg transition-all duration-200 font-mono"
       >
         <UIcon name="i-mdi-linkedin" class="w-5 h-5" />
         <span class="hidden sm:inline">LinkedIn</span>
@@ -23,7 +23,7 @@
       <!-- Facebook -->
       <button
         @click="shareOnFacebook"
-        class="flex items-center gap-2 px-4 py-2 bg-[#4267B2] hover:bg-[#365899] text-white rounded-lg transition-colors"
+        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:cursor-pointer text-[#2b2b2b] rounded-lg transition-all duration-200 font-mono"
       >
         <UIcon name="i-mdi-facebook" class="w-5 h-5" />
         <span class="hidden sm:inline">Facebook</span>
@@ -32,8 +32,8 @@
       <!-- Copy Link -->
       <button
         @click="copyLink"
-        class="flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
-        :class="{ 'bg-green-600 hover:bg-green-700': linkCopied }"
+        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:cursor-pointer text-[#2b2b2b] rounded-lg transition-all duration-200 font-mono"
+        :class="{ 'bg-green-500 bg-opacity-20': linkCopied }"
       >
         <UIcon :name="linkCopied ? 'i-heroicons-check' : 'i-heroicons-link'" class="w-5 h-5" />
         <span class="hidden sm:inline">{{ linkCopied ? 'Copied!' : 'Copy Link' }}</span>

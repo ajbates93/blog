@@ -7,7 +7,7 @@
   </div>
 
   <!-- Hero Section with Blue Background -->
-  <section v-else class="w-full min-h-screen bg-[#5385c2] flex items-center py-10 px-4 md:px-10 xl:px-20">
+  <section v-else class="w-full min-h-screen bg-[#5385c2] flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20">
     <div
       class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_2fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left xl:pr-10">
       <div class="flex flex-col justify-start">
@@ -70,8 +70,8 @@
           :animate="{ opacity: 1, y: 0 }"
           :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
         >
+          <!-- Desktop version -->
           <div class="hidden md:flex bg-[#4278ba] p-5 rounded-md gap-3">
-            <!-- <p class="font-bold mb-2 text-md text-[#ffffff] font-mono rounded-md">Availability:</p> -->
             <p aria-hidden="true">
               <span class="inline-block animate-pulse w-3 h-3 bg-green-500 rounded-full"></span>
             </p>
@@ -83,6 +83,15 @@
                   class="font-bold text-white hover:text-gray-200 transition-colors">hello@alexbates.dev</a> to discuss
                 your project.</p>
             </div>
+          </div>
+          
+          <!-- Mobile version - compact status -->
+          <div class="md:hidden flex items-center justify-center gap-2 mb-4">
+            <span class="inline-block animate-pulse w-2 h-2 bg-green-500 rounded-full"></span>
+            <span class="text-sm text-white font-mono">Available for work</span>
+            <a href="mailto:hello@alexbates.dev" class="text-sm text-white font-mono underline hover:text-gray-200 transition-colors">
+              hello@alexbates.dev
+            </a>
           </div>
         </motion.div>
 

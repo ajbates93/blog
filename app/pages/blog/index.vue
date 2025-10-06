@@ -1,13 +1,13 @@
 <template>
   <!-- Loading Spinner -->
-  <div v-if="pending" class="fixed inset-0 bg-slate-50 dark:bg-slate-900 flex items-center justify-center z-50">
+  <div v-if="pending" class="fixed inset-0 bg-slate-50 flex items-center justify-center z-50">
     <div class="text-center">
-      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-slate-700 dark:text-white animate-spin" />
+      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-slate-700 animate-spin" />
     </div>
   </div>
 
-  <section v-else class="bg-[#5385c2] min-h-screen mx-auto text-left ">
-    <div class="lg:max-w-screen-xl px-4 sm:px-10 mx-auto">
+  <section v-else class="w-full min-h-screen bg-[#5385c2] flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20">
+    <div class="lg:max-w-screen-xl mx-auto">
 
     <!-- Header and Title Group -->
     <motion.div
@@ -16,7 +16,7 @@
       :transition="{ duration: 0.6, ease: 'easeOut' }"
     >
       <Header />
-      <h1 class="text-7xl font-bold text-[#2b2b2b] dark:text-white mb-10">Blog</h1>
+      <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#2b2b2b] font-bold sm:mb-10">Blog</h1>
     </motion.div>
 
     <!-- Intro Text Group -->
@@ -33,7 +33,7 @@
       </TextWrapper>
     </motion.div>
     
-    <BentoGrid class="w-full mb-10">
+    <BentoGrid class="w-full">
       <!-- Featured post (spans 2 columns) -->
       <motion.div
         v-if="transformedBlogPosts.length > 0"
@@ -58,12 +58,12 @@
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
           />
           <!-- Fallback gradient background - better for light mode -->
-          <div v-else class="absolute inset-0 bg-gradient-to-br from-slate-100 to-gray-200 dark:from-indigo-500/10 dark:to-purple-500/10" />
+          <div v-else class="absolute inset-0 bg-gradient-to-br from-slate-100 to-gray-200" />
         </template>
         
         <!-- Add date to main card -->
         <template #header>
-          <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          <p class="text-sm text-neutral-500">
             {{ formatDate(transformedBlogPosts[0]!.date) }}
           </p>
         </template>
@@ -94,12 +94,12 @@
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
           />
           <!-- Fallback gradient background - lighter for smaller cards -->
-          <div v-else class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700/30 dark:to-slate-600/30" />
+          <div v-else class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100" />
         </template>
         
         <!-- Add date to smaller cards -->
         <template #header>
-          <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          <p class="text-sm text-neutral-500">
             {{ formatDate(post.date) }}
           </p>
         </template>
