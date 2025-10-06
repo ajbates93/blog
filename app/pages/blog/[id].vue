@@ -10,10 +10,10 @@ useSeoMeta(blog.value?.seo || {})
 
 const calculateReadingTime = (body: any) => {
   if (!body) return 3;
-  
+
   // Extract text content from the body
   let text = '';
-  
+
   // If body has a _value property (Nuxt Content structure), use that
   if (body._value) {
     text = body._value;
@@ -23,43 +23,34 @@ const calculateReadingTime = (body: any) => {
     // Fallback: try to extract text from the body object
     text = JSON.stringify(body);
   }
-  
+
   // Remove markdown syntax and count words
   const cleanText = text
     .replace(/[#*`\[\]()]/g, '') // Remove markdown syntax
     .replace(/\s+/g, ' ') // Normalize whitespace
     .trim();
-  
+
   const wordCount = cleanText.split(' ').filter(word => word.length > 0).length;
-  
+
   // Average reading speed is about 200-250 words per minute
   // Using 225 as a middle ground
   const readingTime = Math.ceil(wordCount / 225);
-  
+
   // Ensure minimum reading time of 1 minute
   return Math.max(1, readingTime);
 }; 
 </script>
 
 <template>
-  <div class="w-full pb-10 bg-[#5385c2]" v-if="blog">
+  <div class="w-full pb-10 bg-[#5385c2] py-5 sm:py-10" v-if="blog">
     <div v-if="blog.bannerImgUrl" class="relative w-full max-w-[2000px] max-h-[400px] mx-auto mb-10 md:mb-20">
-      <NuxtImg
-        :src="`/images/blog/${blog.bannerImgUrl}`"
-        alt="Blog banner"
-        class="w-full h-[400px] object-cover"
-        :width="1600"
-        :height="400"
-        sizes="(max-width: 768px) 100vw, 1600px"
-      />
+      <NuxtImg :src="`/images/blog/${blog.bannerImgUrl}`" alt="Blog banner" class="w-full h-[400px] object-cover"
+        :width="1600" :height="400" sizes="(max-width: 768px) 100vw, 1600px" />
       <div class="absolute inset-0 bg-black opacity-40 pointer-events-none"></div>
     </div>
-    <div class="flex flex-col items-center mx-auto p-5 sm:p-10 gap-10">
+    <div class="flex flex-col items-center mx-auto gap-10">
       <!-- Blog avatar,  Author and date-->
-      <div 
-        class="flex flex-col justify-center items-center gap-5" 
-        style="view-transition-name: author-section"
-      >
+      <div class="flex flex-col justify-center w-full items-center gap-5" style="view-transition-name: author-section">
         <ULink to="/" style="view-transition-name: none">
           <div class="align-middle w-20 h-20 rounded-full overflow-hidden">
             <picture>
@@ -67,73 +58,81 @@ const calculateReadingTime = (body: any) => {
             </picture>
           </div>
         </ULink>
-        <ULink to="/" class="spacing-2 text-[#4278ba] text-2xl font-serif font-bold" style="view-transition-name: none">Alex Bates</ULink>
-        <div class="flex items-center gap-4 text-gray-700 text-sm">
-          <p>{{ new Date(blog.date).toLocaleString().split(",")[0] }}</p>
-          <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
-          <p>{{ calculateReadingTime(blog.body) }} min read</p>
+        <ULink to="/" class="spacing-2 text-white hover:text-gray-200 transition-colors text-2xl font-serif font-bold"
+          style="view-transition-name: none">Alex Bates</ULink>
+
+
+      </div>
+      <!-- Navigation bar -->
+      <div class="w-full sticky top-0 rounded-lg z-300">
+        <div class="absolute w-full h-full z-100 backdrop-blur bg-white/05"></div>
+        <div class="relative z-200 bg-transparent font-mono md:max-w-screen-md mx-auto flex items-center justify-between text-white text-sm px-4 py-4">
+          <ULink to="/blog"
+            class="bg-white bg-opacity-20 hover:underline px-3 py-2 rounded-md text-white hover:text-white">
+            ← Back to blog
+          </ULink>
+          <div class="flex items-center gap-4">
+            <p>{{ new Date(blog.date).toLocaleString().split(",")[0] }}</p>
+            <span class="w-1 h-1 bg-white rounded-full"></span>
+            <p>{{ calculateReadingTime(blog.body) }} min read</p>
+          </div>
         </div>
       </div>
-
-      <h1 class="text-4xl font-bold" :style="`view-transition-name: blog-title-${blog.title.toLowerCase().replace(/ /g, '-')}`">{{ blog.title }}</h1>
+      <h1 class="text-4xl sm:text-7xl font-bold text-[#2b2b2b] px-5 sm:px-10"
+        :style="`view-transition-name: blog-title-${blog.title.toLowerCase().replace(/ /g, '-')}`">{{ blog.title }}</h1>
 
       <!-- Description -->
-      <p 
-        v-if="blog.description" 
-        class="text-xl text-gray-600 text-center max-w-2xl mx-auto leading-relaxed"
-        style="view-transition-name: blog-description"
-      >
+      <TextWrapper v-if="blog.description" class="text-center max-w-2xl mx-auto px-5 sm:px-10"
+        style="view-transition-name: blog-description">
         {{ blog.description }}
-      </p>
+      </TextWrapper>
 
       <!-- Tags -->
-      <div 
-        v-if="blog.tags && blog.tags.length > 0" 
-        class="flex flex-wrap gap-2 justify-center"
-        style="view-transition-name: blog-tags"
-      >
-        <span 
-          v-for="tag in blog.tags" 
-          :key="tag"
-          class="px-3 py-1 bg-[#4278ba] text-white text-sm rounded-full"
-        >
+      <div v-if="blog.tags && blog.tags.length > 0" class="flex flex-wrap gap-2 justify-center px-5 sm:px-10"
+        style="view-transition-name: blog-tags">
+        <span v-for="tag in blog.tags" :key="tag" class="px-3 py-1 bg-[#4278ba] text-white text-sm rounded-full">
           {{ tag }}
         </span>
       </div>
 
-      <div 
-        class="blog-article max-w-prose text-gray-700"
-        style="view-transition-name: blog-content"
-      >
+      <div class="blog-article max-w-prose text-[#2b2b2b] px-5 sm:px-10" style="view-transition-name: blog-content">
         <ContentRenderer v-if="blog" :value="blog" />
       </div>
-      
+
       <!-- Social Sharing -->
-      <SocialShare 
-        :title="blog.title" 
-        :description="blog.description" 
-        :url="`https://www.alexbates.dev${route.path}`"
-      />
+      <SocialShare :title="blog.title" :description="blog.description" class="px-5 sm:px-10"
+        :url="`https://www.alexbates.dev${route.path}`" />
     </div>
   </div>
 </template>
 
 <style>
-
-
 .blog-article {
-  font-weight: semibold;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
   line-height: 1.75;
+  font-size: 1.125rem;
+  /* text-lg */
 }
 
-.blog-article p, .blog-article hr {
+@media (min-width: 768px) {
+  .blog-article {
+    font-size: 1.25rem;
+    /* text-xl */
+  }
+}
+
+.blog-article p,
+.blog-article hr {
   margin-bottom: 1.25rem;
 }
+
 .blog-article hr {
   opacity: 0.2;
 }
 
-.blog-article ul, .blog-article ol {
+.blog-article ul,
+.blog-article ol {
   list-style-type: disc;
   margin-bottom: 1.25em;
   margin-top: 1.25em;
@@ -148,6 +147,12 @@ const calculateReadingTime = (body: any) => {
 .blog-article a {
   font-weight: bold;
   text-decoration: underline;
+  color: #4278ba;
+}
+
+.blog-article a:hover {
+  color: #2b2b2b;
+  transition: color 0.2s ease;
 }
 
 .blog-article img {
