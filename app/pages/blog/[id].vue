@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { motion } from 'motion-v'
+
 const route = useRoute();
 
 const { data: blog } = await useAsyncData(`page-${route.path}`, () => {
@@ -7,6 +9,20 @@ const { data: blog } = await useAsyncData(`page-${route.path}`, () => {
 
 useHead(blog.value?.head || {})
 useSeoMeta(blog.value?.seo || {})
+
+// Loading state - show spinner until page is ready
+const pending = ref(true)
+
+// Hide loading spinner when page is fully loaded
+onMounted(() => {
+  // Wait for next tick to ensure all content is rendered
+  nextTick(() => {
+    // Small delay to ensure smooth transition
+    setTimeout(() => {
+      pending.value = false
+    }, 100)
+  })
+})
 
 const calculateReadingTime = (body: any) => {
   if (!body) return 3;
@@ -42,7 +58,14 @@ const calculateReadingTime = (body: any) => {
 </script>
 
 <template>
-  <div class="w-full pb-10 bg-[#5385c2] py-5 sm:py-10" v-if="blog">
+  <!-- Loading Spinner -->
+  <div v-if="pending" class="fixed inset-0 bg-[#5385c2] flex items-center justify-center z-50">
+    <div class="text-center">
+      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#2b2b2b] animate-spin" />
+    </div>
+  </div>
+
+  <div v-else class="w-full pb-10 bg-[#5385c2] py-5 sm:py-10" v-if="blog">
     <div v-if="blog.bannerImgUrl" class="relative w-full max-w-[2000px] max-h-[400px] mx-auto mb-10 md:mb-20">
       <NuxtImg :src="`/images/blog/${blog.bannerImgUrl}`" alt="Blog banner" class="w-full h-[400px] object-cover"
         :width="1600" :height="400" sizes="(max-width: 768px) 100vw, 1600px" />
@@ -50,7 +73,13 @@ const calculateReadingTime = (body: any) => {
     </div>
     <div class="flex flex-col items-center mx-auto gap-10">
       <!-- Blog avatar,  Author and date-->
-      <div class="flex flex-col justify-center w-full items-center gap-5" style="view-transition-name: author-section">
+      <motion.div
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut' }"
+        class="flex flex-col justify-center w-full items-center gap-5"
+        style="view-transition-name: author-section"
+      >
         <ULink to="/" style="view-transition-name: none">
           <div class="align-middle w-20 h-20 rounded-full overflow-hidden">
             <picture>
@@ -60,11 +89,14 @@ const calculateReadingTime = (body: any) => {
         </ULink>
         <ULink to="/" class="spacing-2 text-white hover:text-gray-200 transition-colors text-2xl font-serif font-bold"
           style="view-transition-name: none">Alex Bates</ULink>
-
-
-      </div>
+      </motion.div>
       <!-- Navigation bar -->
-      <div class="w-full sticky top-0 rounded-lg z-300">
+      <motion.div
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }"
+        class="w-full sticky top-0 rounded-lg z-300"
+      >
         <div class="absolute w-full h-full z-100 backdrop-blur bg-white/05"></div>
         <div class="relative z-200 bg-transparent font-mono md:max-w-screen-md mx-auto flex items-center justify-between text-white text-sm px-4 py-4">
           <ULink to="/blog"
@@ -77,31 +109,66 @@ const calculateReadingTime = (body: any) => {
             <p>{{ calculateReadingTime(blog.body) }} min read</p>
           </div>
         </div>
-      </div>
-      <h1 class="text-4xl sm:text-5xl font-bold text-[#2b2b2b] px-5 sm:px-10"
-        :style="`view-transition-name: blog-title-${blog.title.toLowerCase().replace(/ /g, '-')}`">{{ blog.title }}</h1>
+      </motion.div>
+
+      <!-- Blog Title -->
+      <motion.div
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
+        class="text-4xl sm:text-5xl font-bold text-[#2b2b2b] px-5 sm:px-10"
+        :style="{ 'view-transition-name': `blog-title-${blog.title.toLowerCase().replace(/ /g, '-')}` }"
+      >
+        <h1>{{ blog.title }}</h1>
+      </motion.div>
 
       <!-- Description -->
-      <TextWrapper v-if="blog.description" class="text-center max-w-2xl mx-auto px-5 sm:px-10"
-        style="view-transition-name: blog-description">
-        {{ blog.description }}
-      </TextWrapper>
+      <motion.div
+        v-if="blog.description"
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
+        class="text-center max-w-2xl mx-auto px-5 sm:px-10"
+        style="view-transition-name: blog-description"
+      >
+        <TextWrapper>{{ blog.description }}</TextWrapper>
+      </motion.div>
 
       <!-- Tags -->
-      <div v-if="blog.tags && blog.tags.length > 0" class="flex flex-wrap gap-2 justify-center px-5 sm:px-10"
-        style="view-transition-name: blog-tags">
+      <motion.div
+        v-if="blog.tags && blog.tags.length > 0"
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.8 }"
+        class="flex flex-wrap gap-2 justify-center px-5 sm:px-10"
+        style="view-transition-name: blog-tags"
+      >
         <span v-for="tag in blog.tags" :key="tag" class="px-3 py-1 bg-[#4278ba] text-white text-sm rounded-full">
           {{ tag }}
         </span>
-      </div>
+      </motion.div>
 
-      <div class="blog-article max-w-prose text-[#2b2b2b] px-5 sm:px-10" style="view-transition-name: blog-content">
+      <!-- Blog Content -->
+      <motion.div
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut', delay: 1.0 }"
+        class="blog-article max-w-prose text-[#2b2b2b] px-5 sm:px-10"
+        style="view-transition-name: blog-content"
+      >
         <ContentRenderer v-if="blog" :value="blog" />
-      </div>
+      </motion.div>
 
       <!-- Social Sharing -->
-      <SocialShare :title="blog.title" :description="blog.description" class="px-5 sm:px-10"
-        :url="`https://www.alexbates.dev${route.path}`" />
+      <motion.div
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut', delay: 1.2 }"
+        class="px-5 sm:px-10"
+      >
+        <SocialShare :title="blog.title" :description="blog.description"
+          :url="`https://www.alexbates.dev${route.path}`" />
+      </motion.div>
     </div>
   </div>
 </template>
