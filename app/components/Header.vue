@@ -7,17 +7,6 @@
     </nav>
     <!--<UIcon class="cursor-pointer ml-auto" @click="toggleTheme" :name="themeIcon" />-->
   </div>
-  <div class="sm:hidden flex">
-    
-    <div>
-      <p class="text-sm text-[#2b2b2b] tracking-tighter font-mono rounded-md mt-0 mb-1">
-        Available for work!<br />
-        <a href="mailto:hello@alexbates.dev"
-          class="font-bold text-[#2b2b2b] hover:text-gray-200 transition-colors">hello@alexbates.dev</a>
-      </p>
-    </div>
-
-  </div>
 </template>
 
 <script setup lang="ts">
