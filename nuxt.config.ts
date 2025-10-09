@@ -1,5 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: "2024-11-13",
+  future: {
+    compatibilityVersion: 4,
+  },
   experimental: {
     viewTransition: true,
   },
@@ -60,5 +64,19 @@ export default defineNuxtConfig({
     preview: {
       api: "https://api.nuxt.studio",
     }
+  },
+  // Configure caching for blog pages using Nuxt 4's advanced caching
+  routeRules: {
+    // Blog pages - use ISR for better performance and cache invalidation
+    "/blog/**": {
+      isr: 60 * 60, // Revalidate every hour
+    },
+    // Static assets - cache indefinitely (Nuxt 4 handles invalidation on deploy)
+    "/_nuxt/**": {
+      headers: {
+        "Cache-Control": "public, max-age=31536000, immutable",
+        "Netlify-CDN-Cache-Control": "public, max-age=31536000, stale-while-revalidate=31536000, durable",
+      },
+    },
   }
 });
