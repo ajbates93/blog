@@ -153,7 +153,7 @@ const calculateReadingTime = (body: any) => {
         :initial="{ opacity: 0, y: 30 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.6, ease: 'easeOut', delay: 1.0 }"
-        class="blog-article max-w-prose text-[#2b2b2b] px-5 sm:px-10"
+        class="blog-article max-w-prose text-[#eeeeee] px-5 sm:px-10"
         style="view-transition-name: blog-content"
       >
         <ContentRenderer v-if="blog" :value="blog" />
@@ -214,7 +214,7 @@ const calculateReadingTime = (body: any) => {
 .blog-article a {
   font-weight: bold;
   text-decoration: underline;
-  color: #4278ba;
+  color: #eeeeee;
 }
 
 .blog-article a:hover {

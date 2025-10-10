@@ -350,7 +350,7 @@ onMounted(async () => {
   }, 100)
   
   // Welcome message
-  terminal.write('\x1b[1;36mWelcome to Alex Bates\' Interactive Terminal!\x1b[0m\r\n')
+  terminal.write('\x1b[1;36mNavigate by terminal instead!\x1b[0m\r\n')
   terminal.write('Type \x1b[1;33mhelp\x1b[0m to see available commands.\r\n')
   terminal.write('Try \x1b[1;33mls\x1b[0m to explore the file system!\r\n\r\n')
   
