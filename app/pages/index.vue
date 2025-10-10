@@ -102,7 +102,7 @@
           :initial="{ opacity: 0, x: 30 }"
           :animate="{ opacity: 1, x: 0 }"
           :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
-          class="mx-auto my-10 xl:m-0 overflow-hidden max-w-[600px]"
+          class="sticky top-10 mx-auto my-10 xl:m-0 overflow-hidden max-w-[600px] max-h-[90dvh]"
         >
           <div class="bg-gray-900 rounded-lg p-4 shadow-2xl flex flex-col border border-gray-700 h-full">
             <div class="flex items-center gap-2 mb-2 flex-shrink-0">
