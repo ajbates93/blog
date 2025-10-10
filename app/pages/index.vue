@@ -23,7 +23,7 @@
           </h1>
           <TextWrapper>
             I'm
-            <span class="font-bold underline text-[#2b2b2b]">Alex Bates</span>. I'm a software developer with over
+            <span class="font-bold underline">Alex Bates</span>. I'm a software developer with over
             <span>{{
               yearsSinceStartDate }}</span> years of industry experience.
           </TextWrapper>
@@ -97,26 +97,24 @@
 
         </div>
 
-        <!-- Image with fade-in-fade-left animation (happens last) -->
+        <!-- Interactive Terminal with fade-in-fade-left animation (happens last) -->
         <motion.div
           :initial="{ opacity: 0, x: 30 }"
           :animate="{ opacity: 1, x: 0 }"
           :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
           class="mx-auto my-10 xl:m-0 overflow-hidden max-w-[600px]"
         >
-          <NuxtImg 
-            src="/images/home-about-small.webp" 
-            alt="Alex Bates, a software developer"
-            class="w-full h-full object-cover border-5 border-gray-800 xl:rounded-r-3xl"
-            loading="eager"
-            fetchpriority="high"
-            preload
-            :width="600"
-            :height="800"
-            format="webp"
-            quality="85"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-          />
+          <div class="bg-gray-900 rounded-lg p-4 shadow-2xl flex flex-col border border-gray-700">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="flex gap-1">
+                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <span class="text-gray-400 text-sm font-mono">terminal</span>
+            </div>
+            <InteractiveTerminal />
+          </div>
         </motion.div>
     </div>
   </section>
@@ -129,15 +127,11 @@ definePageMeta({
   viewTransition: false
 })
 
-// Preload the hero image for better LCP
+// Set page meta for better SEO
 useHead({
-  link: [
-    {
-      rel: 'preload',
-      as: 'image',
-      href: '/images/home-about-small.webp',
-      fetchpriority: 'high'
-    }
+  title: 'Alex Bates - Software Developer',
+  meta: [
+    { name: 'description', content: 'Software developer with over 9 years of experience. Currently working at Pocketworks building web and mobile applications.' }
   ]
 })
 
