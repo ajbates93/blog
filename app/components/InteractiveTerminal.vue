@@ -50,7 +50,7 @@ const fileSystem: FileSystemItem[] = [
   { name: 'projects', type: 'directory', path: '/home/alex/projects' },
   { name: 'about.txt', type: 'file', path: '/home/alex/about.txt' },
   { name: 'contact.txt', type: 'file', path: '/home/alex/contact.txt' },
-  { name: 'resume.pdf', type: 'file', path: '/home/alex/resume.pdf' }
+  { name: 'work', type: 'file', path: '/home/alex/work' }
 ]
 
 // Blog posts for navigation
@@ -61,10 +61,18 @@ const blogPosts = [
   { name: 'middlesbrough-front-end-conference.md', type: 'file', path: '/home/alex/blog/middlesbrough-front-end-conference.md' }
 ]
 
+// Projects for navigation
+const projects = [
+  { name: 'coming-soon.txt', type: 'file', path: '/home/alex/projects/coming-soon.txt' }
+]
+
 // Get all items for current directory
 const getCurrentDirectoryItems = () => {
   if (currentPath === '/home/alex/blog') {
     return blogPosts
+  }
+  if (currentPath === '/home/alex/projects') {
+    return projects
   }
   return fileSystem.filter(item => 
     item.path.startsWith(currentPath) && 
@@ -116,10 +124,10 @@ const commands: Record<string, TerminalCommand> = {
       }
       
       // Check if directory exists
-      const allItems = [...fileSystem, ...blogPosts]
+      const allItems = [...fileSystem, ...blogPosts, ...projects]
       const dirExists = allItems.some(item => 
         item.type === 'directory' && item.path === newPath
-      ) || newPath === '/home/alex' || newPath === '/' || newPath === '/home/alex/blog'
+      ) || newPath === '/home/alex' || newPath === '/' || newPath === '/home/alex/blog' || newPath === '/home/alex/projects'
       
       if (dirExists) {
         currentPath = newPath
@@ -141,7 +149,8 @@ const commands: Record<string, TerminalCommand> = {
       const fileName = args[0]
       const filePath = currentPath === '/' ? `/${fileName}` : `${currentPath}/${fileName}`
       
-      const file = fileSystem.find(item => item.path === filePath && item.type === 'file')
+      const allItems = [...fileSystem, ...blogPosts, ...projects]
+      const file = allItems.find(item => item.path === filePath && item.type === 'file')
       
       if (!file) {
         return `cat: ${fileName}: No such file or directory`
@@ -150,13 +159,19 @@ const commands: Record<string, TerminalCommand> = {
       // Return different content based on file name
       switch (fileName) {
         case 'about.txt':
-          return `Hello! I'm Alex Bates, a software developer with over ${new Date().getFullYear() - 2015} years of experience.\r\n\r\nI'm currently working at Pocketworks as a Full Stack Developer, building web and mobile applications for clients across various industries.\r\n\r\nI love working with modern technologies like Vue.js, Nuxt.js, TypeScript, and Flutter. When I'm not coding, you can find me writing about my experiences on my blog or exploring new technologies.\r\n\r\nFeel free to explore my blog directory or check out my contact information!`
+          return `Hello! I'm Alex Bates, a software developer with over ${new Date().getFullYear() - 2015} years of experience.\r\n\r\nI'm currently working at Pocketworks (https://www.pocketworks.co.uk) as a Full Stack Developer, building web and mobile applications for clients across various industries.\r\n\r\nI love working with modern technologies like Vue.js, Nuxt.js, TypeScript, and Flutter. When I'm not coding, you can find me writing about my experiences on my blog or exploring new technologies.\r\n\r\nFeel free to explore my blog directory or check out my contact information!\r\n\r\nVisit my website: https://alexbates.dev`
         
         case 'contact.txt':
-          return `Contact Information:\r\n==================\r\n\r\nEmail: hello@alexbates.dev\r\nGitHub: https://github.com/ajbates93\r\nLinkedIn: https://www.linkedin.com/in/alex-bates-01b548a7\r\n\r\nI'm currently available for freelance work!\r\nDrop me an email to discuss your project.`
+          return `Contact Information:\r\n==================\r\n\r\nEmail: hello@alexbates.dev\r\nGitHub: https://github.com/ajbates93\r\nLinkedIn: https://www.linkedin.com/in/alex-bates-01b548a7\r\nWebsite: https://alexbates.dev\r\n\r\nI'm currently available for freelance work!\r\nDrop me an email to discuss your project.\r\n\r\nClick any link above to visit!`
         
         case 'resume.pdf':
           return `This is a PDF file. To view it, please visit: https://alexbates.dev/resume`
+        
+        case 'work':
+          return `This is a link to my work portfolio.\r\n\r\nTo view my work, visit: /work\r\n\r\nUse 'open work' to navigate there directly!`
+        
+        case 'coming-soon.txt':
+          return `🚧 Coming Soon!\r\n\r\nI'm currently building out this section of my site.\r\n\r\nThis will showcase my projects, case studies, and work portfolio.\r\n\r\nCheck back soon, or feel free to reach out if you'd like to discuss my work!\r\n\r\nContact: hello@alexbates.dev\r\nWebsite: https://alexbates.dev`
         
         case 'become-a-father.md':
           return `# Becoming a Father\r\n\r\nThis is a blog post about my journey into fatherhood.\r\n\r\nTo read the full post, visit: /blog/become-a-father\r\n\r\nUse 'open become-a-father.md' to navigate there directly!`
@@ -199,7 +214,7 @@ const commands: Record<string, TerminalCommand> = {
       
       // Handle other files
       const filePath = currentPath === '/' ? `/${fileName}` : `${currentPath}/${fileName}`
-      const allItems = [...fileSystem, ...blogPosts]
+      const allItems = [...fileSystem, ...blogPosts, ...projects]
       const file = allItems.find(item => item.path === filePath && item.type === 'file')
       
       if (!file) {
@@ -208,12 +223,14 @@ const commands: Record<string, TerminalCommand> = {
       
       // Handle different file types
       switch (fileName) {
-        case 'resume.pdf':
-          window.open('https://alexbates.dev/resume', '_blank')
-          return `Opening ${fileName} in new tab...`
+        case 'work':
+          const router = useRouter()
+          await router.push('/work')
+          return `Opening ${fileName}...`
         
         case 'about.txt':
         case 'contact.txt':
+        case 'coming-soon.txt':
           return `Use 'cat ${fileName}' to view the contents of this file.`
         
         default:
@@ -261,6 +278,50 @@ const commands: Record<string, TerminalCommand> = {
     execute: async () => {
       terminal?.write('\r\nTerminal closed. Thanks for visiting!')
       return ''
+    }
+  },
+  
+  // Easter egg for dangerous commands
+  'rm': {
+    name: 'rm',
+    description: 'Remove files or directories',
+    execute: async (args: string[]) => {
+      if (args.includes('-rf') || args.includes('-r') || args.includes('-f')) {
+        return `\x1b[1;31mNice try... 😏\x1b[0m`
+      }
+      return `rm: ${args.join(' ')}: Permission denied (this is a simulated terminal)`
+    }
+  },
+  
+  'sudo': {
+    name: 'sudo',
+    description: 'Execute command as superuser',
+    execute: async (args: string[]) => {
+      return `\x1b[1;33mNice try... 😏\x1b[0m`
+    }
+  },
+  
+  'chmod': {
+    name: 'chmod',
+    description: 'Change file permissions',
+    execute: async () => {
+      return `\x1b[1;33mNice try... 😏\x1b[0m`
+    }
+  },
+  
+  'kill': {
+    name: 'kill',
+    description: 'Terminate processes',
+    execute: async () => {
+      return `\x1b[1;31mNice try... 😏\x1b[0m`
+    }
+  },
+  
+  'format': {
+    name: 'format',
+    description: 'Format disk',
+    execute: async () => {
+      return `\x1b[1;31mNice try... 😏\x1b[0m`
     }
   }
 }
@@ -323,9 +384,25 @@ onMounted(async () => {
   
   // Add web links addon
   const webLinksAddon = new WebLinksAddonClass((event, uri) => {
+    // Handle different types of links
     if (event.metaKey || event.ctrlKey) {
-      window.open(uri, '_blank')
+      // Open in new tab
+      window.open(uri, '_blank', 'noopener,noreferrer')
+    } else {
+      // Open in same tab
+      window.open(uri, '_self')
     }
+  }, {
+    // Custom hover handler to show link preview
+    hover: (event, text, location) => {
+      // Could add tooltip functionality here in the future
+    },
+    // Custom leave handler
+    leave: (event, text) => {
+      // Clean up any tooltips
+    },
+    // Custom URL regex to catch more link patterns
+    urlRegex: /(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g
   })
   terminal.loadAddon(webLinksAddon)
   
@@ -341,12 +418,10 @@ onMounted(async () => {
   
   // Fit the terminal to its container
   fitAddon.fit()
-  console.log('Terminal dimensions after fit:', terminal.cols, 'x', terminal.rows)
   
   // Also fit after a short delay to ensure everything is rendered
   setTimeout(() => {
     fitAddon.fit()
-    console.log('Terminal dimensions after delayed fit:', terminal.cols, 'x', terminal.rows)
   }, 100)
   
   // Welcome message
