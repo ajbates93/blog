@@ -3,10 +3,9 @@
     <div 
       ref="terminalContainer" 
       class="terminal-container bg-black rounded-lg border border-gray-600 overflow-hidden shadow-inner flex-1"
-      :style="{ height: terminalHeight }"
     />
     <template #fallback>
-      <div class="terminal-container bg-black rounded-lg border border-gray-600 overflow-hidden shadow-inner flex items-center justify-center flex-1" :style="{ height: terminalHeight }">
+      <div class="terminal-container bg-black rounded-lg border border-gray-600 overflow-hidden shadow-inner flex items-center justify-center flex-1">
         <div class="text-green-400 font-mono">Loading terminal...</div>
       </div>
     </template>
@@ -22,6 +21,7 @@ defineOptions({
 // Dynamic imports to avoid SSR issues
 const Terminal = ref<any>(null)
 const WebLinksAddon = ref<any>(null)
+const FitAddon = ref<any>(null)
 
 interface TerminalCommand {
   name: string
@@ -36,9 +36,9 @@ interface FileSystemItem {
 }
 
 const terminalContainer = ref<HTMLElement>()
-const terminalHeight = ref('100%')
 
 let terminal: any = null
+let fitAddon: any = null
 let currentPath = '/home/alex'
 let commandHistory: string[] = []
 let historyIndex = -1
@@ -276,13 +276,15 @@ onMounted(async () => {
   
   try {
     // Dynamic imports to avoid SSR issues
-    const [{ Terminal: TerminalClass }, { WebLinksAddon: WebLinksAddonClass }] = await Promise.all([
+    const [{ Terminal: TerminalClass }, { WebLinksAddon: WebLinksAddonClass }, { FitAddon: FitAddonClass }] = await Promise.all([
       import('@xterm/xterm'),
-      import('@xterm/addon-web-links')
+      import('@xterm/addon-web-links'),
+      import('@xterm/addon-fit')
     ])
     
     Terminal.value = TerminalClass
     WebLinksAddon.value = WebLinksAddonClass
+    FitAddon.value = FitAddonClass
     
     // Import CSS
     await import('@xterm/xterm/css/xterm.css')
@@ -327,8 +329,25 @@ onMounted(async () => {
   })
   terminal.loadAddon(webLinksAddon)
   
+  // Add fit addon
+  fitAddon = new FitAddonClass()
+  terminal.loadAddon(fitAddon)
+  
   // Open terminal
   terminal.open(terminalContainer.value)
+  
+  // Wait for terminal to be fully rendered before fitting
+  await nextTick()
+  
+  // Fit the terminal to its container
+  fitAddon.fit()
+  console.log('Terminal dimensions after fit:', terminal.cols, 'x', terminal.rows)
+  
+  // Also fit after a short delay to ensure everything is rendered
+  setTimeout(() => {
+    fitAddon.fit()
+    console.log('Terminal dimensions after delayed fit:', terminal.cols, 'x', terminal.rows)
+  }, 100)
   
   // Welcome message
   terminal.write('\x1b[1;36mWelcome to Alex Bates\' Interactive Terminal!\x1b[0m\r\n')
@@ -347,9 +366,24 @@ onMounted(async () => {
   
   // Handle resize
   const resizeObserver = new ResizeObserver(() => {
-    // Terminal will auto-resize based on container
+    // Fit the terminal when container resizes
+    fitAddon.fit()
   })
   resizeObserver.observe(terminalContainer.value)
+  
+  // Also listen for window resize events
+  const handleWindowResize = () => {
+    fitAddon.fit()
+  }
+  window.addEventListener('resize', handleWindowResize)
+  
+  // Cleanup function
+  onUnmounted(() => {
+    window.removeEventListener('resize', handleWindowResize)
+    resizeObserver.disconnect()
+    terminal?.dispose()
+    fitAddon = null
+  })
 })
 
 // Write command prompt
@@ -424,10 +458,6 @@ const executeCommand = async (input: string) => {
   }
 }
 
-// Cleanup
-onUnmounted(() => {
-  terminal?.dispose()
-})
 </script>
 
 <style scoped>
@@ -437,21 +467,27 @@ onUnmounted(() => {
   min-height: 0; /* Important for flex containers */
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
 /* Terminal styling */
 .terminal-container :deep(.xterm) {
   padding: 8px;
   height: 100%;
+  width: 100%;
   flex: 1;
 }
 
 .terminal-container :deep(.xterm-screen) {
   padding: 8px;
+  height: 100%;
+  width: 100%;
 }
 
 .terminal-container :deep(.xterm-viewport) {
   height: 100%;
+  width: 100%;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #333 #000;
@@ -474,8 +510,4 @@ onUnmounted(() => {
   background: #555;
 }
 
-/* Ensure the terminal fills the available space */
-.terminal-container :deep(.xterm-rows) {
-  height: 100%;
-}
 </style>
