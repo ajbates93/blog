@@ -2,11 +2,11 @@
   <ClientOnly>
     <div 
       ref="terminalContainer" 
-      class="terminal-container bg-black rounded-lg border border-gray-600 overflow-hidden shadow-inner"
-      :style="{ height: terminalHeight + 'px' }"
+      class="terminal-container bg-black rounded-lg border border-gray-600 overflow-hidden shadow-inner flex-1"
+      :style="{ height: terminalHeight }"
     />
     <template #fallback>
-      <div class="terminal-container bg-black rounded-lg border border-gray-600 overflow-hidden shadow-inner flex items-center justify-center" :style="{ height: terminalHeight + 'px' }">
+      <div class="terminal-container bg-black rounded-lg border border-gray-600 overflow-hidden shadow-inner flex items-center justify-center flex-1" :style="{ height: terminalHeight }">
         <div class="text-green-400 font-mono">Loading terminal...</div>
       </div>
     </template>
@@ -36,12 +36,13 @@ interface FileSystemItem {
 }
 
 const terminalContainer = ref<HTMLElement>()
-const terminalHeight = ref(400)
+const terminalHeight = ref('100%')
 
 let terminal: any = null
 let currentPath = '/home/alex'
 let commandHistory: string[] = []
 let historyIndex = -1
+let currentInput = ''
 
 // File system structure for navigation
 const fileSystem: FileSystemItem[] = [
@@ -87,7 +88,7 @@ const commands: Record<string, TerminalCommand> = {
       return items.map(item => {
         const icon = item.type === 'directory' ? '📁' : '📄'
         return `${icon} ${item.name}`
-      }).join('\n')
+      }).join('\r\n')
     }
   },
   
@@ -149,63 +150,25 @@ const commands: Record<string, TerminalCommand> = {
       // Return different content based on file name
       switch (fileName) {
         case 'about.txt':
-          return `Hello! I'm Alex Bates, a software developer with over ${new Date().getFullYear() - 2015} years of experience.
-
-I'm currently working at Pocketworks as a Full Stack Developer, building web and mobile applications for clients across various industries.
-
-I love working with modern technologies like Vue.js, Nuxt.js, TypeScript, and Flutter. When I'm not coding, you can find me writing about my experiences on my blog or exploring new technologies.
-
-Feel free to explore my blog directory or check out my contact information!`
+          return `Hello! I'm Alex Bates, a software developer with over ${new Date().getFullYear() - 2015} years of experience.\r\n\r\nI'm currently working at Pocketworks as a Full Stack Developer, building web and mobile applications for clients across various industries.\r\n\r\nI love working with modern technologies like Vue.js, Nuxt.js, TypeScript, and Flutter. When I'm not coding, you can find me writing about my experiences on my blog or exploring new technologies.\r\n\r\nFeel free to explore my blog directory or check out my contact information!`
         
         case 'contact.txt':
-          return `Contact Information:
-==================
-
-Email: hello@alexbates.dev
-GitHub: https://github.com/ajbates93
-LinkedIn: https://www.linkedin.com/in/alex-bates-01b548a7
-
-I'm currently available for freelance work!
-Drop me an email to discuss your project.`
+          return `Contact Information:\r\n==================\r\n\r\nEmail: hello@alexbates.dev\r\nGitHub: https://github.com/ajbates93\r\nLinkedIn: https://www.linkedin.com/in/alex-bates-01b548a7\r\n\r\nI'm currently available for freelance work!\r\nDrop me an email to discuss your project.`
         
         case 'resume.pdf':
           return `This is a PDF file. To view it, please visit: https://alexbates.dev/resume`
         
         case 'become-a-father.md':
-          return `# Becoming a Father
-
-This is a blog post about my journey into fatherhood. 
-
-To read the full post, visit: /blog/become-a-father
-
-Use 'open become-a-father.md' to navigate there directly!`
+          return `# Becoming a Father\r\n\r\nThis is a blog post about my journey into fatherhood.\r\n\r\nTo read the full post, visit: /blog/become-a-father\r\n\r\nUse 'open become-a-father.md' to navigate there directly!`
         
         case 'building-this-blog.md':
-          return `# Building This Blog
-
-This post covers the technical details of building this blog with Nuxt.js and Vue.
-
-To read the full post, visit: /blog/building-this-blog
-
-Use 'open building-this-blog.md' to navigate there directly!`
+          return `# Building This Blog\r\n\r\nThis post covers the technical details of building this blog with Nuxt.js and Vue.\r\n\r\nTo read the full post, visit: /blog/building-this-blog\r\n\r\nUse 'open building-this-blog.md' to navigate there directly!`
         
         case 'learning-flutter.md':
-          return `# Learning Flutter
-
-My experience learning Flutter for mobile development.
-
-To read the full post, visit: /blog/learning-flutter
-
-Use 'open learning-flutter.md' to navigate there directly!`
+          return `# Learning Flutter\r\n\r\nMy experience learning Flutter for mobile development.\r\n\r\nTo read the full post, visit: /blog/learning-flutter\r\n\r\nUse 'open learning-flutter.md' to navigate there directly!`
         
         case 'middlesbrough-front-end-conference.md':
-          return `# Middlesbrough Front End Conference
-
-My experience attending and speaking at the Middlesbrough Front End Conference.
-
-To read the full post, visit: /blog/middlesbrough-front-end-conference
-
-Use 'open middlesbrough-front-end-conference.md' to navigate there directly!`
+          return `# Middlesbrough Front End Conference\r\n\r\nMy experience attending and speaking at the Middlesbrough Front End Conference.\r\n\r\nTo read the full post, visit: /blog/middlesbrough-front-end-conference\r\n\r\nUse 'open middlesbrough-front-end-conference.md' to navigate there directly!`
         
         default:
           return `File contents for ${fileName}`
@@ -263,21 +226,7 @@ Use 'open middlesbrough-front-end-conference.md' to navigate there directly!`
     name: 'help',
     description: 'Show available commands',
     execute: async () => {
-      return `Available commands:
-==================
-
-ls          - List directory contents
-cd <dir>    - Change directory
-cat <file>  - Display file contents
-open <file> - Open a file or navigate to a page
-help        - Show this help message
-clear       - Clear the terminal
-whoami      - Display current user
-pwd         - Print working directory
-exit        - Close terminal
-
-Try 'ls' to see what's available in the current directory!
-Try 'cd blog' to explore my blog posts!`
+      return `Available commands:\r\n==================\r\n\r\nls          - List directory contents\r\ncd <dir>    - Change directory\r\ncat <file>  - Display file contents\r\nopen <file> - Open a file or navigate to a page\r\nhelp        - Show this help message\r\nclear       - Clear the terminal\r\nwhoami      - Display current user\r\npwd         - Print working directory\r\nexit        - Close terminal\r\n\r\nTry 'ls' to see what's available in the current directory!\r\nTry 'cd blog' to explore my blog posts!`
     }
   },
   
@@ -318,27 +267,19 @@ Try 'cd blog' to explore my blog posts!`
 
 // Initialize terminal
 onMounted(async () => {
-  console.log('Terminal component mounted')
-  
   // Wait for next tick to ensure DOM is ready
   await nextTick()
   
   if (!terminalContainer.value) {
-    console.error('Terminal container not found')
     return
   }
   
-  console.log('Terminal container found:', terminalContainer.value)
-  
   try {
     // Dynamic imports to avoid SSR issues
-    console.log('Loading xterm modules...')
     const [{ Terminal: TerminalClass }, { WebLinksAddon: WebLinksAddonClass }] = await Promise.all([
       import('@xterm/xterm'),
       import('@xterm/addon-web-links')
     ])
-    
-    console.log('Modules loaded successfully')
     
     Terminal.value = TerminalClass
     WebLinksAddon.value = WebLinksAddonClass
@@ -347,35 +288,36 @@ onMounted(async () => {
     await import('@xterm/xterm/css/xterm.css')
     
     // Create terminal instance
-    console.log('Creating terminal instance...')
     terminal = new TerminalClass({
-    theme: {
-      background: '#000000',
-      foreground: '#00ff41',
-      cursor: '#00ff41',
-      black: '#000000',
-      red: '#ff5555',
-      green: '#50fa7b',
-      yellow: '#f1fa8c',
-      blue: '#5385c2',
-      magenta: '#ff79c6',
-      cyan: '#8be9fd',
-      white: '#f8f8f2',
-      brightBlack: '#6272a4',
-      brightRed: '#ff6e6e',
-      brightGreen: '#69ff94',
-      brightYellow: '#ffffa5',
-      brightBlue: '#d6acff',
-      brightMagenta: '#ff92df',
-      brightCyan: '#a4ffff',
-      brightWhite: '#ffffff'
-    },
-    fontFamily: 'Monaco, Menlo, "Ubuntu Mono", monospace',
-    fontSize: 14,
-    lineHeight: 1.2,
-    cursorBlink: true,
-    cursorStyle: 'block'
-  })
+      theme: {
+        background: '#000000',
+        foreground: '#00ff41',
+        cursor: '#00ff41',
+        black: '#000000',
+        red: '#ff5555',
+        green: '#50fa7b',
+        yellow: '#f1fa8c',
+        blue: '#5385c2',
+        magenta: '#ff79c6',
+        cyan: '#8be9fd',
+        white: '#f8f8f2',
+        brightBlack: '#6272a4',
+        brightRed: '#ff6e6e',
+        brightGreen: '#69ff94',
+        brightYellow: '#ffffa5',
+        brightBlue: '#d6acff',
+        brightMagenta: '#ff92df',
+        brightCyan: '#a4ffff',
+        brightWhite: '#ffffff'
+      },
+      fontFamily: 'Monaco, Menlo, "Ubuntu Mono", monospace',
+      fontSize: 14,
+      lineHeight: 1.2,
+      cursorBlink: true,
+      cursorStyle: 'block',
+      scrollback: 1000,
+      allowTransparency: false
+    })
   
   // Add web links addon
   const webLinksAddon = new WebLinksAddonClass((event, uri) => {
@@ -386,24 +328,18 @@ onMounted(async () => {
   terminal.loadAddon(webLinksAddon)
   
   // Open terminal
-  console.log('Opening terminal...')
   terminal.open(terminalContainer.value)
   
   // Welcome message
-  console.log('Writing welcome message...')
   terminal.write('\x1b[1;36mWelcome to Alex Bates\' Interactive Terminal!\x1b[0m\r\n')
   terminal.write('Type \x1b[1;33mhelp\x1b[0m to see available commands.\r\n')
   terminal.write('Try \x1b[1;33mls\x1b[0m to explore the file system!\r\n\r\n')
   
   // Initial prompt
-  console.log('Writing initial prompt...')
   writePrompt()
   
   // Handle input
-  console.log('Setting up input handler...')
   terminal.onData(handleInput)
-  
-  console.log('Terminal initialization complete!')
   
   } catch (error) {
     console.error('Error initializing terminal:', error)
@@ -419,12 +355,10 @@ onMounted(async () => {
 // Write command prompt
 const writePrompt = () => {
   if (!terminal) {
-    console.error('Terminal not available for writing prompt')
     return
   }
   
   const prompt = `\x1b[1;32malex@alexbates\x1b[0m:\x1b[1;34m${currentPath}\x1b[0m$ `
-  console.log('Writing prompt:', prompt)
   terminal.write(prompt)
 }
 
@@ -438,30 +372,27 @@ const handleInput = async (data: string) => {
   if (char === 13) { // Enter
     terminal.write('\r\n')
     
-    // Get current line
-    const line = terminal.buffer.active.cursorX > 0 
-      ? terminal.buffer.active.getLine(terminal.buffer.active.cursorY)?.translateToString() || ''
-      : ''
-    
-    const promptLength = `alex@alexbates:${currentPath}$ `.length
-    const command = line.substring(promptLength).trim()
-    
-    if (command) {
-      commandHistory.push(command)
+    if (currentInput.trim()) {
+      commandHistory.push(currentInput)
       historyIndex = commandHistory.length
       
-      await executeCommand(command)
+      await executeCommand(currentInput.trim())
     }
     
+    // Reset current input
+    currentInput = ''
     writePrompt()
   } else if (char === 127) { // Backspace
-    if (terminal.buffer.active.cursorX > 0) {
+    if (currentInput.length > 0) {
+      currentInput = currentInput.slice(0, -1)
       terminal.write('\b \b')
     }
   } else if (char === 3) { // Ctrl+C
     terminal.write('^C\r\n')
+    currentInput = ''
     writePrompt()
   } else if (char >= 32) { // Printable characters
+    currentInput += data
     terminal.write(data)
   }
 }
@@ -503,10 +434,25 @@ onUnmounted(() => {
 .terminal-container {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   padding: 8px;
+  min-height: 0; /* Important for flex containers */
+  display: flex;
+  flex-direction: column;
 }
 
-/* Custom scrollbar for terminal */
+/* Terminal styling */
+.terminal-container :deep(.xterm) {
+  padding: 8px;
+  height: 100%;
+  flex: 1;
+}
+
+.terminal-container :deep(.xterm-screen) {
+  padding: 8px;
+}
+
 .terminal-container :deep(.xterm-viewport) {
+  height: 100%;
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #333 #000;
 }
@@ -528,12 +474,8 @@ onUnmounted(() => {
   background: #555;
 }
 
-/* Terminal styling */
-.terminal-container :deep(.xterm) {
-  padding: 8px;
-}
-
-.terminal-container :deep(.xterm-screen) {
-  padding: 8px;
+/* Ensure the terminal fills the available space */
+.terminal-container :deep(.xterm-rows) {
+  height: 100%;
 }
 </style>

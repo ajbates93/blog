@@ -9,7 +9,7 @@
   <!-- Hero Section with Blue Background -->
   <section v-else class="w-full min-h-screen bg-[#5385c2] flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20">
     <div
-      class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_2fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left xl:pr-10">
+      class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_2fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left xl:pr-10 items-center">
       <div class="flex flex-col justify-start">
         <!-- Group 1: Header, Heading, and Intro -->
         <motion.div
@@ -105,7 +105,7 @@
           class="mx-auto my-10 xl:m-0 overflow-hidden max-w-[600px]"
         >
           <div class="bg-gray-900 rounded-lg p-4 shadow-2xl flex flex-col border border-gray-700">
-            <div class="flex items-center gap-2 mb-2">
+            <div class="flex items-center gap-2 mb-2 flex-shrink-0">
               <div class="flex gap-1">
                 <div class="w-3 h-3 bg-red-500 rounded-full"></div>
                 <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
