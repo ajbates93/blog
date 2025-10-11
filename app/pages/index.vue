@@ -1,6 +1,6 @@
 <template>
   <!-- Loading Spinner -->
-  <div v-if="pending" class="fixed inset-0 bg-[#5385c2] flex items-center justify-center z-50 !bg-transparent">
+  <div v-if="pending" class="w-full min-h-screen bg-[#5385c2] flex items-center justify-center z-10">
     <div class="text-center">
       <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#2b2b2b] animate-spin" />
     </div>

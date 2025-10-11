@@ -14,8 +14,10 @@
     
     <!-- Content -->
     <UApp class="relative z-10">
-      <div>
-        <slot />
+      <div class="min-h-screen flex flex-col">
+        <main class="flex-1">
+          <slot />
+        </main>
         <Footer class="relative z-20" />
       </div>
     </UApp>
