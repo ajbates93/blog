@@ -92,12 +92,15 @@
           </div>
           
           <!-- Mobile version - compact status -->
-          <div class="md:hidden flex items-center justify-center gap-2 mb-4">
+          <div class="md:hidden flex flex-col items-center justify-center gap-6 mb-4">
+            <div class="flex items-center gap-2">
             <span class="inline-block animate-pulse w-2 h-2 bg-green-500 rounded-full"></span>
             <span class="text-white font-serif">Available for work</span>
             <a href="mailto:hello@alexbates.dev" class="text-white font-serif underline hover:text-gray-200 transition-colors">
               hello@alexbates.dev
             </a>
+            </div>
+            <GradientButton href="mailto:hello@alexbates.dev" class="text-white">Get in touch!</GradientButton>
           </div>
         </motion.div>
 
@@ -128,6 +131,7 @@
 
 <script lang="ts" setup>
 import { motion } from 'motion-v'
+import GradientButton from '@/components/inspira-ui/GradientButton.vue'
 
 definePageMeta({
   viewTransition: false
