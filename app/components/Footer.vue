@@ -1,6 +1,6 @@
 <template>
-  <footer class="bg-slate-800">
-    <div class="mx-auto px-4 sm:px-10 py-8 md:max-w-3/5 lg:max-w-screen-xl">
+  <footer class="bg-[#1e1d2c] px-4 sm:px-10 xl:px-20 py-8">
+    <div class="mx-auto xl:max-w-screen-xl md:max-w-3/5">
       <!-- Main footer content -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
         <!-- About section -->
