@@ -16,7 +16,7 @@
       :transition="{ duration: 0.6, ease: 'easeOut' }"
     >
       <Header />
-      <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#2b2b2b] font-bold sm:mb-10">Blog</h1>
+      <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10">Blog</h1>
     </motion.div>
 
     <!-- Intro Text Group -->

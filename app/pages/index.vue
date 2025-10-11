@@ -1,8 +1,8 @@
 <template>
   <!-- Loading Spinner -->
-  <div v-if="pending" class="w-full min-h-screen bg-[#5385c2] flex items-center justify-center z-10">
+  <div v-if="pending" class="w-full min-h-screen bg-[#1e1d2c] flex items-center justify-center z-10">
     <div class="text-center">
-      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#2b2b2b] animate-spin" />
+      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#eeeeee] animate-spin" />
     </div>
   </div>
 
@@ -18,24 +18,30 @@
           :transition="{ duration: 0.6, ease: 'easeOut' }"
         >
           <Header />
-          <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#2b2b2b] font-bold sm:mb-10">
+          <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10">
             Hello there.
           </h1>
+          
+        </motion.div>
+
+        <motion.div
+          :initial="{ opacity: 0, y: 30 }"
+          :animate="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }"
+        >
           <TextWrapper>
             I'm
             <span class="font-bold underline">Alex Bates</span>. I'm a software developer with over
             <span>{{
               yearsSinceStartDate }}</span> years of industry experience.
           </TextWrapper>
-          <div class="italic text-5xl sm:py-5 text-[#2b2b2b] text-center block">~</div>
         </motion.div>
-
 
         <!-- Group 2: Work Description, Blog/Social Links, and Social Icons -->
         <motion.div
           :initial="{ opacity: 0, y: 30 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
         >
           <TextWrapper>
             I'm currently working at
@@ -68,7 +74,7 @@
         <motion.div
           :initial="{ opacity: 0, y: 30 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
         >
           <!-- Desktop version -->
           <div class="hidden md:flex bg-white/10 backdrop-blur-sm p-5 rounded-md gap-3">
@@ -76,7 +82,7 @@
               <span class="inline-block animate-pulse w-3 h-3 bg-green-500 rounded-full"></span>
             </p>
             <div>
-              <p class="text-md text-[#ffffff] font-mono rounded-md mt-0 mb-1">
+              <p class="text-md text-[#ffffff] font-serif rounded-md mt-0 mb-1">
                 Hooray! I'm currently available for new freelance work!<br />
               Drop me an email at <a
                   href="mailto:hello@alexbates.dev"
@@ -101,7 +107,7 @@
         <motion.div
           :initial="{ opacity: 0, x: 30 }"
           :animate="{ opacity: 1, x: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.8 }"
           class="hidden xl:block sticky top-10 mx-auto my-10 xl:m-0 overflow-hidden w-full max-w-[600px] max-h-[90dvh]"
         >
           <div class="bg-gray-900 rounded-lg p-4 shadow-2xl flex flex-col border border-gray-700 h-full">

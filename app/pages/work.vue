@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[#5385c2]">
+  <div class="min-h-screen bg-[#1e1d2c]">
     <!-- Header -->
     <Header />
     
@@ -20,8 +20,8 @@
               I'm currently building out this section to showcase my projects, case studies, and work portfolio.
             </p>
             <p class="text-gray-600 mb-8">
-              In the meantime, feel free to check out my <ULink to="/blog" class="text-[#5385c2] hover:text-[#4278ba] font-semibold">blog</ULink> 
-              or <ULink to="/" class="text-[#5385c2] hover:text-[#4278ba] font-semibold">interactive terminal</ULink> to explore my site!
+              In the meantime, feel free to check out my <ULink to="/blog" class="text-[#1e1d2c] hover:text-[#4278ba] font-semibold">blog</ULink> 
+              or <ULink to="/" class="text-[#1e1d2c] hover:text-[#4278ba] font-semibold">interactive terminal</ULink> to explore my site!
             </p>
             
             <!-- Contact CTA -->
@@ -32,7 +32,7 @@
               </p>
               <a 
                 href="mailto:hello@alexbates.dev"
-                class="inline-block bg-[#5385c2] text-white px-6 py-3 rounded-lg hover:bg-[#4278ba] transition-colors font-semibold"
+                class="inline-block bg-[#1e1d2c] text-white px-6 py-3 rounded-lg hover:bg-[#4278ba] transition-colors font-semibold"
               >
                 Get in Touch
               </a>

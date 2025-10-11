@@ -1,6 +1,6 @@
 <template>
   <div class="text-left mx-auto py-5 md:py-10 flex items-center justify-start w-full gap-5 text-sm sm:text-lg">
-    <nav class="flex gap-2 font-mono text-sm sm:text-xl">
+    <nav class="flex gap-2 text-sm sm:text-xl text-white">
       <NuxtLink to="/">home</NuxtLink>
       <span>|</span>
       <NuxtLink to="/blog">blog</NuxtLink>

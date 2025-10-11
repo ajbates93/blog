@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen bg-[#5385c2]">
+  <div class="relative min-h-screen bg-[#1e1d2c]">
     <!-- Background FlickeringGrid -->
     <ClientOnly>
       <FlickeringGrid
