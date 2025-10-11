@@ -3,11 +3,12 @@
     <!-- Background FlickeringGrid -->
     <ClientOnly>
       <FlickeringGrid
-        class="fixed inset-0 z-0 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
+        class="fixed inset-0 z-0 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)] md:[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
         :square-size="4"
         :grid-gap="6"
         color="#60A5FA"
-        :max-opacity="0.5"
+        :max-opacity="0.3"
+        :mobile-max-opacity="0.1"
         :flicker-chance="0.1"
       />
     </ClientOnly>

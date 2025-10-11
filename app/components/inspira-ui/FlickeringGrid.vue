@@ -25,6 +25,7 @@ interface FlickeringGridProps {
   height?: number;
   class?: string;
   maxOpacity?: number;
+  mobileMaxOpacity?: number;
 }
 
 const props = withDefaults(defineProps<FlickeringGridProps>(), {
@@ -33,9 +34,10 @@ const props = withDefaults(defineProps<FlickeringGridProps>(), {
   flickerChance: 0.3,
   color: "rgb(0, 0, 0)",
   maxOpacity: 0.3,
+  mobileMaxOpacity: 0.1,
 });
 
-const { squareSize, gridGap, flickerChance, color, maxOpacity, width, height } = toRefs(props);
+const { squareSize, gridGap, flickerChance, color, maxOpacity, mobileMaxOpacity, width, height } = toRefs(props);
 
 const containerRef = ref<HTMLDivElement>();
 const canvasRef = ref<HTMLCanvasElement>();
@@ -43,6 +45,12 @@ const context = ref<CanvasRenderingContext2D>();
 
 const isInView = ref(false);
 const canvasSize = ref({ width: 0, height: 0 });
+const isMobile = ref(false);
+
+// Responsive opacity based on screen size
+const currentMaxOpacity = computed(() => {
+  return isMobile.value ? mobileMaxOpacity.value : maxOpacity.value;
+});
 
 const computedColor = computed(() => {
   if (!context.value) return "rgba(255, 0, 0,";
@@ -89,7 +97,7 @@ function setupCanvas(
 
   const squares = new Float32Array(cols * rows);
   for (let i = 0; i < squares.length; i++) {
-    squares[i] = Math.random() * maxOpacity.value;
+    squares[i] = Math.random() * currentMaxOpacity.value;
   }
   return { cols, rows, squares, dpr };
 }
@@ -97,7 +105,7 @@ function setupCanvas(
 function updateSquares(squares: Float32Array, deltaTime: number) {
   for (let i = 0; i < squares.length; i++) {
     if (Math.random() < flickerChance.value * deltaTime) {
-      squares[i] = Math.random() * maxOpacity.value;
+      squares[i] = Math.random() * currentMaxOpacity.value;
     }
   }
 }
@@ -167,6 +175,13 @@ onMounted(() => {
   context.value = canvasRef.value.getContext("2d")!;
   if (!context.value) return;
 
+  // Detect mobile screen size
+  const checkMobile = () => {
+    isMobile.value = window.innerWidth < 768; // md breakpoint
+  };
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+
   updateCanvasSize();
 
   resizeObserver = new ResizeObserver(() => {
@@ -190,5 +205,6 @@ onBeforeUnmount(() => {
   }
   resizeObserver?.disconnect();
   intersectionObserver?.disconnect();
+  window.removeEventListener('resize', () => {});
 });
 </script>

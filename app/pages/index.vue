@@ -94,8 +94,8 @@
           <!-- Mobile version - compact status -->
           <div class="md:hidden flex items-center justify-center gap-2 mb-4">
             <span class="inline-block animate-pulse w-2 h-2 bg-green-500 rounded-full"></span>
-            <span class="text-sm text-white font-mono">Available for work</span>
-            <a href="mailto:hello@alexbates.dev" class="text-sm text-white font-mono underline hover:text-gray-200 transition-colors">
+            <span class="text-white font-serif">Available for work</span>
+            <a href="mailto:hello@alexbates.dev" class="text-white font-serif underline hover:text-gray-200 transition-colors">
               hello@alexbates.dev
             </a>
           </div>
