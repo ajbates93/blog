@@ -16,7 +16,7 @@
     <slot name="background" />
 
     <!-- Header slot for date -->
-    <div class="hidden sm:block absolute font-mono top-4 left-4 md:top-6 md:left-6 z-20">
+    <div class="hidden sm:block absolute top-4 left-4 md:top-6 md:left-6 z-20">
       <slot name="header" />
     </div>
 
@@ -35,7 +35,7 @@
       <h3 class="text-lg md:text-xl font-semibold text-slate-700">
         {{ name }}
       </h3>
-      <p class="max-w-lg text-sm font-mono tracking-tight md:text-base text-slate-500 mb-4 md:mb-0">{{ description }}</p>
+      <p class="max-w-lg text-sm tracking-tight md:text-base text-slate-500 mb-4 md:mb-0">{{ description }}</p>
     </div>
     
     <!-- Mobile Read More Link -->

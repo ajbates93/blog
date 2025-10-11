@@ -6,7 +6,7 @@
         <!-- About section -->
         <div>
           <h3 class="text-xl font-bold text-slate-200 mb-3">Alex Bates</h3>
-          <p class="text-slate-400 font-mono">
+          <p class="text-slate-400">
             Web developer based in the UK, specialising in building websites, web applications and mobile applications using modern technologies.
           </p>
         </div>
@@ -16,17 +16,17 @@
           <h3 class="text-xl font-bold text-slate-200 mb-3">Quick Links</h3>
           <ul class="space-y-2 text-sm">
             <li>
-              <ULink to="/" class="text-slate-400 hover:underline font-mono transition-colors">
+              <ULink to="/" class="text-slate-400 hover:underline transition-colors">
                 Home
               </ULink>
             </li>
             <li>
-              <ULink to="/blog" class="text-slate-400 hover:underline font-mono transition-colors">
+              <ULink to="/blog" class="text-slate-400 hover:underline transition-colors">
                 Blog
               </ULink>
             </li>
             <li>
-              <a href="mailto:hello@alexbates.dev" class="text-slate-400 hover:underline font-mono transition-colors">
+              <a href="mailto:hello@alexbates.dev" class="text-slate-400 hover:underline transition-colors">
                 Contact
               </a>
             </li>
@@ -38,17 +38,17 @@
           <h3 class="text-xl font-bold text-slate-200 mb-3">Connect</h3>
           <ul class="space-y-2 text-sm">
             <li>
-              <a href="https://github.com/alexbates" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:underline font-mono transition-colors">
+              <a href="https://github.com/alexbates" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:underline transition-colors">
                 GitHub
               </a>
             </li>
             <li>
-              <a href="https://linkedin.com/in/alexbates" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:underline font-mono transition-colors">
+              <a href="https://linkedin.com/in/alexbates" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:underline transition-colors">
                 LinkedIn
               </a>
             </li>
             <li>
-              <a href="mailto:hello@alexbates.dev" class="text-slate-400 hover:underline font-mono transition-colors">
+              <a href="mailto:hello@alexbates.dev" class="text-slate-400 hover:underline transition-colors">
                 Email
               </a>
             </li>
@@ -58,10 +58,10 @@
 
       <!-- Bottom bar with copyright -->
       <div class="border-t border-slate-600 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
-        <div class="text-slate-400 font-mono">
+        <div class="text-slate-400">
           &copy; {{ year }} Alex Bates. All rights reserved.
         </div>
-        <div class="text-slate-500 flex items-center gap-2 font-mono">
+        <div class="text-slate-500 flex items-center gap-2">
           <Icon name="tabler:brand-nuxt" class="w-4 h-4" />
           Built with Nuxt & Nuxt Content
         </div>

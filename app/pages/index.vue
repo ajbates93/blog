@@ -1,15 +1,15 @@
 <template>
   <!-- Loading Spinner -->
-  <div v-if="pending" class="fixed inset-0 bg-[#5385c2] flex items-center justify-center z-50">
+  <div v-if="pending" class="w-full min-h-screen bg-[#1e1d2c] flex items-center justify-center z-10">
     <div class="text-center">
-      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#2b2b2b] animate-spin" />
+      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#eeeeee] animate-spin" />
     </div>
   </div>
 
-  <!-- Hero Section with Blue Background -->
-  <section v-else class="w-full min-h-screen bg-[#5385c2] flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20">
+  <!-- Hero Section -->
+  <section v-else class="w-full min-h-screen flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20 relative z-10">
     <div
-      class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_2fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left xl:pr-10">
+      class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_3fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left xl:pr-10 items-stretch">
       <div class="flex flex-col justify-start">
         <!-- Group 1: Header, Heading, and Intro -->
         <motion.div
@@ -18,24 +18,30 @@
           :transition="{ duration: 0.6, ease: 'easeOut' }"
         >
           <Header />
-          <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#2b2b2b] font-bold sm:mb-10">
+          <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10">
             Hello there.
           </h1>
+          
+        </motion.div>
+
+        <motion.div
+          :initial="{ opacity: 0, y: 30 }"
+          :animate="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }"
+        >
           <TextWrapper>
             I'm
-            <span class="font-bold underline text-[#2b2b2b]">Alex Bates</span>. I'm a software developer with over
+            <span class="font-bold underline">Alex Bates</span>. I'm a software developer with over
             <span>{{
               yearsSinceStartDate }}</span> years of industry experience.
           </TextWrapper>
-          <div class="italic text-5xl sm:py-5 text-[#2b2b2b] text-center block">~</div>
         </motion.div>
-
 
         <!-- Group 2: Work Description, Blog/Social Links, and Social Icons -->
         <motion.div
           :initial="{ opacity: 0, y: 30 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
         >
           <TextWrapper>
             I'm currently working at
@@ -68,15 +74,15 @@
         <motion.div
           :initial="{ opacity: 0, y: 30 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
         >
           <!-- Desktop version -->
-          <div class="hidden md:flex bg-[#4278ba] p-5 rounded-md gap-3">
+          <div class="hidden md:flex bg-white/10 backdrop-blur-sm p-5 rounded-md gap-3">
             <p aria-hidden="true">
               <span class="inline-block animate-pulse w-3 h-3 bg-green-500 rounded-full"></span>
             </p>
             <div>
-              <p class="text-md text-[#ffffff] font-mono rounded-md mt-0 mb-1">
+              <p class="text-md text-[#ffffff] font-serif rounded-md mt-0 mb-1">
                 Hooray! I'm currently available for new freelance work!<br />
               Drop me an email at <a
                   href="mailto:hello@alexbates.dev"
@@ -86,37 +92,38 @@
           </div>
           
           <!-- Mobile version - compact status -->
-          <div class="md:hidden flex items-center justify-center gap-2 mb-4">
+          <div class="md:hidden flex flex-col items-center justify-center gap-6 mb-4">
+            <div class="flex items-center gap-2">
             <span class="inline-block animate-pulse w-2 h-2 bg-green-500 rounded-full"></span>
-            <span class="text-sm text-white font-mono">Available for work</span>
-            <a href="mailto:hello@alexbates.dev" class="text-sm text-white font-mono underline hover:text-gray-200 transition-colors">
+            <span class="text-white font-serif">Available for work</span>
+            <a href="mailto:hello@alexbates.dev" class="text-white font-serif underline hover:text-gray-200 transition-colors">
               hello@alexbates.dev
             </a>
+            </div>
+            <GradientButton href="mailto:hello@alexbates.dev" class="text-white">Get in touch!</GradientButton>
           </div>
         </motion.div>
 
         </div>
 
-        <!-- Image with fade-in-fade-left animation (happens last) -->
+        <!-- Interactive Terminal with fade-in-fade-left animation (happens last) -->
         <motion.div
           :initial="{ opacity: 0, x: 30 }"
           :animate="{ opacity: 1, x: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
-          class="mx-auto my-10 xl:m-0 overflow-hidden max-w-[600px]"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.8 }"
+          class="hidden xl:block sticky top-10 mx-auto my-10 xl:m-0 overflow-hidden w-full max-w-[600px] max-h-[90dvh]"
         >
-          <NuxtImg 
-            src="/images/home-about-small.webp" 
-            alt="Alex Bates, a software developer"
-            class="w-full h-full object-cover border-5 border-gray-800 xl:rounded-r-3xl"
-            loading="eager"
-            fetchpriority="high"
-            preload
-            :width="600"
-            :height="800"
-            format="webp"
-            quality="85"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-          />
+          <div class="bg-gray-900 rounded-lg p-4 shadow-2xl flex flex-col border border-gray-700 h-full">
+            <div class="flex items-center gap-2 mb-2 flex-shrink-0">
+              <div class="flex gap-1">
+                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <span class="text-gray-400 text-sm font-mono">terminal</span>
+            </div>
+            <InteractiveTerminal />
+          </div>
         </motion.div>
     </div>
   </section>
@@ -124,20 +131,17 @@
 
 <script lang="ts" setup>
 import { motion } from 'motion-v'
+import GradientButton from '@/components/inspira-ui/GradientButton.vue'
 
 definePageMeta({
   viewTransition: false
 })
 
-// Preload the hero image for better LCP
+// Set page meta for better SEO
 useHead({
-  link: [
-    {
-      rel: 'preload',
-      as: 'image',
-      href: '/images/home-about-small.webp',
-      fetchpriority: 'high'
-    }
+  title: 'Alex Bates - Software Developer',
+  meta: [
+    { name: 'description', content: 'Software developer with over 9 years of experience. Currently working at Pocketworks building web and mobile applications.' }
   ]
 })
 

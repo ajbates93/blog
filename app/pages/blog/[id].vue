@@ -59,13 +59,13 @@ const calculateReadingTime = (body: any) => {
 
 <template>
   <!-- Loading Spinner -->
-  <div v-if="pending" class="fixed inset-0 bg-[#5385c2] flex items-center justify-center z-50">
+  <div v-if="pending" class="fixed inset-0 bg-[#1e1d2c] flex items-center justify-center z-50">
     <div class="text-center">
-      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#2b2b2b] animate-spin" />
+      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#eeeeee] animate-spin" />
     </div>
   </div>
 
-  <div v-else class="w-full pb-10 bg-[#5385c2] py-5 sm:py-10" v-if="blog">
+  <div v-else class="w-full pb-10 bg-[#1e1d2c] py-5 sm:py-10" v-if="blog">
     <div v-if="blog.bannerImgUrl" class="relative w-full max-w-[2000px] max-h-[400px] mx-auto mb-10 md:mb-20">
       <NuxtImg :src="`/images/blog/${blog.bannerImgUrl}`" alt="Blog banner" class="w-full h-[400px] object-cover"
         :width="1600" :height="400" sizes="(max-width: 768px) 100vw, 1600px" />
@@ -98,7 +98,7 @@ const calculateReadingTime = (body: any) => {
         class="w-full sticky top-0 rounded-lg z-300"
       >
         <div class="absolute w-full h-full z-100 backdrop-blur bg-white/05"></div>
-        <div class="relative z-200 bg-transparent font-mono md:max-w-screen-md mx-auto flex items-center justify-between text-white text-sm px-4 py-4">
+        <div class="relative z-200 bg-transparent md:max-w-screen-md mx-auto flex items-center justify-between text-white text-sm px-4 py-4">
           <ULink to="/blog"
             class="bg-white bg-opacity-20 hover:underline px-3 py-2 rounded-md text-white hover:text-white">
             ← Back to blog
@@ -116,7 +116,7 @@ const calculateReadingTime = (body: any) => {
         :initial="{ opacity: 0, y: 30 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
-        class="text-4xl sm:text-5xl font-bold text-[#2b2b2b] px-5 sm:px-10"
+        class="text-4xl sm:text-5xl font-bold text-[#eeeeee] px-5 sm:px-10"
         :style="{ 'view-transition-name': `blog-title-${blog.title.toLowerCase().replace(/ /g, '-')}` }"
       >
         <h1>{{ blog.title }}</h1>
@@ -153,7 +153,7 @@ const calculateReadingTime = (body: any) => {
         :initial="{ opacity: 0, y: 30 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.6, ease: 'easeOut', delay: 1.0 }"
-        class="blog-article max-w-prose text-[#2b2b2b] px-5 sm:px-10"
+        class="blog-article max-w-prose text-[#eeeeee] px-5 sm:px-10"
         style="view-transition-name: blog-content"
       >
         <ContentRenderer v-if="blog" :value="blog" />
@@ -214,7 +214,7 @@ const calculateReadingTime = (body: any) => {
 .blog-article a {
   font-weight: bold;
   text-decoration: underline;
-  color: #4278ba;
+  color: #eeeeee;
 }
 
 .blog-article a:hover {

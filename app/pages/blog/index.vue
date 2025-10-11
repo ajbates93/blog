@@ -1,12 +1,12 @@
 <template>
   <!-- Loading Spinner -->
-  <div v-if="pending" class="fixed inset-0 bg-slate-50 flex items-center justify-center z-50">
+  <div v-if="pending" class="w-full min-h-screen bg-slate-50 flex items-center justify-center z-10">
     <div class="text-center">
       <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-slate-700 animate-spin" />
     </div>
   </div>
 
-  <section v-else class="w-full min-h-screen bg-[#5385c2] flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20">
+  <section v-else class="w-full min-h-screen flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20 relative z-10">
     <div class="lg:max-w-screen-xl mx-auto">
 
     <!-- Header and Title Group -->
@@ -16,7 +16,7 @@
       :transition="{ duration: 0.6, ease: 'easeOut' }"
     >
       <Header />
-      <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#2b2b2b] font-bold sm:mb-10">Blog</h1>
+      <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10">Blog</h1>
     </motion.div>
 
     <!-- Intro Text Group -->
