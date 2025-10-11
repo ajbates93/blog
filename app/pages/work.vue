@@ -5,7 +5,6 @@
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-10 relative z-10">
       <div class="max-w-screen-xl mx-auto">
-      <Header />
         <!-- Page Title -->
         <h1 class="text-4xl md:text-6xl font-bold text-[#ffffff] mb-8">
           Work

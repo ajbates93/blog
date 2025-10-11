@@ -9,7 +9,7 @@
   <!-- Hero Section -->
   <section v-else class="w-full min-h-screen flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20 relative z-10">
     <div
-      class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_3fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left xl:pr-10 items-stretch">
+      class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_3fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left items-stretch">
       <div class="flex flex-col justify-start">
         <!-- Group 1: Header, Heading, and Intro -->
         <motion.div
@@ -17,7 +17,6 @@
           :animate="{ opacity: 1, y: 0 }"
           :transition="{ duration: 0.6, ease: 'easeOut' }"
         >
-          <Header />
           <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10">
             Hello there.
           </h1>
@@ -127,11 +126,52 @@
         </motion.div>
     </div>
   </section>
+
+  <!-- Work Timeline Section -->
+  <section id="about" class="w-full py-4 md:py-10 xl:py-20 px-4 md:px-10 xl:px-20">
+    <Timeline
+      :items="workTimelineData"
+      title="Experience"
+      description="A timeline of my professional experience in software development"
+    >
+      <template
+        v-for="(item, index) in workTimelineData"
+        :key="item.id + 'template'"
+        #[item.id]
+      >
+        <div class="pl-20 lg:pl-0 relative w-full">
+          <h3
+            class="mb-4 block text-left text-3xl font-bold text-white"
+          >
+            {{ item.title }}
+          </h3>
+          <div class="mb-2 text-base text-gray-300">
+            {{ item.period }}
+          </div>
+          <div class="mb-2 text-base text-gray-300 font-bold">
+            {{ item.location }}
+          </div>
+        </div>
+        <div class="pl-20 lg:pl-0 mb-8 font-normal text-gray-200 text-base">
+          <p class="mb-4">{{ item.description }}</p>
+          <div v-if="item.achievements && item.achievements.length > 0">
+            <h4 class="font-semibold mb-2">Key achievements:</h4>
+            <ul class="list-disc list-inside space-y-1">
+              <li v-for="achievement in item.achievements" :key="achievement">
+                {{ achievement }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </template>
+    </Timeline>
+  </section>
 </template>
 
 <script lang="ts" setup>
 import { motion } from 'motion-v'
 import GradientButton from '@/components/inspira-ui/GradientButton.vue'
+import Timeline from '@/components/inspira-ui/Timeline.vue'
 
 definePageMeta({
   viewTransition: false
@@ -222,6 +262,53 @@ const formatDate = (dateString: string) => {
     year: 'numeric'
   });
 };
+
+// Work timeline data
+const workTimelineData = [
+  {
+    id: "pocketworks",
+    label: "2023",
+    title: "Fullstack Web Developer, Pocketworks",
+    period: "10/2023 - Present (2 years)",
+    location: "📍 Leeds, UK",
+    description: "Delivering full-stack solutions across diverse industries, working autonomously to make technical decisions and manage project timelines. Expanding technology capabilities with TypeScript, Vue/Nuxt, Alpine.js, Astro, Elixir/Phoenix, Python/Flask, and Go.",
+    achievements: [
+      "Led web application development for electrical testing equipment",
+      "Delivered complex data visualisations using SciCharts",
+      "Created custom licensing integration with C libraries using Python",
+      "Migrated legacy systems to modern Astro/GraphQL/DatoCMS stack",
+      "Integrated AI tools into development workflow"
+    ]
+  },
+  {
+    id: "hci-senior",
+    label: "2022",
+    title: "Senior Software Developer, HCI York",
+    period: "07/2022 - 09/2023 (1 year 3 months)",
+    location: "📍 York, UK",
+    description: "Led projects involving custom .NET CMS development and migrated the company's front-end approach to modern Vue.js stacks.",
+    achievements: [
+      "Led custom in-house .NET CMS projects",
+      "Migrated front-end development to Vue.js",
+      "Mentored junior developers",
+      "Improved company documentation and workflows"
+    ]
+  },
+  {
+    id: "hci-developer",
+    label: "2015",
+    title: "Software Developer, HCI York",
+    period: "02/2015 - 06/2022 (7 years 5 months)",
+    location: "📍 York, UK",
+    description: "Progressed from Software Apprentice to Senior Developer over 7+ years, developing expertise in C#, ASP.NET, and modern web technologies.",
+    achievements: [
+      "Progressed from Apprentice to Senior Developer",
+      "Developed expertise in C#, ASP.NET, and web technologies",
+      "Built custom CMS solutions for various industries",
+      "Built successful e-commerce solution for local business"
+    ]
+  }
+];
 </script>
 
 <style scoped>

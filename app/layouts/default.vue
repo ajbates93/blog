@@ -16,6 +16,7 @@
     <!-- Content -->
     <UApp class="relative z-10">
       <div class="min-h-screen flex flex-col">
+        <Header class="relative z-20" />
         <main class="flex-1">
           <slot />
         </main>
