@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <section v-else class="w-full min-h-screen bg-[#5385c2] flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20">
+  <section v-else class="w-full min-h-screen flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20 relative z-10">
     <div class="lg:max-w-screen-xl mx-auto">
 
     <!-- Header and Title Group -->

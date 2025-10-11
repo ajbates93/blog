@@ -1,13 +1,13 @@
 <template>
   <!-- Loading Spinner -->
-  <div v-if="pending" class="fixed inset-0 bg-[#5385c2] flex items-center justify-center z-50">
+  <div v-if="pending" class="fixed inset-0 bg-[#5385c2] flex items-center justify-center z-50 !bg-transparent">
     <div class="text-center">
       <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#2b2b2b] animate-spin" />
     </div>
   </div>
 
-  <!-- Hero Section with Blue Background -->
-  <section v-else class="w-full min-h-screen bg-[#5385c2] flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20">
+  <!-- Hero Section -->
+  <section v-else class="w-full min-h-screen flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20 relative z-10">
     <div
       class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_3fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left xl:pr-10 items-stretch">
       <div class="flex flex-col justify-start">
@@ -71,7 +71,7 @@
           :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
         >
           <!-- Desktop version -->
-          <div class="hidden md:flex bg-[#4278ba] p-5 rounded-md gap-3">
+          <div class="hidden md:flex bg-white/10 backdrop-blur-sm p-5 rounded-md gap-3">
             <p aria-hidden="true">
               <span class="inline-block animate-pulse w-3 h-3 bg-green-500 rounded-full"></span>
             </p>
@@ -102,7 +102,7 @@
           :initial="{ opacity: 0, x: 30 }"
           :animate="{ opacity: 1, x: 0 }"
           :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
-          class="sticky top-10 mx-auto my-10 xl:m-0 overflow-hidden max-w-[600px] max-h-[90dvh]"
+          class="hidden xl:block sticky top-10 mx-auto my-10 xl:m-0 overflow-hidden w-full max-w-[600px] max-h-[90dvh]"
         >
           <div class="bg-gray-900 rounded-lg p-4 shadow-2xl flex flex-col border border-gray-700 h-full">
             <div class="flex items-center gap-2 mb-2 flex-shrink-0">

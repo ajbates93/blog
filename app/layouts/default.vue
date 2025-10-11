@@ -1,13 +1,29 @@
 <template>
-  <UApp>
-    <div>
-      <slot />
-      <Footer />
-    </div>
-  </UApp>
+  <div class="relative min-h-screen bg-[#5385c2]">
+    <!-- Background FlickeringGrid -->
+    <ClientOnly>
+      <FlickeringGrid
+        class="fixed inset-0 z-0 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
+        :square-size="4"
+        :grid-gap="6"
+        color="#60A5FA"
+        :max-opacity="0.5"
+        :flicker-chance="0.1"
+      />
+    </ClientOnly>
+    
+    <!-- Content -->
+    <UApp class="relative z-10">
+      <div>
+        <slot />
+        <Footer class="relative z-20" />
+      </div>
+    </UApp>
+  </div>
 </template>
 
 <script setup>
+import FlickeringGrid from '@/components/inspira-ui/FlickeringGrid.vue'
 
 </script>
 
@@ -45,6 +61,7 @@
     opacity: 1;
     transform: translateY(0);
   }
+
   to {
     opacity: 0;
     transform: translateY(20px);
@@ -56,6 +73,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -67,6 +85,7 @@
     transform: translateY(0) scale(1);
     opacity: 1;
   }
+
   to {
     transform: translateY(-30px) scale(0.95);
     opacity: 0;
@@ -78,6 +97,7 @@
     transform: translateY(30px) scale(1.05);
     opacity: 0;
   }
+
   to {
     transform: translateY(0) scale(1);
     opacity: 1;
