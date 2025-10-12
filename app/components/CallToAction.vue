@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#1e1d2c] max-w-screen-xl mx-auto border-[#2e2d3c] border rounded-lg p-4 md:p-10 xl:p-20 grid grid-cols-[3fr_2fr] items-center">
+  <div class="bg-[#1e1d2c] max-w-screen-xl mx-auto border-[#2e2d3c] border rounded-lg p-4 md:p-10 xl:p-20 grid grid-cols-1 xl:grid-cols-[3fr_2fr] items-center">
     <!-- Lottie Animation -->
     <div class="flex items-center justify-center">
       <Lottie 

@@ -12,7 +12,7 @@
         </div>
 
         <!-- Quick links -->
-        <div class="text-right">
+        <div class="xl:text-right">
           <h3 class="text-xl font-bold text-slate-200 mb-3">Quick Links</h3>
           <ul class="space-y-2 text-sm">
             <li>
@@ -34,7 +34,7 @@
         </div>
 
         <!-- Social & External -->
-        <div class="text-right">
+        <div class="xl:text-right">
           <h3 class="text-xl font-bold text-slate-200 mb-3">Connect</h3>
           <ul class="space-y-2 text-sm">
             <li>
