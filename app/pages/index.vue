@@ -12,22 +12,16 @@
       class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_3fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left items-stretch">
       <div class="flex flex-col justify-start">
         <!-- Group 1: Header, Heading, and Intro -->
-        <motion.div
-          :initial="{ opacity: 0, y: 30 }"
-          :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut' }"
-        >
+        <motion.div :initial="{ opacity: 0, y: 30 }" :animate="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut' }">
           <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10">
             Hello there.
           </h1>
-          
+
         </motion.div>
 
-        <motion.div
-          :initial="{ opacity: 0, y: 30 }"
-          :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }"
-        >
+        <motion.div :initial="{ opacity: 0, y: 30 }" :animate="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }">
           <TextWrapper>
             I'm
             <span class="font-bold underline">Alex Bates</span>. I'm a software developer with over
@@ -37,11 +31,8 @@
         </motion.div>
 
         <!-- Group 2: Work Description, Blog/Social Links, and Social Icons -->
-        <motion.div
-          :initial="{ opacity: 0, y: 30 }"
-          :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
-        >
+        <motion.div :initial="{ opacity: 0, y: 30 }" :animate="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }">
           <TextWrapper>
             I'm currently working at
             <a target="_blank" class="font-bold text-white hover:text-gray-200 transition-colors"
@@ -50,7 +41,9 @@
             industries.
           </TextWrapper>
           <TextWrapper>
-            Take a look at my <ULink to="/blog" class="font-bold text-white hover:text-gray-200 transition-colors">blog</ULink> to see what I've been working on. I try and remember to write about things I learn or find interesting.
+            Take a look at my <ULink to="/blog" class="font-bold text-white hover:text-gray-200 transition-colors">blog
+            </ULink> to see what I've been working on. I try and remember to write about things I learn or find
+            interesting.
             You can also follow me on <a target="_blank"
               class="font-bold text-white hover:text-gray-200 transition-colors"
               href="https://github.com/ajbates93">Github</a> (or <a target="_blank"
@@ -70,11 +63,8 @@
         </motion.div>
 
         <!-- Group 3: Availability Status -->
-        <motion.div
-          :initial="{ opacity: 0, y: 30 }"
-          :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
-        >
+        <motion.div :initial="{ opacity: 0, y: 30 }" :animate="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }">
           <!-- Desktop version -->
           <div class="hidden md:flex bg-white/10 backdrop-blur-sm p-5 rounded-md gap-3">
             <p aria-hidden="true">
@@ -83,66 +73,54 @@
             <div>
               <p class="text-md text-[#ffffff] font-serif rounded-md mt-0 mb-1">
                 Hooray! I'm currently available for new freelance work!<br />
-              Drop me an email at <a
-                  href="mailto:hello@alexbates.dev"
+                Drop me an email at <a href="mailto:hello@alexbates.dev"
                   class="font-bold text-white hover:text-gray-200 transition-colors">hello@alexbates.dev</a> to discuss
                 your project.</p>
             </div>
           </div>
-          
+
           <!-- Mobile version - compact status -->
           <div class="md:hidden flex flex-col items-center justify-center gap-6 mb-4">
             <div class="flex items-center gap-2">
-            <span class="inline-block animate-pulse w-2 h-2 bg-green-500 rounded-full"></span>
-            <span class="text-white font-serif">Available for work</span>
-            <a href="mailto:hello@alexbates.dev" class="text-white font-serif underline hover:text-gray-200 transition-colors">
-              hello@alexbates.dev
-            </a>
+              <span class="inline-block animate-pulse w-2 h-2 bg-green-500 rounded-full"></span>
+              <span class="text-white font-serif">Available for work</span>
+              <a href="mailto:hello@alexbates.dev"
+                class="text-white font-serif underline hover:text-gray-200 transition-colors">
+                hello@alexbates.dev
+              </a>
             </div>
             <GradientButton href="mailto:hello@alexbates.dev" class="text-white">Get in touch!</GradientButton>
           </div>
         </motion.div>
 
-        </div>
+      </div>
 
-        <!-- Interactive Terminal with fade-in-fade-left animation (happens last) -->
-        <motion.div
-          :initial="{ opacity: 0, x: 30 }"
-          :animate="{ opacity: 1, x: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.8 }"
-          class="hidden xl:block sticky top-10 mx-auto my-10 xl:m-0 overflow-hidden w-full max-w-[600px] max-h-[90dvh]"
-        >
-          <div class="bg-gray-900 rounded-lg p-4 shadow-2xl flex flex-col border border-gray-700 h-full">
-            <div class="flex items-center gap-2 mb-2 flex-shrink-0">
-              <div class="flex gap-1">
-                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <span class="text-gray-400 text-sm font-mono">terminal</span>
+      <!-- Interactive Terminal with fade-in-fade-left animation (happens last) -->
+      <motion.div :initial="{ opacity: 0, x: 30 }" :animate="{ opacity: 1, x: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.8 }"
+        class="hidden xl:block sticky top-10 mx-auto my-10 xl:m-0 overflow-hidden w-full max-w-[600px] max-h-[90dvh]">
+        <div class="bg-gray-900 rounded-lg p-4 shadow-2xl flex flex-col border border-gray-700 h-full">
+          <div class="flex items-center gap-2 mb-2 flex-shrink-0">
+            <div class="flex gap-1">
+              <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-green-500 rounded-full"></div>
             </div>
-            <InteractiveTerminal />
+            <span class="text-gray-400 text-sm font-mono">terminal</span>
           </div>
-        </motion.div>
+          <InteractiveTerminal />
+        </div>
+      </motion.div>
     </div>
   </section>
 
   <!-- Work Timeline Section -->
   <section id="about" class="w-full py-4 md:py-10 xl:py-20 px-4 md:px-10 xl:px-20">
-    <Timeline
-      :items="workTimelineData"
-      title="Experience"
-      description="A timeline of my professional experience in software development"
-    >
-      <template
-        v-for="(item, index) in workTimelineData"
-        :key="item.id + 'template'"
-        #[item.id]
-      >
+    <Timeline :items="workTimelineData" title="Experience"
+      description="A timeline of my professional experience in software development">
+      <template v-for="(item, index) in workTimelineData" :key="item.id + 'template'" #[item.id]>
         <div class="pl-20 lg:pl-0 relative w-full">
-          <h3
-            class="mb-4 block text-left text-3xl font-bold text-white"
-          >
+          <h3 class="mb-4 block text-left text-3xl font-bold text-white">
             {{ item.title }}
           </h3>
           <div class="mb-2 text-base text-gray-300">
@@ -165,6 +143,11 @@
         </div>
       </template>
     </Timeline>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section id="call-to-action" class="w-full py-4 md:py-10 xl:py-20 px-4 md:px-10 xl:px-20 relative z-10 mb-4 md:mb-10 xl:mb-20">
+    <CallToAction />
   </section>
 </template>
 
