@@ -116,38 +116,52 @@
 
   <!-- Work Timeline Section -->
   <section id="about" class="w-full py-4 md:py-10 xl:py-20 px-4 md:px-10 xl:px-20">
-    <Timeline :items="workTimelineData" title="Experience"
-      description="A timeline of my professional experience in software development">
-      <template v-for="(item, index) in workTimelineData" :key="item.id + 'template'" #[item.id]>
-        <div class="pl-20 lg:pl-0 relative w-full">
-          <h3 class="mb-4 block text-left text-3xl font-bold text-white">
-            {{ item.title }}
-          </h3>
-          <div class="mb-2 text-base text-gray-300">
-            {{ item.period }}
+    <motion.div 
+      :initial="{ opacity: 0, y: 50 }" 
+      :animate="{ opacity: 1, y: 0 }"
+      :transition="{ duration: 0.8, ease: 'easeOut' }"
+      :viewport="{ once: true, margin: '-100px' }"
+    >
+      <Timeline :items="workTimelineData" title="Experience"
+        description="A timeline of my professional experience in software development">
+        <template v-for="(item, index) in workTimelineData" :key="item.id + 'template'" #[item.id]>
+          <div class="pl-20 lg:pl-0 relative w-full">
+            <h3 class="mb-4 block text-left text-3xl font-bold text-white">
+              {{ item.title }}
+            </h3>
+            <div class="mb-2 text-base text-gray-300">
+              {{ item.period }}
+            </div>
+            <div class="mb-2 text-base text-gray-300 font-bold">
+              {{ item.location }}
+            </div>
           </div>
-          <div class="mb-2 text-base text-gray-300 font-bold">
-            {{ item.location }}
+          <div class="pl-20 lg:pl-0 mb-8 font-normal text-gray-200 text-base">
+            <p class="mb-4">{{ item.description }}</p>
+            <div v-if="item.achievements && item.achievements.length > 0">
+              <h4 class="font-semibold mb-2">Key achievements:</h4>
+              <ul class="list-disc list-inside space-y-1">
+                <li v-for="achievement in item.achievements" :key="achievement">
+                  {{ achievement }}
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="pl-20 lg:pl-0 mb-8 font-normal text-gray-200 text-base">
-          <p class="mb-4">{{ item.description }}</p>
-          <div v-if="item.achievements && item.achievements.length > 0">
-            <h4 class="font-semibold mb-2">Key achievements:</h4>
-            <ul class="list-disc list-inside space-y-1">
-              <li v-for="achievement in item.achievements" :key="achievement">
-                {{ achievement }}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </template>
-    </Timeline>
+        </template>
+      </Timeline>
+    </motion.div>
   </section>
 
   <!-- Call to Action Section -->
   <section id="call-to-action" class="w-full py-4 md:py-10 xl:py-20 px-4 md:px-10 xl:px-20 relative z-10 mb-4 md:mb-10 xl:mb-20">
-    <CallToAction />
+    <motion.div 
+      :initial="{ opacity: 0, y: 50 }" 
+      :animate="{ opacity: 1, y: 0 }"
+      :transition="{ duration: 0.8, ease: 'easeOut' }"
+      :viewport="{ once: true, margin: '-100px' }"
+    >
+      <CallToAction />
+    </motion.div>
   </section>
 </template>
 

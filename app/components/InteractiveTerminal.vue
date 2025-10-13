@@ -47,10 +47,9 @@ let currentInput = ''
 // File system structure for navigation
 const fileSystem: FileSystemItem[] = [
   { name: 'blog', type: 'directory', path: '/home/alex/blog' },
-  { name: 'projects', type: 'directory', path: '/home/alex/projects' },
+  { name: 'work', type: 'directory', path: '/home/alex/work' },
   { name: 'about.txt', type: 'file', path: '/home/alex/about.txt' },
   { name: 'contact.txt', type: 'file', path: '/home/alex/contact.txt' },
-  { name: 'work', type: 'file', path: '/home/alex/work' }
 ]
 
 // Blog posts for navigation
@@ -62,8 +61,8 @@ const blogPosts = [
 ]
 
 // Projects for navigation
-const projects = [
-  { name: 'coming-soon.txt', type: 'file', path: '/home/alex/projects/coming-soon.txt' }
+const work = [
+  { name: 'coming-soon.txt', type: 'file', path: '/home/alex/work/coming-soon.txt' }
 ]
 
 // Get all items for current directory
@@ -71,8 +70,8 @@ const getCurrentDirectoryItems = () => {
   if (currentPath === '/home/alex/blog') {
     return blogPosts
   }
-  if (currentPath === '/home/alex/projects') {
-    return projects
+  if (currentPath === '/home/alex/work') {
+    return work
   }
   return fileSystem.filter(item => 
     item.path.startsWith(currentPath) && 
@@ -124,7 +123,7 @@ const commands: Record<string, TerminalCommand> = {
       }
       
       // Check if directory exists
-      const allItems = [...fileSystem, ...blogPosts, ...projects]
+      const allItems = [...fileSystem, ...blogPosts, ...work]
       const dirExists = allItems.some(item => 
         item.type === 'directory' && item.path === newPath
       ) || newPath === '/home/alex' || newPath === '/' || newPath === '/home/alex/blog' || newPath === '/home/alex/projects'
@@ -149,7 +148,7 @@ const commands: Record<string, TerminalCommand> = {
       const fileName = args[0]
       const filePath = currentPath === '/' ? `/${fileName}` : `${currentPath}/${fileName}`
       
-      const allItems = [...fileSystem, ...blogPosts, ...projects]
+      const allItems = [...fileSystem, ...blogPosts, ...work]
       const file = allItems.find(item => item.path === filePath && item.type === 'file')
       
       if (!file) {
@@ -214,7 +213,7 @@ const commands: Record<string, TerminalCommand> = {
       
       // Handle other files
       const filePath = currentPath === '/' ? `/${fileName}` : `${currentPath}/${fileName}`
-      const allItems = [...fileSystem, ...blogPosts, ...projects]
+      const allItems = [...fileSystem, ...blogPosts, ...work]
       const file = allItems.find(item => item.path === filePath && item.type === 'file')
       
       if (!file) {
