@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   experimental: {
     viewTransition: true,
   },
-  modules: ["@nuxtjs/seo", "@nuxt/content", "@nuxt/ui", "@nuxt/fonts", "@nuxt/image", "@nuxt/icon", "motion-v/nuxt", "nuxt-lottie"],
+  modules: ["@nuxtjs/seo", "@nuxt/content", "@nuxt/ui", "@nuxt/fonts", "@nuxt/image", "@nuxt/icon", "motion-v/nuxt", "nuxt-lottie", "@storyblok/nuxt"],
   ssr: true,
   nitro: {
     preset: "netlify-static",
@@ -59,6 +59,9 @@ export default defineNuxtConfig({
         { name: "twitter:image", content: "https://alexbates.dev/images/home-about-small.webp" },
       ],
     },
+  },
+  storyblok: {
+    accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
   },
   content: {
     preview: {

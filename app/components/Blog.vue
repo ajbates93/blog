@@ -14,6 +14,14 @@
 const route = useRoute();
 const active = useState();
 
+const storyblokApi = useStoryblokApi();
+const posts = await storyblokApi.get("cdn/stories", {
+  version: "published",
+  content_type: "posts",
+});
+
+console.log(posts);
+
 const { data: blog } = await useAsyncData(route.path, () =>
   queryCollection("blog")
     .where("isArchived", "<>", true)
