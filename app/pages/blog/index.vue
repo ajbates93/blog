@@ -46,7 +46,7 @@
           :description="transformedBlogPosts[0]!.description"
           :href="transformedBlogPosts[0]!.path"
           cta="Read more"
-          :icon="transformedBlogPosts[0]!.image ? undefined : (transformedBlogPosts[0]!.icon || 'i-heroicons-document-text')"
+          :icon="transformedBlogPosts[0]!.image ? undefined : ('i-heroicons-document-text')"
         >
         <template #background>
           <!-- Image takes precedence over icon -->
@@ -82,7 +82,7 @@
           :description="post.description"
           :href="post.path"
           cta="Read more"
-          :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')"
+          :icon="post.image ? undefined : ('i-heroicons-document-text')"
         >
         <template #background>
           <!-- Image takes precedence over icon -->
@@ -135,6 +135,7 @@
 
 <script lang="ts" setup>
 import { motion } from 'motion-v'
+import type { StoryblokStory, BlogPost } from '~/types/storyblok'
 
 definePageMeta({
   viewTransition: false
@@ -154,27 +155,35 @@ onMounted(() => {
   })
 })
 
-const { data: blogPosts } = await useAsyncData('blog-posts', () =>
-  queryCollection("blog")
-    .where("isArchived", "<>", true)
-    .andWhere((group) => group.where("isPublished", "=", true))
-    .order("date", "DESC")
-    .all()
-);
+const { data: blogPosts } = await useAsyncData('blog-posts', async () => {
+  const storyblokApi = useStoryblokApi();
+  const { data } = await storyblokApi.get('cdn/stories', {
+    version: 'published',
+    starts_with: 'posts/',
+    per_page: 100,
+    sort_by: 'first_published_at:desc'
+  });
+  console.log(data.stories);
+  return data.stories as StoryblokStory[];
+});
 
 // Transform the blog data to match the BlogPost interface
-const transformedBlogPosts = computed(() => {
+const transformedBlogPosts = computed((): BlogPost[] => {
   if (!blogPosts.value) return [];
   
-  return blogPosts.value.map((item: any) => ({
-    id: item.id || item._id || item._path,
-    title: item.title || 'Untitled',
-    description: item.description || 'No description available',
-    date: item.date || new Date().toISOString(),
-    path: item._path || item.path || '/',
-    tags: item.tags || [],
-    image: item.image, // Add image to the transformed data
-    icon: item.icon // Add icon to the transformed data
+  return blogPosts.value.map((story: StoryblokStory): BlogPost => ({
+    id: story.id.toString(),
+    title: story.content.title,
+    description: story.content.description,
+    content: story.content.content,
+    date: story.first_published_at,
+    path: `/blog/${story.slug}`,
+    tags: story.tag_list,
+    image: story.content.banner_image?.filename || undefined,
+    slug: story.slug,
+    publishedAt: story.published_at,
+    firstPublishedAt: story.first_published_at,
+    component: story.content.component
   }));
 });
 

@@ -169,6 +169,7 @@
 import { motion } from 'motion-v'
 import GradientButton from '@/components/inspira-ui/GradientButton.vue'
 import Timeline from '@/components/inspira-ui/Timeline.vue'
+import type { StoryblokStory, BlogPost } from '~/types/storyblok'
 
 definePageMeta({
   viewTransition: false
@@ -225,28 +226,42 @@ const csharpRef = ref<HTMLElement | null>(null);
 const dotnetRef = ref<HTMLElement | null>(null);
 
 // Blog data
-const { data: blog } = await useAsyncData('homepage-blog', () =>
-  queryCollection("blog")
-    .where("isArchived", "<>", true)
-    .andWhere((group) => group.where("isPublished", "=", true))
-    .order("date", "DESC")
-    .limit(3)
-    .all()
-);
+const { data: blog } = await useAsyncData('homepage-blog', async () => {
+  const storyblokApi = useStoryblokApi();
+  const { data } = await storyblokApi.get('cdn/stories', {
+    version: 'published',
+    starts_with: 'posts/',
+    per_page: 3,
+    sort_by: 'created_at:desc',
+    filter_query: {
+      is_archived: {
+        is_not: true
+      },
+      is_published: {
+        is: true
+      }
+    }
+  });
+  return data.stories as StoryblokStory[];
+});
 
 // Transform the blog data to match the BlogPost interface
-const transformedBlog = computed(() => {
+const transformedBlog = computed((): BlogPost[] => {
   if (!blog.value) return [];
-
-  return blog.value.map((item: any) => ({
-    id: item.id || item._id || item._path,
-    title: item.title || 'Untitled',
-    description: item.description || 'No description available',
-    date: item.date || new Date().toISOString(),
-    path: item._path || item.path || '/',
-    tags: item.tags || [],
-    image: item.image, // Add image to the transformed data
-    icon: item.icon // Add icon to the transformed data
+  
+  return blog.value.map((story: StoryblokStory): BlogPost => ({
+    id: story.id.toString(),
+    title: story.content.title,
+    description: story.content.description,
+    content: story.content.content,
+    date: story.first_published_at,
+    path: `/blog/${story.slug}`,
+    tags: story.tag_list,
+    image: story.content.banner_image?.filename || undefined,
+    slug: story.slug,
+    publishedAt: story.published_at,
+    firstPublishedAt: story.first_published_at,
+    component: story.content.component
   }));
 });
 

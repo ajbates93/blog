@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   experimental: {
     viewTransition: true,
   },
-  modules: ["@nuxtjs/seo", "@nuxt/content", "@nuxt/ui", "@nuxt/fonts", "@nuxt/image", "@nuxt/icon", "motion-v/nuxt", "nuxt-lottie", "@storyblok/nuxt"],
+  modules: ["@nuxtjs/seo", "@nuxt/ui", "@nuxt/fonts", "@nuxt/image", "@nuxt/icon", "motion-v/nuxt", "nuxt-lottie", "@storyblok/nuxt"],
   ssr: true,
   nitro: {
     preset: "netlify-static",
@@ -62,11 +62,6 @@ export default defineNuxtConfig({
   },
   storyblok: {
     accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
-  },
-  content: {
-    preview: {
-      api: "https://api.nuxt.studio",
-    }
   },
   // Configure caching for blog pages using Nuxt 4's advanced caching
   routeRules: {
