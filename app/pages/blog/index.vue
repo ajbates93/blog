@@ -56,8 +56,8 @@
             :alt="transformedBlogPosts[0]!.title"
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
           />
-          <!-- Fallback gradient background - better for dark mode -->
-          <div v-else class="absolute inset-0 bg-gradient-to-br from-slate-800/80 to-slate-900/80" />
+          <!-- Fallback gradient background - matching main background -->
+          <div v-else class="absolute inset-0 bg-gradient-to-br from-[#1e1d2c]/90 to-gray-900/90" />
         </template>
         
         <!-- Add date to main card -->
@@ -92,8 +92,8 @@
             :alt="post.title"
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
           />
-          <!-- Fallback gradient background - darker for smaller cards -->
-          <div v-else class="absolute inset-0 bg-gradient-to-br from-slate-800/60 to-slate-900/60" />
+          <!-- Fallback gradient background - matching main background -->
+          <div v-else class="absolute inset-0 bg-gradient-to-br from-[#1e1d2c]/80 to-gray-900/80" />
         </template>
         
         <!-- Add date to smaller cards -->

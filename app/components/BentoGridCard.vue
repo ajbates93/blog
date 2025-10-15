@@ -5,8 +5,8 @@
     :class="
         cn(
           'group relative col-span-1 flex flex-col justify-end overflow-hidden rounded-xl h-full',
-          // Dark theme styles
-          'bg-slate-800/50 border border-slate-700/50 [box-shadow:0_1px_3px_rgba(0,0,0,.3),0_4px_12px_rgba(0,0,0,.4)]',
+          // Dark theme styles - matching the main background color
+          'bg-[#1e1d2c]/80 border border-gray-800/50 [box-shadow:0_1px_3px_rgba(0,0,0,.4),0_4px_12px_rgba(0,0,0,.5)]',
           'transform-gpu',
           props.class,
         )
@@ -41,7 +41,7 @@
     <div class="lg:hidden relative z-30 p-4 pt-2 md:p-6 md:pt-6">
       <a
         :href="href"
-        class="inline-flex items-center rounded-md text-sm font-medium text-[#eeeeee] transition-colors hover:bg-slate-700/50"
+        class="inline-flex items-center rounded-md text-sm font-medium text-[#eeeeee] transition-colors hover:bg-gray-800/50"
       >
         {{ cta }} →
       </a>
@@ -53,13 +53,13 @@
     >
       <a
         :href="href"
-        class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-[#eeeeee] transition-colors hover:bg-slate-700/50"
+        class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-[#eeeeee] transition-colors hover:bg-gray-800/50"
       >
         {{ cta }} →
       </a>
     </div>
     <div
-      class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 lg:group-hover:bg-slate-700/30"
+      class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 lg:group-hover:bg-gray-800/30"
     />
   </a>
 </template>
