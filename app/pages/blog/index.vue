@@ -1,8 +1,8 @@
 <template>
   <!-- Loading Spinner -->
-  <div v-if="pending" class="w-full min-h-screen bg-slate-50 flex items-center justify-center z-10">
+  <div v-if="pending" class="w-full min-h-screen bg-[#1e1d2c] flex items-center justify-center z-10">
     <div class="text-center">
-      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-slate-700 animate-spin" />
+      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#eeeeee] animate-spin" />
     </div>
   </div>
 
@@ -56,13 +56,13 @@
             :alt="transformedBlogPosts[0]!.title"
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
           />
-          <!-- Fallback gradient background - better for light mode -->
-          <div v-else class="absolute inset-0 bg-gradient-to-br from-slate-100 to-gray-200" />
+          <!-- Fallback gradient background - better for dark mode -->
+          <div v-else class="absolute inset-0 bg-gradient-to-br from-slate-800/80 to-slate-900/80" />
         </template>
         
         <!-- Add date to main card -->
         <template #header>
-          <p class="text-sm text-neutral-500">
+          <p class="text-sm text-gray-300">
             {{ formatDate(transformedBlogPosts[0]!.date) }}
           </p>
         </template>
@@ -92,13 +92,13 @@
             :alt="post.title"
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
           />
-          <!-- Fallback gradient background - lighter for smaller cards -->
-          <div v-else class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100" />
+          <!-- Fallback gradient background - darker for smaller cards -->
+          <div v-else class="absolute inset-0 bg-gradient-to-br from-slate-800/60 to-slate-900/60" />
         </template>
         
         <!-- Add date to smaller cards -->
         <template #header>
-          <p class="text-sm text-neutral-500">
+          <p class="text-sm text-gray-300">
             {{ formatDate(post.date) }}
           </p>
         </template>
