@@ -5,9 +5,8 @@
     :class="
         cn(
           'group relative col-span-1 flex flex-col justify-end overflow-hidden rounded-xl h-full',
-          // light styles - softer background and shadows
-          'bg-slate-50 border border-slate-200 [box-shadow:0_1px_3px_rgba(0,0,0,.05),0_4px_12px_rgba(0,0,0,.08)]',
-          // dark styles - softer contrast for dark backgrounds
+          // Dark theme styles - matching the main background color
+          'bg-[#1e1d2c]/80 border border-gray-800/50 [box-shadow:0_1px_3px_rgba(0,0,0,.4),0_4px_12px_rgba(0,0,0,.5)]',
           'transform-gpu',
           props.class,
         )
@@ -26,23 +25,23 @@
       <UIcon
         v-if="icon"
         :name="icon"
-        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-slate-700 transition-all duration-300 ease-in-out lg:group-hover:scale-75"
+        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-[#eeeeee] transition-all duration-300 ease-in-out lg:group-hover:scale-75"
       />
       <div
         v-else
-        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-slate-700 transition-all duration-300 ease-in-out lg:group-hover:scale-75"
+        class="size-8 md:size-12 origin-left mb-2 transform-gpu text-[#eeeeee] transition-all duration-300 ease-in-out lg:group-hover:scale-75"
       ></div>
-      <h3 class="text-lg md:text-xl font-semibold text-slate-700">
+      <h3 class="text-lg md:text-xl font-semibold text-[#eeeeee]">
         {{ name }}
       </h3>
-      <p class="max-w-lg text-sm tracking-tight md:text-base text-slate-500 mb-4 md:mb-0">{{ description }}</p>
+      <p class="max-w-lg text-sm tracking-tight md:text-base text-gray-300 mb-4 md:mb-0">{{ description }}</p>
     </div>
     
     <!-- Mobile Read More Link -->
     <div class="lg:hidden relative z-30 p-4 pt-2 md:p-6 md:pt-6">
       <a
         :href="href"
-        class="inline-flex items-center rounded-md text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100"
+        class="inline-flex items-center rounded-md text-sm font-medium text-[#eeeeee] transition-colors hover:bg-gray-800/50"
       >
         {{ cta }} →
       </a>
@@ -54,13 +53,13 @@
     >
       <a
         :href="href"
-        class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100"
+        class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-[#eeeeee] transition-colors hover:bg-gray-800/50"
       >
         {{ cta }} →
       </a>
     </div>
     <div
-      class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 lg:group-hover:bg-slate-100/50"
+      class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 lg:group-hover:bg-gray-800/30"
     />
   </a>
 </template>

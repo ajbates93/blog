@@ -1,8 +1,8 @@
 <template>
   <!-- Loading Spinner -->
-  <div v-if="pending" class="w-full min-h-screen bg-slate-50 flex items-center justify-center z-10">
+  <div v-if="pending" class="w-full min-h-screen bg-[#1e1d2c] flex items-center justify-center z-10">
     <div class="text-center">
-      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-slate-700 animate-spin" />
+      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#eeeeee] animate-spin" />
     </div>
   </div>
 
@@ -46,7 +46,7 @@
           :description="transformedBlogPosts[0]!.description"
           :href="transformedBlogPosts[0]!.path"
           cta="Read more"
-          :icon="transformedBlogPosts[0]!.image ? undefined : (transformedBlogPosts[0]!.icon || 'i-heroicons-document-text')"
+          :icon="transformedBlogPosts[0]!.image ? undefined : ('i-heroicons-document-text')"
         >
         <template #background>
           <!-- Image takes precedence over icon -->
@@ -56,13 +56,13 @@
             :alt="transformedBlogPosts[0]!.title"
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
           />
-          <!-- Fallback gradient background - better for light mode -->
-          <div v-else class="absolute inset-0 bg-gradient-to-br from-slate-100 to-gray-200" />
+          <!-- Fallback gradient background - matching main background -->
+          <div v-else class="absolute inset-0 bg-gradient-to-br from-[#1e1d2c]/90 to-gray-900/90" />
         </template>
         
         <!-- Add date to main card -->
         <template #header>
-          <p class="text-sm text-neutral-500">
+          <p class="text-sm text-gray-300">
             {{ formatDate(transformedBlogPosts[0]!.date) }}
           </p>
         </template>
@@ -82,7 +82,7 @@
           :description="post.description"
           :href="post.path"
           cta="Read more"
-          :icon="post.image ? undefined : (post.icon || 'i-heroicons-document-text')"
+          :icon="post.image ? undefined : ('i-heroicons-document-text')"
         >
         <template #background>
           <!-- Image takes precedence over icon -->
@@ -92,13 +92,13 @@
             :alt="post.title"
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
           />
-          <!-- Fallback gradient background - lighter for smaller cards -->
-          <div v-else class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100" />
+          <!-- Fallback gradient background - matching main background -->
+          <div v-else class="absolute inset-0 bg-gradient-to-br from-[#1e1d2c]/80 to-gray-900/80" />
         </template>
         
         <!-- Add date to smaller cards -->
         <template #header>
-          <p class="text-sm text-neutral-500">
+          <p class="text-sm text-gray-300">
             {{ formatDate(post.date) }}
           </p>
         </template>
@@ -135,6 +135,7 @@
 
 <script lang="ts" setup>
 import { motion } from 'motion-v'
+import type { StoryblokStory, BlogPost } from '~/types/storyblok'
 
 definePageMeta({
   viewTransition: false
@@ -154,27 +155,35 @@ onMounted(() => {
   })
 })
 
-const { data: blogPosts } = await useAsyncData('blog-posts', () =>
-  queryCollection("blog")
-    .where("isArchived", "<>", true)
-    .andWhere((group) => group.where("isPublished", "=", true))
-    .order("date", "DESC")
-    .all()
-);
+const { data: blogPosts } = await useAsyncData('blog-posts', async () => {
+  const storyblokApi = useStoryblokApi();
+  const { data } = await storyblokApi.get('cdn/stories', {
+    version: 'published',
+    starts_with: 'posts/',
+    per_page: 100,
+    sort_by: 'first_published_at:desc'
+  });
+  console.log(data.stories);
+  return data.stories as StoryblokStory[];
+});
 
 // Transform the blog data to match the BlogPost interface
-const transformedBlogPosts = computed(() => {
+const transformedBlogPosts = computed((): BlogPost[] => {
   if (!blogPosts.value) return [];
   
-  return blogPosts.value.map((item: any) => ({
-    id: item.id || item._id || item._path,
-    title: item.title || 'Untitled',
-    description: item.description || 'No description available',
-    date: item.date || new Date().toISOString(),
-    path: item._path || item.path || '/',
-    tags: item.tags || [],
-    image: item.image, // Add image to the transformed data
-    icon: item.icon // Add icon to the transformed data
+  return blogPosts.value.map((story: StoryblokStory): BlogPost => ({
+    id: story.id.toString(),
+    title: story.content.title,
+    description: story.content.description,
+    content: story.content.content,
+    date: story.first_published_at,
+    path: `/blog/${story.slug}`,
+    tags: story.tag_list,
+    image: story.content.banner_image?.filename || undefined,
+    slug: story.slug,
+    publishedAt: story.published_at,
+    firstPublishedAt: story.first_published_at,
+    component: story.content.component
   }));
 });
 

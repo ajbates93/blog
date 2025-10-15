@@ -116,38 +116,52 @@
 
   <!-- Work Timeline Section -->
   <section id="about" class="w-full py-4 md:py-10 xl:py-20 px-4 md:px-10 xl:px-20">
-    <Timeline :items="workTimelineData" title="Experience"
-      description="A timeline of my professional experience in software development">
-      <template v-for="(item, index) in workTimelineData" :key="item.id + 'template'" #[item.id]>
-        <div class="pl-20 lg:pl-0 relative w-full">
-          <h3 class="mb-4 block text-left text-3xl font-bold text-white">
-            {{ item.title }}
-          </h3>
-          <div class="mb-2 text-base text-gray-300">
-            {{ item.period }}
+    <motion.div 
+      :initial="{ opacity: 0, y: 50 }" 
+      :animate="{ opacity: 1, y: 0 }"
+      :transition="{ duration: 0.8, ease: 'easeOut' }"
+      :viewport="{ once: true, margin: '-100px' }"
+    >
+      <Timeline :items="workTimelineData" title="Experience"
+        description="A timeline of my professional experience in software development">
+        <template v-for="(item, index) in workTimelineData" :key="item.id + 'template'" #[item.id]>
+          <div class="pl-20 lg:pl-0 relative w-full">
+            <h3 class="mb-4 block text-left text-3xl font-bold text-white">
+              {{ item.title }}
+            </h3>
+            <div class="mb-2 text-base text-gray-300">
+              {{ item.period }}
+            </div>
+            <div class="mb-2 text-base text-gray-300 font-bold">
+              {{ item.location }}
+            </div>
           </div>
-          <div class="mb-2 text-base text-gray-300 font-bold">
-            {{ item.location }}
+          <div class="pl-20 lg:pl-0 mb-8 font-normal text-gray-200 text-base">
+            <p class="mb-4">{{ item.description }}</p>
+            <div v-if="item.achievements && item.achievements.length > 0">
+              <h4 class="font-semibold mb-2">Key achievements:</h4>
+              <ul class="list-disc list-inside space-y-1">
+                <li v-for="achievement in item.achievements" :key="achievement">
+                  {{ achievement }}
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="pl-20 lg:pl-0 mb-8 font-normal text-gray-200 text-base">
-          <p class="mb-4">{{ item.description }}</p>
-          <div v-if="item.achievements && item.achievements.length > 0">
-            <h4 class="font-semibold mb-2">Key achievements:</h4>
-            <ul class="list-disc list-inside space-y-1">
-              <li v-for="achievement in item.achievements" :key="achievement">
-                {{ achievement }}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </template>
-    </Timeline>
+        </template>
+      </Timeline>
+    </motion.div>
   </section>
 
   <!-- Call to Action Section -->
   <section id="call-to-action" class="w-full py-4 md:py-10 xl:py-20 px-4 md:px-10 xl:px-20 relative z-10 mb-4 md:mb-10 xl:mb-20">
-    <CallToAction />
+    <motion.div 
+      :initial="{ opacity: 0, y: 50 }" 
+      :animate="{ opacity: 1, y: 0 }"
+      :transition="{ duration: 0.8, ease: 'easeOut' }"
+      :viewport="{ once: true, margin: '-100px' }"
+    >
+      <CallToAction />
+    </motion.div>
   </section>
 </template>
 
@@ -155,6 +169,7 @@
 import { motion } from 'motion-v'
 import GradientButton from '@/components/inspira-ui/GradientButton.vue'
 import Timeline from '@/components/inspira-ui/Timeline.vue'
+import type { StoryblokStory, BlogPost } from '~/types/storyblok'
 
 definePageMeta({
   viewTransition: false
@@ -211,28 +226,42 @@ const csharpRef = ref<HTMLElement | null>(null);
 const dotnetRef = ref<HTMLElement | null>(null);
 
 // Blog data
-const { data: blog } = await useAsyncData('homepage-blog', () =>
-  queryCollection("blog")
-    .where("isArchived", "<>", true)
-    .andWhere((group) => group.where("isPublished", "=", true))
-    .order("date", "DESC")
-    .limit(3)
-    .all()
-);
+const { data: blog } = await useAsyncData('homepage-blog', async () => {
+  const storyblokApi = useStoryblokApi();
+  const { data } = await storyblokApi.get('cdn/stories', {
+    version: 'published',
+    starts_with: 'posts/',
+    per_page: 3,
+    sort_by: 'created_at:desc',
+    filter_query: {
+      is_archived: {
+        is_not: true
+      },
+      is_published: {
+        is: true
+      }
+    }
+  });
+  return data.stories as StoryblokStory[];
+});
 
 // Transform the blog data to match the BlogPost interface
-const transformedBlog = computed(() => {
+const transformedBlog = computed((): BlogPost[] => {
   if (!blog.value) return [];
-
-  return blog.value.map((item: any) => ({
-    id: item.id || item._id || item._path,
-    title: item.title || 'Untitled',
-    description: item.description || 'No description available',
-    date: item.date || new Date().toISOString(),
-    path: item._path || item.path || '/',
-    tags: item.tags || [],
-    image: item.image, // Add image to the transformed data
-    icon: item.icon // Add icon to the transformed data
+  
+  return blog.value.map((story: StoryblokStory): BlogPost => ({
+    id: story.id.toString(),
+    title: story.content.title,
+    description: story.content.description,
+    content: story.content.content,
+    date: story.first_published_at,
+    path: `/blog/${story.slug}`,
+    tags: story.tag_list,
+    image: story.content.banner_image?.filename || undefined,
+    slug: story.slug,
+    publishedAt: story.published_at,
+    firstPublishedAt: story.first_published_at,
+    component: story.content.component
   }));
 });
 
