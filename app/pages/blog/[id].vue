@@ -74,8 +74,8 @@ const renderMarkdown = (markdown: string) => {
 
   <div v-else class="w-full pb-10 bg-[#1e1d2c] py-5 sm:py-10" v-if="blog">
     <div v-if="blog.content.banner_image?.filename" class="relative w-full max-w-[2000px] max-h-[400px] mx-auto mb-10 md:mb-20">
-      <NuxtImg :src="blog.content.banner_image.filename" :alt="blog.content.banner_image.alt || 'Blog banner'" class="w-full h-[400px] object-cover"
-        :width="1600" :height="400" sizes="(max-width: 768px) 100vw, 1600px" />
+      <img :src="blog.content.banner_image.filename" :alt="blog.content.banner_image.alt || 'Blog banner'" class="w-full h-[400px] object-cover"
+        width="1600" height="400" />
       <div class="absolute inset-0 bg-black opacity-40 pointer-events-none"></div>
     </div>
     <div class="flex flex-col items-center mx-auto gap-10">
