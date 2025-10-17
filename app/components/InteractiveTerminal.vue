@@ -52,13 +52,32 @@ const fileSystem: FileSystemItem[] = [
   { name: 'contact.txt', type: 'file', path: '/home/alex/contact.txt' },
 ]
 
-// Blog posts for navigation
-const blogPosts = [
-  { name: 'become-a-father.md', type: 'file', path: '/home/alex/blog/become-a-father.md' },
-  { name: 'building-this-blog.md', type: 'file', path: '/home/alex/blog/building-this-blog.md' },
-  { name: 'learning-flutter.md', type: 'file', path: '/home/alex/blog/learning-flutter.md' },
-  { name: 'middlesbrough-front-end-conference.md', type: 'file', path: '/home/alex/blog/middlesbrough-front-end-conference.md' }
-]
+// Blog posts for navigation - will be populated dynamically
+const blogPosts = ref<FileSystemItem[]>([])
+
+// Fetch blog posts from Storyblok
+const fetchBlogPosts = async () => {
+  try {
+    const storyblokApi = useStoryblokApi()
+    const { data } = await storyblokApi.get('cdn/stories', {
+      version: 'published',
+      starts_with: 'posts/',
+      per_page: 100,
+      sort_by: 'first_published_at:desc'
+    })
+    
+    // Transform Storyblok stories to file system items
+    blogPosts.value = data.stories.map((story: any) => ({
+      name: `${story.slug}.md`,
+      type: 'file' as const,
+      path: `/home/alex/blog/${story.slug}.md`
+    }))
+  } catch (error) {
+    console.error('Error fetching blog posts:', error)
+    // Fallback to empty array if API fails
+    blogPosts.value = []
+  }
+}
 
 // Projects for navigation
 const work = [
@@ -68,7 +87,7 @@ const work = [
 // Get all items for current directory
 const getCurrentDirectoryItems = () => {
   if (currentPath === '/home/alex/blog') {
-    return blogPosts
+    return blogPosts.value
   }
   if (currentPath === '/home/alex/work') {
     return work
@@ -123,7 +142,7 @@ const commands: Record<string, TerminalCommand> = {
       }
       
       // Check if directory exists
-      const allItems = [...fileSystem, ...blogPosts, ...work]
+      const allItems = [...fileSystem, ...blogPosts.value, ...work]
       const dirExists = allItems.some(item => 
         item.type === 'directory' && item.path === newPath
       ) || newPath === '/home/alex' || newPath === '/' || newPath === '/home/alex/blog' || newPath === '/home/alex/projects'
@@ -148,7 +167,7 @@ const commands: Record<string, TerminalCommand> = {
       const fileName = args[0]
       const filePath = currentPath === '/' ? `/${fileName}` : `${currentPath}/${fileName}`
       
-      const allItems = [...fileSystem, ...blogPosts, ...work]
+      const allItems = [...fileSystem, ...blogPosts.value, ...work]
       const file = allItems.find(item => item.path === filePath && item.type === 'file')
       
       if (!file) {
@@ -172,19 +191,13 @@ const commands: Record<string, TerminalCommand> = {
         case 'coming-soon.txt':
           return `🚧 Coming Soon!\r\n\r\nI'm currently building out this section of my site.\r\n\r\nThis will showcase my projects, case studies, and work portfolio.\r\n\r\nCheck back soon, or feel free to reach out if you'd like to discuss my work!\r\n\r\nContact: hello@alexbates.dev\r\nWebsite: https://alexbates.dev`
         
-        case 'become-a-father.md':
-          return `# Becoming a Father\r\n\r\nThis is a blog post about my journey into fatherhood.\r\n\r\nTo read the full post, visit: /blog/become-a-father\r\n\r\nUse 'open become-a-father.md' to navigate there directly!`
-        
-        case 'building-this-blog.md':
-          return `# Building This Blog\r\n\r\nThis post covers the technical details of building this blog with Nuxt.js and Vue.\r\n\r\nTo read the full post, visit: /blog/building-this-blog\r\n\r\nUse 'open building-this-blog.md' to navigate there directly!`
-        
-        case 'learning-flutter.md':
-          return `# Learning Flutter\r\n\r\nMy experience learning Flutter for mobile development.\r\n\r\nTo read the full post, visit: /blog/learning-flutter\r\n\r\nUse 'open learning-flutter.md' to navigate there directly!`
-        
-        case 'middlesbrough-front-end-conference.md':
-          return `# Middlesbrough Front End Conference\r\n\r\nMy experience attending and speaking at the Middlesbrough Front End Conference.\r\n\r\nTo read the full post, visit: /blog/middlesbrough-front-end-conference\r\n\r\nUse 'open middlesbrough-front-end-conference.md' to navigate there directly!`
-        
         default:
+          // Handle dynamic blog posts
+          if (fileName && fileName.endsWith('.md') && currentPath === '/home/alex/blog') {
+            const blogSlug = fileName.replace('.md', '')
+            return `# ${fileName.replace('.md', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}\r\n\r\nThis is a blog post from my collection.\r\n\r\nTo read the full post, visit: /blog/${blogSlug}\r\n\r\nUse 'open ${fileName}' to navigate there directly!`
+          }
+          
           return `File contents for ${fileName}`
       }
     }
@@ -213,7 +226,7 @@ const commands: Record<string, TerminalCommand> = {
       
       // Handle other files
       const filePath = currentPath === '/' ? `/${fileName}` : `${currentPath}/${fileName}`
-      const allItems = [...fileSystem, ...blogPosts, ...work]
+      const allItems = [...fileSystem, ...blogPosts.value, ...work]
       const file = allItems.find(item => item.path === filePath && item.type === 'file')
       
       if (!file) {
@@ -327,6 +340,9 @@ const commands: Record<string, TerminalCommand> = {
 
 // Initialize terminal
 onMounted(async () => {
+  // Fetch blog posts from Storyblok
+  await fetchBlogPosts()
+  
   // Wait for next tick to ensure DOM is ready
   await nextTick()
   
@@ -427,6 +443,7 @@ onMounted(async () => {
   terminal.write('\x1b[1;36mNavigate by terminal instead!\x1b[0m\r\n')
   terminal.write('Type \x1b[1;33mhelp\x1b[0m to see available commands.\r\n')
   terminal.write('Try \x1b[1;33mls\x1b[0m to explore the file system!\r\n\r\n')
+  terminal.write('-----------------------------------------\r\n\r\n')
   
   // Initial prompt
   writePrompt()
