@@ -44,6 +44,11 @@ let commandHistory: string[] = []
 let historyIndex = -1
 let currentInput = ''
 
+// Tab completion state
+let completionMatches: string[] = []
+let completionIndex = 0
+let lastCompletionPrefix = ''
+
 // File system structure for navigation
 const fileSystem: FileSystemItem[] = [
   { name: 'blog', type: 'directory', path: '/home/alex/blog' },
@@ -97,6 +102,85 @@ const getCurrentDirectoryItems = () => {
     item.path !== currentPath &&
     !item.path.substring(currentPath.length + 1).includes('/')
   )
+}
+
+// Tab completion logic
+const handleTabCompletion = () => {
+  if (!terminal) return
+  
+  const inputParts = currentInput.trim().split(' ')
+  const lastPart = inputParts[inputParts.length - 1] || ''
+  
+  // Get available items in current directory
+  const availableItems = getCurrentDirectoryItems()
+  const itemNames = availableItems.map(item => item.name)
+  
+  // Find matches
+  const matches = itemNames.filter(name => 
+    name.toLowerCase().startsWith(lastPart.toLowerCase())
+  )
+  
+  if (matches.length === 0) {
+    // No matches - show available options
+    terminal.write('\r\n')
+    if (itemNames.length > 0) {
+      terminal.write('Available files and directories:\r\n')
+      itemNames.forEach(name => {
+        const item = availableItems.find(i => i.name === name)
+        const icon = item?.type === 'directory' ? '📁' : '📄'
+        terminal.write(`  ${icon} ${name}\r\n`)
+      })
+    } else {
+      terminal.write('No files or directories found.\r\n')
+    }
+    writePrompt()
+    terminal.write(currentInput)
+    return
+  }
+  
+  // Check if we're continuing from the same prefix
+  if (lastCompletionPrefix !== lastPart) {
+    completionMatches = matches.sort()
+    completionIndex = 0
+    lastCompletionPrefix = lastPart
+  } else {
+    // Cycle through matches
+    completionIndex = (completionIndex + 1) % completionMatches.length
+  }
+  
+  // Complete the input
+  const completion = completionMatches[completionIndex]
+  if (!completion) return
+  
+  const newInput = inputParts.slice(0, -1).concat(completion).join(' ')
+  
+  // Clear only the partial input part and complete it
+  const partialInput = inputParts[inputParts.length - 1] || ''
+  const partialLength = partialInput.length
+  
+  // Move cursor back and clear the partial input
+  for (let i = 0; i < partialLength; i++) {
+    terminal.write('\b \b')
+  }
+  
+  // Update current input
+  currentInput = newInput + ' '
+  
+  // Show completion
+  terminal.write(completion + ' ')
+  
+  // If multiple matches, show them
+  if (completionMatches.length > 1) {
+    terminal.write('\r\n')
+    completionMatches.forEach((match, index) => {
+      const item = availableItems.find(i => i.name === match)
+      const icon = item?.type === 'directory' ? '📁' : '📄'
+      const marker = index === completionIndex ? '→' : ' '
+      terminal.write(`  ${marker} ${icon} ${match}\r\n`)
+    })
+    writePrompt()
+    terminal.write(currentInput)
+  }
 }
 
 // Terminal commands
@@ -255,7 +339,7 @@ const commands: Record<string, TerminalCommand> = {
     name: 'help',
     description: 'Show available commands',
     execute: async () => {
-      return `Available commands:\r\n==================\r\n\r\nls          - List directory contents\r\ncd <dir>    - Change directory\r\ncat <file>  - Display file contents\r\nopen <file> - Open a file or navigate to a page\r\nhelp        - Show this help message\r\nclear       - Clear the terminal\r\nwhoami      - Display current user\r\npwd         - Print working directory\r\nexit        - Close terminal\r\n\r\nTry 'ls' to see what's available in the current directory!\r\nTry 'cd blog' to explore my blog posts!`
+      return `Available commands:\r\n==================\r\n\r\nls          - List directory contents\r\ncd <dir>    - Change directory\r\ncat <file>  - Display file contents\r\nopen <file> - Open a file or navigate to a page\r\nhelp        - Show this help message\r\nclear       - Clear the terminal\r\nwhoami      - Display current user\r\npwd         - Print working directory\r\nexit        - Close terminal\r\n\r\nTips:\r\n=====\r\n• Use TAB to auto-complete file and directory names\r\n• Press TAB multiple times to cycle through matches\r\n• Try 'ls' to see what's available in the current directory!\r\n• Try 'cd blog' to explore my blog posts!`
     }
   },
   
@@ -504,21 +588,37 @@ const handleInput = async (data: string) => {
       await executeCommand(currentInput.trim())
     }
     
-    // Reset current input
+    // Reset current input and completion state
     currentInput = ''
+    completionMatches = []
+    completionIndex = 0
+    lastCompletionPrefix = ''
     writePrompt()
   } else if (char === 127) { // Backspace
     if (currentInput.length > 0) {
       currentInput = currentInput.slice(0, -1)
       terminal.write('\b \b')
+      // Reset completion state on backspace
+      completionMatches = []
+      completionIndex = 0
+      lastCompletionPrefix = ''
     }
   } else if (char === 3) { // Ctrl+C
     terminal.write('^C\r\n')
     currentInput = ''
+    completionMatches = []
+    completionIndex = 0
+    lastCompletionPrefix = ''
     writePrompt()
+  } else if (char === 9) { // Tab
+    handleTabCompletion()
   } else if (char >= 32) { // Printable characters
     currentInput += data
     terminal.write(data)
+    // Reset completion state when typing new characters
+    completionMatches = []
+    completionIndex = 0
+    lastCompletionPrefix = ''
   }
 }
 
