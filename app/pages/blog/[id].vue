@@ -48,7 +48,7 @@ useSeoMeta({
 
 // Hero and title morph in from the blog card; skip their entrance so the morph lands on visible elements
 const from = useTransitionFrom()
-const { enter, enterFrom } = useEntrance()
+const { enter, enterFrom, fadeUp } = useEntrance()
 const morphsFromCard = computed(() => from.value === '/blog')
 const slug = route.params.id as string
 
@@ -240,49 +240,41 @@ const renderMarkdown = (markdown: string) => {
       </motion.div>
 
       <!-- Description -->
-      <motion.div
+      <div
         v-if="blog.content.description"
-        :initial="enterFrom('y', 30)"
-        :animate="{ opacity: 1, y: 0 }"
-        :transition="enter(0.6, 0.6)"
-        class="text-center max-w-2xl mx-auto px-5 sm:px-10"
+        class="fade-up text-center max-w-2xl mx-auto px-5 sm:px-10"
+        :style="fadeUp(0.6)"
       >
         <TextWrapper>{{ blog.content.description }}</TextWrapper>
-      </motion.div>
+      </div>
 
       <!-- Tags -->
-      <motion.div
+      <div
         v-if="blog.tag_list && blog.tag_list.length > 0"
-        :initial="enterFrom('y', 30)"
-        :animate="{ opacity: 1, y: 0 }"
-        :transition="enter(0.8, 0.6)"
-        class="flex flex-wrap gap-2 justify-center px-5 sm:px-10"
+        class="fade-up flex flex-wrap gap-2 justify-center px-5 sm:px-10"
+        :style="fadeUp(0.8)"
       >
         <span v-for="tag in blog.tag_list" :key="tag" class="px-3 py-1 bg-[#4278ba] text-white text-sm rounded-full">
           {{ tag }}
         </span>
-      </motion.div>
+      </div>
 
       <!-- Blog Content -->
-      <motion.div
-        :initial="enterFrom('y', 30)"
-        :animate="{ opacity: 1, y: 0 }"
-        :transition="enter(1.0, 0.6)"
-        class="blog-article max-w-prose text-[#eeeeee] px-5 sm:px-10"
+      <div
+        class="fade-up blog-article max-w-prose text-[#eeeeee] px-5 sm:px-10"
+        :style="fadeUp(1.0)"
       >
         <div ref="articleRef" v-html="renderMarkdown(blog.content.content)"></div>
-      </motion.div>
+      </div>
 
       <!-- Social Sharing -->
-      <motion.div
-        :initial="enterFrom('y', 30)"
-        :animate="{ opacity: 1, y: 0 }"
-        :transition="enter(1.2, 0.6)"
-        class="px-5 sm:px-10"
+      <div
+        class="fade-up px-5 sm:px-10"
+        :style="fadeUp(1.2)"
       >
         <SocialShare :title="blog.content.title" :description="blog.content.description"
           :url="postUrl" />
-      </motion.div>
+      </div>
 
       <!-- Keep reading: older / newer posts -->
       <nav v-if="neighbours.older || neighbours.newer" aria-label="More posts"

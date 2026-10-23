@@ -32,5 +32,14 @@ export const useEntrance = () => {
     [axis]: isClientNav.value ? 12 : distance,
   })
 
-  return { enter, enterFrom }
+  /**
+   * Same timings as a CSS animation (see .fade-up in main.css). Used for long-form content,
+   * which must never get stuck invisible if a JS animation fails to run.
+   */
+  const fadeUp = (delay = 0) =>
+    isClientNav.value
+      ? { '--fade-delay': `${Math.min(delay * 0.25, 0.15)}s`, '--fade-duration': '0.3s', '--fade-distance': '12px' }
+      : { '--fade-delay': `${delay}s` }
+
+  return { enter, enterFrom, fadeUp }
 }
