@@ -3,11 +3,11 @@
     ref="containerRef"
     :class="cn('w-full h-full', props.class)"
   >
+    <!-- Canvas size is set in setupCanvas() (scaled by devicePixelRatio).
+         Don't bind width/height here: Vue would reset it to 1x and blur the grid. -->
     <canvas
       ref="canvasRef"
       class="pointer-events-none"
-      :width="canvasSize.width"
-      :height="canvasSize.height"
     />
   </div>
 </template>
@@ -44,8 +44,11 @@ const canvasRef = ref<HTMLCanvasElement>();
 const context = ref<CanvasRenderingContext2D>();
 
 const isInView = ref(false);
-const canvasSize = ref({ width: 0, height: 0 });
 const isMobile = ref(false);
+
+function checkMobile() {
+  isMobile.value = window.innerWidth < 768; // md breakpoint
+}
 
 // Responsive opacity based on screen size
 const currentMaxOpacity = computed(() => {
@@ -142,7 +145,6 @@ function updateCanvasSize() {
   const newWidth = width.value || containerRef.value!.clientWidth;
   const newHeight = height.value || containerRef.value!.clientHeight;
 
-  canvasSize.value = { width: newWidth, height: newHeight };
   gridParams.value = setupCanvas(canvasRef.value!, newWidth, newHeight);
 }
 
@@ -175,10 +177,6 @@ onMounted(() => {
   context.value = canvasRef.value.getContext("2d")!;
   if (!context.value) return;
 
-  // Detect mobile screen size
-  const checkMobile = () => {
-    isMobile.value = window.innerWidth < 768; // md breakpoint
-  };
   checkMobile();
   window.addEventListener('resize', checkMobile);
 
@@ -205,6 +203,6 @@ onBeforeUnmount(() => {
   }
   resizeObserver?.disconnect();
   intersectionObserver?.disconnect();
-  window.removeEventListener('resize', () => {});
+  window.removeEventListener('resize', checkMobile);
 });
 </script>
