@@ -46,9 +46,23 @@ useSeoMeta({
   articleModifiedTime: blog.value.published_at,
 });
 
+// Structured data so Google knows this page is an article, when it was published and who wrote it
+// (the author is the site's Person identity set in nuxt.config.ts)
+useSchemaOrg([
+  defineArticle({
+    '@type': 'BlogPosting',
+    headline: postTitle,
+    description: postDescription,
+    image: ogImage,
+    datePublished: blog.value.first_published_at,
+    dateModified: blog.value.published_at,
+    keywords: blog.value.tag_list,
+  }),
+]);
+
 // Hero and title morph in from the blog card; skip their entrance so the morph lands on visible elements
 const from = useTransitionFrom()
-const { enter, enterFrom, fadeUp } = useEntrance()
+const { enter, enterFrom, firstLoad, fadeUp } = useEntrance()
 const morphsFromCard = computed(() => from.value === '/blog')
 const slug = route.params.id as string
 
@@ -185,6 +199,7 @@ const renderMarkdown = (markdown: string) => {
         :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
         :transition="enter(0, 0.6)"
+        v-bind="firstLoad(0, 'y', 30, 0.6)"
         class="flex flex-col justify-center w-full items-center gap-5"
       >
         <ULink to="/">
@@ -202,6 +217,7 @@ const renderMarkdown = (markdown: string) => {
         :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
         :transition="enter(0.2, 0.6)"
+        v-bind="firstLoad(0.2, 'y', 30, 0.6)"
         class="w-full sticky top-0 z-30"
       >
         <div class="absolute inset-0 backdrop-blur-md bg-[#1e1d2c]/70 border-b transition-colors duration-300"
@@ -234,6 +250,7 @@ const renderMarkdown = (markdown: string) => {
         :initial="morphsFromCard ? false : enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
         :transition="enter(0.4, 0.6)"
+        v-bind="firstLoad(0.4, 'y', 30, 0.6)"
         class="w-full md:max-w-screen-md text-4xl sm:text-5xl font-bold text-[#eeeeee] px-5 sm:px-10"
       >
         <h1 :style="{ viewTransitionName: `post-title-${slug}`, viewTransitionClass: 'post-title' }">{{ blog.content.title }}</h1>

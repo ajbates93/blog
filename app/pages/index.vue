@@ -7,7 +7,8 @@
       <div class="flex flex-col justify-start">
         <!-- Group 1: Header, Heading, and Intro -->
         <motion.div :initial="titleMorphs ? false : enterFrom('y', 30)" :animate="{ opacity: 1, y: 0 }"
-          :transition="enter(0, 0.6)">
+          :transition="enter(0, 0.6)"
+          v-bind="firstLoad(0, 'y', 30, 0.6)">
           <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10"
             style="view-transition-name: page-title">
             Hello there.
@@ -16,7 +17,8 @@
         </motion.div>
 
         <motion.div :initial="enterFrom('y', 30)" :animate="{ opacity: 1, y: 0 }"
-          :transition="enter(0.2, 0.6)">
+          :transition="enter(0.2, 0.6)"
+          v-bind="firstLoad(0.2, 'y', 30, 0.6)">
           <TextWrapper>
             I'm
             <span class="font-bold underline">Alex Bates</span>. I'm a software developer with over
@@ -27,7 +29,8 @@
 
         <!-- Group 2: Work Description, Blog/Social Links, and Social Icons -->
         <motion.div :initial="enterFrom('y', 30)" :animate="{ opacity: 1, y: 0 }"
-          :transition="enter(0.4, 0.6)">
+          :transition="enter(0.4, 0.6)"
+          v-bind="firstLoad(0.4, 'y', 30, 0.6)">
           <TextWrapper>
             I'm currently working at
             <a target="_blank" class="font-bold text-white hover:text-gray-200 transition-colors"
@@ -59,7 +62,8 @@
 
         <!-- Group 3: Availability Status -->
         <motion.div :initial="enterFrom('y', 30)" :animate="{ opacity: 1, y: 0 }"
-          :transition="enter(0.6, 0.6)">
+          :transition="enter(0.6, 0.6)"
+          v-bind="firstLoad(0.6, 'y', 30, 0.6)">
           <!-- Desktop version -->
           <div class="hidden md:flex bg-white/10 backdrop-blur-sm p-5 rounded-md gap-3">
             <p aria-hidden="true">
@@ -92,6 +96,7 @@
       <!-- Interactive Terminal with fade-in-fade-left animation (happens last) -->
       <motion.div :initial="enterFrom('x', 30)" :animate="{ opacity: 1, x: 0 }"
         :transition="enter(0.8, 0.6)"
+        v-bind="firstLoad(0.8, 'x', 30, 0.6)"
         class="hidden xl:block sticky top-10 mx-auto my-10 xl:m-0 overflow-hidden w-full max-w-[600px] max-h-[90dvh]">
         <div class="bg-gray-900 rounded-lg p-4 shadow-2xl flex flex-col border border-gray-700 h-full">
           <div class="flex items-center gap-2 mb-2 flex-shrink-0">
@@ -114,6 +119,7 @@
       :initial="enterFrom('y', 50)" 
       :animate="{ opacity: 1, y: 0 }"
       :transition="enter(0, 0.8)"
+      v-bind="firstLoad(0, 'y', 50, 0.8)"
       :viewport="{ once: true, margin: '-100px' }"
     >
       <Timeline :items="workTimelineData" title="Experience"
@@ -152,6 +158,7 @@
       :initial="enterFrom('y', 50)" 
       :animate="{ opacity: 1, y: 0 }"
       :transition="enter(0, 0.8)"
+      v-bind="firstLoad(0, 'y', 50, 0.8)"
       :viewport="{ once: true, margin: '-100px' }"
     >
       <CallToAction />
@@ -167,7 +174,7 @@ import type { StoryblokStory, BlogPost } from '~/types/storyblok'
 
 // Skip the title's entrance when it morphs in from another page's title
 const from = useTransitionFrom()
-const { enter, enterFrom } = useEntrance()
+const { enter, enterFrom, firstLoad } = useEntrance()
 const titleMorphs = computed(() => from.value === '/blog' || from.value === '/work')
 
 // Set page meta for better SEO

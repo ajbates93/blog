@@ -27,10 +27,26 @@ export const useEntrance = () => {
       ? { duration: 0.3, ease: 'easeOut' as const, delay: Math.min(delay * 0.25, 0.15) }
       : { duration, ease: 'easeOut' as const, delay }
 
-  const enterFrom = (axis: 'x' | 'y' = 'y', distance = 30) => ({
-    opacity: 0,
-    [axis]: isClientNav.value ? 12 : distance,
-  })
+  /**
+   * Starting state for motion-v's `:initial`. On first load this is `false`, so the server HTML
+   * has the element visible (Google and slow devices see the text straight away) and `firstLoad`
+   * runs the entrance as a CSS animation instead, without waiting for JavaScript.
+   */
+  const enterFrom = (axis: 'x' | 'y' = 'y', distance = 30) =>
+    isClientNav.value ? { opacity: 0, [axis]: 12 } : false
+
+  /** First-load entrance as a CSS animation (see .fade-in in main.css). Bind with v-bind on the same element. */
+  const firstLoad = (delay = 0, axis: 'x' | 'y' = 'y', distance = 30, duration = 0.6) =>
+    isClientNav.value
+      ? {}
+      : {
+          class: 'fade-in',
+          style: {
+            '--fade-delay': `${delay}s`,
+            '--fade-duration': `${duration}s`,
+            [`--fade-${axis}`]: `${distance}px`,
+          },
+        }
 
   /**
    * Same timings as a CSS animation (see .fade-up in main.css). Used for long-form content,
@@ -41,5 +57,5 @@ export const useEntrance = () => {
       ? { '--fade-delay': `${Math.min(delay * 0.25, 0.15)}s`, '--fade-duration': '0.3s', '--fade-distance': '12px' }
       : { '--fade-delay': `${delay}s` }
 
-  return { enter, enterFrom, fadeUp }
+  return { enter, enterFrom, firstLoad, fadeUp }
 }

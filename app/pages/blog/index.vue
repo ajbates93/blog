@@ -8,6 +8,7 @@
       :initial="titleMorphs ? false : enterFrom('y', 30)"
       :animate="{ opacity: 1, y: 0 }"
       :transition="enter(0, 0.6)"
+      v-bind="firstLoad(0, 'y', 30, 0.6)"
     >
       <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10"
         style="view-transition-name: page-title">Blog</h1>
@@ -18,6 +19,7 @@
       :initial="enterFrom('y', 30)"
       :animate="{ opacity: 1, y: 0 }"
       :transition="enter(0.2, 0.6)"
+      v-bind="firstLoad(0.2, 'y', 30, 0.6)"
     >
       <TextWrapper>
         Here you'll find thoughts, tutorials, and insights about web development, mobile development, and the tech industry. I write about things I learn, interesting projects I work on, and share knowledge that might help other developers on their journey.
@@ -34,6 +36,7 @@
         :initial="cardMorphs(transformedBlogPosts[0]!.path) ? false : enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
         :transition="enter(0.4, 0.6)"
+        v-bind="firstLoad(0.4, 'y', 30, 0.6)"
         class="md:col-span-2"
       >
         <BentoGridCard
@@ -74,6 +77,7 @@
         :initial="cardMorphs(post.path) ? false : enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
         :transition="enter(0.6 + (index * 0.1), 0.6)"
+        v-bind="firstLoad(0.6 + (index * 0.1), 'y', 30, 0.6)"
       >
         <BentoGridCard
           :name="post.title"
@@ -112,6 +116,7 @@
         :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
         :transition="enter(0.4, 0.6)"
+        v-bind="firstLoad(0.4, 'y', 30, 0.6)"
         class="col-span-full text-center"
       >
         <BentoGridItem>
@@ -140,7 +145,7 @@ import type { StoryblokStory, BlogPost } from '~/types/storyblok'
 
 // Skip entrances for elements that morph in from the previous page
 const from = useTransitionFrom()
-const { enter, enterFrom } = useEntrance()
+const { enter, enterFrom, firstLoad } = useEntrance()
 const titleMorphs = computed(() => from.value === '/' || from.value === '/work')
 const cardMorphs = (path: string) => from.value === path
 

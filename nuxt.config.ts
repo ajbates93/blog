@@ -16,6 +16,23 @@ export default defineNuxtConfig({
   site: {
     url: "https://alexbates.dev",
     name: "Alex Bates",
+    // Default description; pages with their own description override it.
+    // og:title, og:description, og:url and the canonical link are filled in per page by @nuxtjs/seo.
+    description:
+      "Alex Bates is a software developer based in the UK, building websites, web applications and mobile apps with modern technologies.",
+    defaultLocale: "en-GB",
+  },
+  schemaOrg: {
+    // Tells Google who the site belongs to, so searches for "Alex Bates" can link it to these profiles
+    identity: {
+      type: "Person",
+      name: "Alex Bates",
+      url: "https://alexbates.dev",
+      image: "https://alexbates.dev/images/home-about-small.webp",
+      jobTitle: "Senior Fullstack Developer",
+      worksFor: { "@type": "Organization", name: "Pocketworks", url: "https://pocketworks.co.uk" },
+      sameAs: ["https://github.com/ajbates93", "https://www.linkedin.com/in/alex-bates-01b548a7"],
+    },
   },
   image: {
     // Resize/convert via Storyblok's image service, which works on any host
@@ -81,26 +98,13 @@ export default defineNuxtConfig({
         },
       ],
       meta: [
-        {
-          name: "description",
-          content:
-            "Alex Bates is a web developer based in the UK. He specialises in building websites, web applications and mobile applications using modern technologies.",
-        },
-        // OpenGraph meta tags
-        { property: "og:type", content: "website" },
-        { property: "og:site_name", content: "Alex Bates" },
-        { property: "og:title", content: "Alex Bates | Software Developer" },
-        { property: "og:description", content: "Alex Bates is a web developer based in the UK. He specialises in building websites, web applications and mobile applications using modern technologies." },
-        { property: "og:url", content: "https://alexbates.dev" },
-        { property: "og:image", content: "https://alexbates.dev/images/home-about-small.webp" },
+        // Default share image (twitter:image falls back to it); blog posts replace it with their banner
+        { property: "og:image", content: "https://alexbates.dev/images/og-default.jpg" },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
-        // Twitter Card meta tags
+        { property: "og:image:alt", content: "Alex Bates, Software Developer" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:site", content: "@alexbates" },
-        { name: "twitter:title", content: "Alex Bates | Software Developer" },
-        { name: "twitter:description", content: "Alex Bates is a web developer based in the UK. He specialises in building websites, web applications and mobile applications using modern technologies." },
-        { name: "twitter:image", content: "https://alexbates.dev/images/home-about-small.webp" },
       ],
     },
   },
