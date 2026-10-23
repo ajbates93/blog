@@ -52,6 +52,63 @@ const { enter, enterFrom } = useEntrance()
 const morphsFromCard = computed(() => from.value === '/blog')
 const slug = route.params.id as string
 
+const publishedDate = computed(() =>
+  new Date(blog.value!.first_published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+);
+
+// Copy link (canonical URL, without any query string)
+const linkCopied = ref(false);
+let copiedTimer: ReturnType<typeof setTimeout> | undefined;
+const copyPostLink = async () => {
+  try {
+    await navigator.clipboard.writeText(postUrl);
+    linkCopied.value = true;
+    clearTimeout(copiedTimer);
+    copiedTimer = setTimeout(() => (linkCopied.value = false), 2000);
+  } catch {
+    // Clipboard blocked (e.g. insecure context): fall back to the native prompt
+    window.prompt('Copy this link:', postUrl);
+  }
+};
+
+// Sticky bar state: border once stuck, and how far through the article we are
+const barRef = ref<{ $el: HTMLElement } | null>(null);
+const articleRef = ref<HTMLElement | null>(null);
+const barStuck = ref(false);
+const readProgress = ref(0);
+let frame = 0;
+
+const updateBar = () => {
+  frame = 0;
+  const bar = barRef.value?.$el;
+  const article = articleRef.value;
+  if (!bar || !article) return;
+  const barRect = bar.getBoundingClientRect();
+  barStuck.value = barRect.top <= 0;
+  // 0 when the article's top reaches the bar, 1 when its bottom reaches the bottom of the screen
+  const rect = article.getBoundingClientRect();
+  const distance = rect.height - (window.innerHeight - barRect.height);
+  const travelled = barRect.height - rect.top;
+  readProgress.value = distance > 0 ? Math.min(1, Math.max(0, travelled / distance)) : 1;
+};
+
+const onScroll = () => {
+  if (!frame) frame = requestAnimationFrame(updateBar);
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  updateBar();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll);
+  window.removeEventListener('resize', onScroll);
+  cancelAnimationFrame(frame);
+  clearTimeout(copiedTimer);
+});
+
 const calculateReadingTime = (content: string) => {
   if (!content) return 3;
 
@@ -115,25 +172,37 @@ const renderMarkdown = (markdown: string) => {
         </ULink>
         <ULink to="/" class="spacing-2 text-white hover:text-gray-200 transition-colors text-2xl font-serif font-bold">Alex Bates</ULink>
       </motion.div>
-      <!-- Navigation bar -->
+      <!-- Sticky action bar: back link, date, reading time, copy link, reading progress -->
       <motion.div
+        ref="barRef"
         :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
         :transition="enter(0.2, 0.6)"
-        class="w-full sticky top-0 rounded-lg z-300"
+        class="w-full sticky top-0 z-30"
       >
-        <div class="absolute w-full h-full z-100 backdrop-blur bg-white/05"></div>
-        <div class="relative z-200 bg-transparent md:max-w-screen-md mx-auto flex items-center justify-between text-white text-sm px-4 py-4">
-          <ULink to="/blog"
-            class="bg-white bg-opacity-20 hover:underline px-3 py-2 rounded-md text-white hover:text-white">
-            ← Back to blog
-          </ULink>
-          <div class="flex items-center gap-4">
-            <p>{{ new Date(blog.first_published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) }}</p>
-            <span class="w-1 h-1 bg-white rounded-full"></span>
-            <p>{{ calculateReadingTime(blog.content.content) }} min read</p>
+        <div class="absolute inset-0 backdrop-blur-md bg-[#1e1d2c]/70 border-b transition-colors duration-300"
+          :class="barStuck ? 'border-white/10' : 'border-transparent'" />
+        <div class="relative md:max-w-screen-md mx-auto flex items-center justify-between gap-3 px-4 py-3 text-sm">
+          <NuxtLink to="/blog"
+            class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-medium text-gray-200 bg-white/5 ring-1 ring-white/10 hover:bg-white/10 hover:text-white transition-colors">
+            <UIcon name="i-heroicons-arrow-left-20-solid" class="size-4" />
+            Blog
+          </NuxtLink>
+          <div class="flex items-center gap-3 text-gray-400">
+            <time :datetime="blog.first_published_at" class="hidden sm:inline">{{ publishedDate }}</time>
+            <span class="hidden sm:inline" aria-hidden="true">·</span>
+            <span>{{ calculateReadingTime(blog.content.content) }} min read</span>
+            <button type="button" @click="copyPostLink"
+              class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-medium text-gray-200 bg-white/5 ring-1 ring-white/10 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
+              :aria-label="linkCopied ? 'Link copied' : 'Copy link to this post'">
+              <UIcon :name="linkCopied ? 'i-heroicons-check-20-solid' : 'i-heroicons-link-20-solid'" class="size-4" />
+              <span class="hidden sm:inline" aria-live="polite">{{ linkCopied ? 'Copied' : 'Copy link' }}</span>
+            </button>
           </div>
         </div>
+        <!-- Reading progress -->
+        <div class="absolute bottom-0 left-0 h-0.5 w-full origin-left bg-[#60A5FA]"
+          :style="{ transform: `scaleX(${readProgress})` }" aria-hidden="true" />
       </motion.div>
 
       <!-- Blog Title -->
@@ -141,7 +210,7 @@ const renderMarkdown = (markdown: string) => {
         :initial="morphsFromCard ? false : enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
         :transition="enter(0.4, 0.6)"
-        class="text-4xl sm:text-5xl font-bold text-[#eeeeee] px-5 sm:px-10"
+        class="w-full md:max-w-screen-md text-4xl sm:text-5xl font-bold text-[#eeeeee] px-5 sm:px-10"
       >
         <h1 :style="{ viewTransitionName: `post-title-${slug}`, viewTransitionClass: 'post-title' }">{{ blog.content.title }}</h1>
       </motion.div>
@@ -177,7 +246,7 @@ const renderMarkdown = (markdown: string) => {
         :transition="enter(1.0, 0.6)"
         class="blog-article max-w-prose text-[#eeeeee] px-5 sm:px-10"
       >
-        <div v-html="renderMarkdown(blog.content.content)"></div>
+        <div ref="articleRef" v-html="renderMarkdown(blog.content.content)"></div>
       </motion.div>
 
       <!-- Social Sharing -->
