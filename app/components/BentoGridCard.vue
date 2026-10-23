@@ -1,7 +1,7 @@
 <template>
-  <a
-    :href="href"
-    :key="name"
+  <!-- NuxtLink (not <a>) so opening a post is a client-side navigation and can animate -->
+  <NuxtLink
+    :to="href"
     :class="
         cn(
           'group relative col-span-1 flex flex-col justify-end overflow-hidden rounded-xl h-full',
@@ -31,7 +31,8 @@
         v-else
         class="size-8 md:size-12 origin-left mb-2 transform-gpu text-[#eeeeee] transition-all duration-300 ease-in-out lg:group-hover:scale-75"
       ></div>
-      <h3 class="text-lg md:text-xl font-semibold text-[#eeeeee]">
+      <h3 class="text-lg md:text-xl font-semibold text-[#eeeeee]"
+        :style="transitionKey ? { viewTransitionName: `post-title-${transitionKey}`, viewTransitionClass: 'post-title' } : undefined">
         {{ name }}
       </h3>
       <p class="max-w-lg text-sm tracking-tight md:text-base text-gray-300 mb-4 md:mb-0">{{ description }}</p>
@@ -39,29 +40,27 @@
     
     <!-- Mobile Read More Link -->
     <div class="lg:hidden relative z-30 p-4 pt-2 md:p-6 md:pt-6">
-      <a
-        :href="href"
+      <span
         class="inline-flex items-center rounded-md text-sm font-medium text-[#eeeeee] transition-colors hover:bg-gray-800/50"
       >
         {{ cta }} →
-      </a>
+      </span>
     </div>
 
     <!-- Desktop Read More Link (absolute positioned for hover effect) -->
     <div
       class="absolute bottom-0 hidden lg:flex w-full transform-gpu flex-row items-center p-4 translate-y-10 opacity-0 transition-all duration-300 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 z-30"
     >
-      <a
-        :href="href"
+      <span
         class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-[#eeeeee] transition-colors hover:bg-gray-800/50"
       >
         {{ cta }} →
-      </a>
+      </span>
     </div>
     <div
       class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 lg:group-hover:bg-gray-800/30"
     />
-  </a>
+  </NuxtLink>
 </template>
 
 <script lang="ts" setup>
@@ -75,6 +74,8 @@ interface Props {
   description: string;
   href: string;
   cta: string;
+  /** Post slug; names the title so it can morph into the post page's title */
+  transitionKey?: string;
 }
 
 const props = defineProps<Props>();

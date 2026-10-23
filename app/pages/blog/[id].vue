@@ -46,19 +46,11 @@ useSeoMeta({
   articleModifiedTime: blog.value.published_at,
 });
 
-// Loading state - show spinner until page is ready
-const pending = ref(true)
-
-// Hide loading spinner when page is fully loaded
-onMounted(() => {
-  // Wait for next tick to ensure all content is rendered
-  nextTick(() => {
-    // Small delay to ensure smooth transition
-    setTimeout(() => {
-      pending.value = false
-    }, 100)
-  })
-})
+// Hero and title morph in from the blog card; skip their entrance so the morph lands on visible elements
+const from = useTransitionFrom()
+const { enter, enterFrom } = useEntrance()
+const morphsFromCard = computed(() => from.value === '/blog')
+const slug = route.params.id as string
 
 const calculateReadingTime = (content: string) => {
   if (!content) return 3;
@@ -94,19 +86,13 @@ const renderMarkdown = (markdown: string) => {
 </script>
 
 <template>
-  <!-- Loading Spinner -->
-  <div v-if="pending" class="fixed inset-0 bg-[#1e1d2c] flex items-center justify-center z-50">
-    <div class="text-center">
-      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#eeeeee] animate-spin" />
-    </div>
-  </div>
-
-  <div v-else class="w-full pb-10 bg-[#1e1d2c] py-5 sm:py-10" v-if="blog">
+  <div class="w-full pb-10 bg-[#1e1d2c] py-5 sm:py-10" v-if="blog">
     <!-- Hero: full-width strip on mobile; contained, rounded 2:1 image on wider screens
          so it isn't cropped to a thin letterbox -->
     <div v-if="blog.content.banner_image?.filename"
       class="relative w-full h-[400px] md:h-auto md:aspect-[2/1] md:max-w-5xl md:px-10 mx-auto mb-10 md:mb-16">
-      <div class="relative w-full h-full overflow-hidden md:rounded-2xl md:shadow-2xl">
+      <div class="relative w-full h-full overflow-hidden md:rounded-2xl md:shadow-2xl"
+        :style="{ viewTransitionName: `post-image-${slug}`, viewTransitionClass: 'post-image' }">
         <img :src="blog.content.banner_image.filename" :alt="blog.content.banner_image.alt || 'Blog banner'"
           class="w-full h-full object-cover" width="2000" height="1000" fetchpriority="high" />
         <div class="absolute inset-0 bg-black/30 pointer-events-none"></div>
@@ -115,27 +101,25 @@ const renderMarkdown = (markdown: string) => {
     <div class="flex flex-col items-center mx-auto gap-10">
       <!-- Blog avatar,  Author and date-->
       <motion.div
-        :initial="{ opacity: 0, y: 30 }"
+        :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut' }"
+        :transition="enter(0, 0.6)"
         class="flex flex-col justify-center w-full items-center gap-5"
-        style="view-transition-name: author-section"
       >
-        <ULink to="/" style="view-transition-name: none">
+        <ULink to="/">
           <div class="align-middle w-20 h-20 rounded-full overflow-hidden">
             <picture>
               <img class="scale-125" src="/images/home-about-small.webp" alt="Author" />
             </picture>
           </div>
         </ULink>
-        <ULink to="/" class="spacing-2 text-white hover:text-gray-200 transition-colors text-2xl font-serif font-bold"
-          style="view-transition-name: none">Alex Bates</ULink>
+        <ULink to="/" class="spacing-2 text-white hover:text-gray-200 transition-colors text-2xl font-serif font-bold">Alex Bates</ULink>
       </motion.div>
       <!-- Navigation bar -->
       <motion.div
-        :initial="{ opacity: 0, y: 30 }"
+        :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }"
+        :transition="enter(0.2, 0.6)"
         class="w-full sticky top-0 rounded-lg z-300"
       >
         <div class="absolute w-full h-full z-100 backdrop-blur bg-white/05"></div>
@@ -154,23 +138,21 @@ const renderMarkdown = (markdown: string) => {
 
       <!-- Blog Title -->
       <motion.div
-        :initial="{ opacity: 0, y: 30 }"
+        :initial="morphsFromCard ? false : enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
+        :transition="enter(0.4, 0.6)"
         class="text-4xl sm:text-5xl font-bold text-[#eeeeee] px-5 sm:px-10"
-        :style="{ 'view-transition-name': `blog-title-${blog.content.title.toLowerCase().replace(/ /g, '-')}` }"
       >
-        <h1>{{ blog.content.title }}</h1>
+        <h1 :style="{ viewTransitionName: `post-title-${slug}`, viewTransitionClass: 'post-title' }">{{ blog.content.title }}</h1>
       </motion.div>
 
       <!-- Description -->
       <motion.div
         v-if="blog.content.description"
-        :initial="{ opacity: 0, y: 30 }"
+        :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }"
+        :transition="enter(0.6, 0.6)"
         class="text-center max-w-2xl mx-auto px-5 sm:px-10"
-        style="view-transition-name: blog-description"
       >
         <TextWrapper>{{ blog.content.description }}</TextWrapper>
       </motion.div>
@@ -178,11 +160,10 @@ const renderMarkdown = (markdown: string) => {
       <!-- Tags -->
       <motion.div
         v-if="blog.tag_list && blog.tag_list.length > 0"
-        :initial="{ opacity: 0, y: 30 }"
+        :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.8 }"
+        :transition="enter(0.8, 0.6)"
         class="flex flex-wrap gap-2 justify-center px-5 sm:px-10"
-        style="view-transition-name: blog-tags"
       >
         <span v-for="tag in blog.tag_list" :key="tag" class="px-3 py-1 bg-[#4278ba] text-white text-sm rounded-full">
           {{ tag }}
@@ -191,20 +172,19 @@ const renderMarkdown = (markdown: string) => {
 
       <!-- Blog Content -->
       <motion.div
-        :initial="{ opacity: 0, y: 30 }"
+        :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut', delay: 1.0 }"
+        :transition="enter(1.0, 0.6)"
         class="blog-article max-w-prose text-[#eeeeee] px-5 sm:px-10"
-        style="view-transition-name: blog-content"
       >
         <div v-html="renderMarkdown(blog.content.content)"></div>
       </motion.div>
 
       <!-- Social Sharing -->
       <motion.div
-        :initial="{ opacity: 0, y: 30 }"
+        :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut', delay: 1.2 }"
+        :transition="enter(1.2, 0.6)"
         class="px-5 sm:px-10"
       >
         <SocialShare :title="blog.content.title" :description="blog.content.description"

@@ -1,28 +1,23 @@
 <template>
-  <!-- Loading Spinner -->
-  <div v-if="pending" class="w-full min-h-screen bg-[#1e1d2c] flex items-center justify-center z-10">
-    <div class="text-center">
-      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#eeeeee] animate-spin" />
-    </div>
-  </div>
 
-  <section v-else class="w-full min-h-screen flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20 relative z-10">
+  <section class="w-full min-h-screen flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20 relative z-10">
     <div class="lg:max-w-screen-xl mx-auto">
 
     <!-- Header and Title Group -->
     <motion.div
-      :initial="{ opacity: 0, y: 30 }"
+      :initial="titleMorphs ? false : enterFrom('y', 30)"
       :animate="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.6, ease: 'easeOut' }"
+      :transition="enter(0, 0.6)"
     >
-      <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10">Blog</h1>
+      <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10"
+        style="view-transition-name: page-title">Blog</h1>
     </motion.div>
 
     <!-- Intro Text Group -->
     <motion.div
-      :initial="{ opacity: 0, y: 30 }"
+      :initial="enterFrom('y', 30)"
       :animate="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }"
+      :transition="enter(0.2, 0.6)"
     >
       <TextWrapper>
         Here you'll find thoughts, tutorials, and insights about web development, mobile development, and the tech industry. I write about things I learn, interesting projects I work on, and share knowledge that might help other developers on their journey.
@@ -36,15 +31,16 @@
       <!-- Featured post (spans 2 columns) -->
       <motion.div
         v-if="transformedBlogPosts.length > 0"
-        :initial="{ opacity: 0, y: 30 }"
+        :initial="cardMorphs(transformedBlogPosts[0]!.path) ? false : enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
+        :transition="enter(0.4, 0.6)"
         class="md:col-span-2"
       >
         <BentoGridCard
           :name="transformedBlogPosts[0]!.title"
           :description="transformedBlogPosts[0]!.description"
           :href="transformedBlogPosts[0]!.path"
+          :transition-key="transformedBlogPosts[0]!.slug"
           cta="Read more"
           :icon="transformedBlogPosts[0]!.image ? undefined : ('i-heroicons-document-text')"
         >
@@ -54,6 +50,7 @@
             v-if="transformedBlogPosts[0]!.image" 
             :src="transformedBlogPosts[0]!.image" 
             :alt="transformedBlogPosts[0]!.title"
+            :style="{ viewTransitionName: `post-image-${transformedBlogPosts[0]!.slug}`, viewTransitionClass: 'post-image' }"
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
           />
           <!-- Fallback gradient background - matching main background -->
@@ -73,14 +70,15 @@
       <motion.div
         v-for="(post, index) in transformedBlogPosts.slice(1)"
         :key="post.id"
-        :initial="{ opacity: 0, y: 30 }"
+        :initial="cardMorphs(post.path) ? false : enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 + (index * 0.1) }"
+        :transition="enter(0.6 + (index * 0.1), 0.6)"
       >
         <BentoGridCard
           :name="post.title"
           :description="post.description"
           :href="post.path"
+          :transition-key="post.slug"
           cta="Read more"
           :icon="post.image ? undefined : ('i-heroicons-document-text')"
         >
@@ -90,6 +88,7 @@
             v-if="post.image" 
             :src="post.image" 
             :alt="post.title"
+            :style="{ viewTransitionName: `post-image-${post.slug}`, viewTransitionClass: 'post-image' }"
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
           />
           <!-- Fallback gradient background - matching main background -->
@@ -108,9 +107,9 @@
       <!-- Empty state -->
       <motion.div
         v-if="transformedBlogPosts.length === 0"
-        :initial="{ opacity: 0, y: 30 }"
+        :initial="enterFrom('y', 30)"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }"
+        :transition="enter(0.4, 0.6)"
         class="col-span-full text-center"
       >
         <BentoGridItem>
@@ -137,9 +136,11 @@
 import { motion } from 'motion-v'
 import type { StoryblokStory, BlogPost } from '~/types/storyblok'
 
-definePageMeta({
-  viewTransition: false
-})
+// Skip entrances for elements that morph in from the previous page
+const from = useTransitionFrom()
+const { enter, enterFrom } = useEntrance()
+const titleMorphs = computed(() => from.value === '/' || from.value === '/work')
+const cardMorphs = (path: string) => from.value === path
 
 useSeoMeta({
   title: 'Blog',
@@ -148,19 +149,6 @@ useSeoMeta({
   ogUrl: 'https://alexbates.dev/blog',
 })
 
-// Loading state - show spinner until page is ready
-const pending = ref(true)
-
-// Hide loading spinner when page is fully loaded
-onMounted(() => {
-  // Wait for next tick to ensure all content is rendered
-  nextTick(() => {
-    // Small delay to ensure smooth transition
-    setTimeout(() => {
-      pending.value = false
-    }, 100)
-  })
-})
 
 const { data: blogPosts } = await useAsyncData('blog-posts', async () => {
   const storyblokApi = useStoryblokApi();

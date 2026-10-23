@@ -13,6 +13,10 @@
 @layer base {
   html {
     font-family: var(--font-sans);
+    /* Page colour on the root itself: during view transitions the old and new
+       snapshots are semi-transparent, and an unset root shows white through them */
+    background-color: #1e1d2c;
+    color-scheme: dark;
   }
 
   h1, h2, h3, h4, h5, h6 {

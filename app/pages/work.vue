@@ -6,7 +6,7 @@
     <main class="container mx-auto px-4 py-10 relative z-10">
       <div class="max-w-screen-xl mx-auto">
         <!-- Page Title -->
-        <h1 class="text-4xl sm:text-7xl font-bold text-[#ffffff] mb-8">
+        <h1 class="text-4xl sm:text-7xl font-bold text-[#ffffff] mb-8" style="view-transition-name: page-title">
           Work
         </h1>
 
@@ -29,9 +29,6 @@
 </template>
 
 <script lang="ts" setup>
-definePageMeta({
-  viewTransition: false
-})
 
 // Set page meta for SEO
 useHead({

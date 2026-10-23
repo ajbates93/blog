@@ -1,27 +1,22 @@
 <template>
-  <!-- Loading Spinner -->
-  <div v-if="pending" class="w-full min-h-screen bg-[#1e1d2c] flex items-center justify-center z-10">
-    <div class="text-center">
-      <UIcon name="i-mingcute:loading-3-fill" class="w-16 h-16 mx-auto text-[#eeeeee] animate-spin" />
-    </div>
-  </div>
 
   <!-- Hero Section -->
-  <section v-else class="w-full min-h-screen flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20 relative z-10">
+  <section class="w-full min-h-screen flex items-center pb-10 md:py-10 px-4 md:px-10 xl:px-20 relative z-10">
     <div
       class="xl:grid xl:max-w-screen-xl xl:grid-cols-[3fr_3fr] gap-10 xl:gap-20 grid-cols-1 mx-auto text-left items-stretch">
       <div class="flex flex-col justify-start">
         <!-- Group 1: Header, Heading, and Intro -->
-        <motion.div :initial="{ opacity: 0, y: 30 }" :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut' }">
-          <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10">
+        <motion.div :initial="titleMorphs ? false : enterFrom('y', 30)" :animate="{ opacity: 1, y: 0 }"
+          :transition="enter(0, 0.6)">
+          <h1 class="mt-4 sm:mt-0 xl:mt-20 text-4xl sm:text-7xl text-[#ffffff] font-bold sm:mb-10"
+            style="view-transition-name: page-title">
             Hello there.
           </h1>
 
         </motion.div>
 
-        <motion.div :initial="{ opacity: 0, y: 30 }" :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.2 }">
+        <motion.div :initial="enterFrom('y', 30)" :animate="{ opacity: 1, y: 0 }"
+          :transition="enter(0.2, 0.6)">
           <TextWrapper>
             I'm
             <span class="font-bold underline">Alex Bates</span>. I'm a software developer with over
@@ -31,8 +26,8 @@
         </motion.div>
 
         <!-- Group 2: Work Description, Blog/Social Links, and Social Icons -->
-        <motion.div :initial="{ opacity: 0, y: 30 }" :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.4 }">
+        <motion.div :initial="enterFrom('y', 30)" :animate="{ opacity: 1, y: 0 }"
+          :transition="enter(0.4, 0.6)">
           <TextWrapper>
             I'm currently working at
             <a target="_blank" class="font-bold text-white hover:text-gray-200 transition-colors"
@@ -63,8 +58,8 @@
         </motion.div>
 
         <!-- Group 3: Availability Status -->
-        <motion.div :initial="{ opacity: 0, y: 30 }" :animate="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.6 }">
+        <motion.div :initial="enterFrom('y', 30)" :animate="{ opacity: 1, y: 0 }"
+          :transition="enter(0.6, 0.6)">
           <!-- Desktop version -->
           <div class="hidden md:flex bg-white/10 backdrop-blur-sm p-5 rounded-md gap-3">
             <p aria-hidden="true">
@@ -96,8 +91,8 @@
       </div>
 
       <!-- Interactive Terminal with fade-in-fade-left animation (happens last) -->
-      <motion.div :initial="{ opacity: 0, x: 30 }" :animate="{ opacity: 1, x: 0 }"
-        :transition="{ duration: 0.6, ease: 'easeOut', delay: 0.8 }"
+      <motion.div :initial="enterFrom('x', 30)" :animate="{ opacity: 1, x: 0 }"
+        :transition="enter(0.8, 0.6)"
         class="hidden xl:block sticky top-10 mx-auto my-10 xl:m-0 overflow-hidden w-full max-w-[600px] max-h-[90dvh]">
         <div class="bg-gray-900 rounded-lg p-4 shadow-2xl flex flex-col border border-gray-700 h-full">
           <div class="flex items-center gap-2 mb-2 flex-shrink-0">
@@ -117,9 +112,9 @@
   <!-- Work Timeline Section -->
   <section id="about" class="w-full py-4 md:py-10 xl:py-20 px-4 md:px-10 xl:px-20">
     <motion.div 
-      :initial="{ opacity: 0, y: 50 }" 
+      :initial="enterFrom('y', 50)" 
       :animate="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.8, ease: 'easeOut' }"
+      :transition="enter(0, 0.8)"
       :viewport="{ once: true, margin: '-100px' }"
     >
       <Timeline :items="workTimelineData" title="Experience"
@@ -155,9 +150,9 @@
   <!-- Call to Action Section -->
   <section id="call-to-action" class="w-full py-4 md:py-10 xl:py-20 px-4 md:px-10 xl:px-20 relative z-10 mb-4 md:mb-10 xl:mb-20">
     <motion.div 
-      :initial="{ opacity: 0, y: 50 }" 
+      :initial="enterFrom('y', 50)" 
       :animate="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.8, ease: 'easeOut' }"
+      :transition="enter(0, 0.8)"
       :viewport="{ once: true, margin: '-100px' }"
     >
       <CallToAction />
@@ -171,9 +166,10 @@ import GradientButton from '@/components/inspira-ui/GradientButton.vue'
 import Timeline from '@/components/inspira-ui/Timeline.vue'
 import type { StoryblokStory, BlogPost } from '~/types/storyblok'
 
-definePageMeta({
-  viewTransition: false
-})
+// Skip the title's entrance when it morphs in from another page's title
+const from = useTransitionFrom()
+const { enter, enterFrom } = useEntrance()
+const titleMorphs = computed(() => from.value === '/blog' || from.value === '/work')
 
 // Set page meta for better SEO
 useHead({
@@ -184,19 +180,6 @@ useHead({
   ]
 })
 
-// Loading state - show spinner until page is ready
-const pending = ref(true)
-
-// Hide loading spinner when page is fully loaded
-onMounted(() => {
-  // Wait for next tick to ensure all content is rendered
-  nextTick(() => {
-    // Small delay to ensure smooth transition
-    setTimeout(() => {
-      pending.value = false
-    }, 100)
-  })
-})
 
 // Dark mode detection for CardSpotlight
 const isDark = computed(() => useColorMode().value === "dark");

@@ -10,13 +10,14 @@
         :max-opacity="0.3"
         :mobile-max-opacity="0.1"
         :flicker-chance="0.1"
+        style="view-transition-name: bg-grid"
       />
     </ClientOnly>
     
     <!-- Content -->
     <UApp class="relative z-10">
       <div class="min-h-screen flex flex-col">
-        <Header class="relative z-20" />
+        <Header class="relative z-20" style="view-transition-name: site-header" />
         <main class="flex-1">
           <slot />
         </main>
@@ -32,79 +33,95 @@ import FlickeringGrid from '@/components/inspira-ui/FlickeringGrid.vue'
 </script>
 
 <style>
-::view-transition-old(root),
+/* ---------------------------------------------------------------------------
+   Page transitions (Nuxt experimental.viewTransition)
+   - Pages: old page fades out fast; the new page's own fade-up entrances do the rest
+   - Header and background grid stay put
+   - Page titles (Home / Blog / Work) morph into each other
+   - Blog card image + title morph into the post hero + title, and back
+   --------------------------------------------------------------------------- */
+
+::view-transition-old(root) {
+  animation: 100ms ease-out both vt-fade-out;
+}
+
 ::view-transition-new(root) {
+  animation: 150ms ease-out both vt-fade-in;
+}
+
+/* Pinned: show the live new state with no animation */
+::view-transition-group(site-header),
+::view-transition-group(bg-grid),
+::view-transition-new(site-header),
+::view-transition-new(bg-grid) {
   animation: none;
 }
 
-/* ::view-transition-old(blog-title) {
-  animation: blog-title-out 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-} */
-
-::view-transition-new(blog-title) {
-  animation: blog-title-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+::view-transition-old(site-header),
+::view-transition-old(bg-grid) {
+  display: none;
 }
 
-/* ::view-transition-old(author-section),
-::view-transition-old(blog-content) {
-  animation: fade-out 0.4s ease-out forwards;
-  animation-delay: 0.6s;
-} */
-
-::view-transition-new(author-section),
-::view-transition-new(blog-content),
-::view-transition-new(blog-description),
-::view-transition-new(blog-tags) {
-  animation: fade-in 0.4s ease-out forwards;
-  animation-delay: 0.6s;
-  opacity: 0;
+/* Page title: move + crossfade without stretching the text */
+::view-transition-group(page-title) {
+  animation-duration: 250ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
 
-@keyframes fade-out {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
+::view-transition-old(page-title),
+::view-transition-new(page-title) {
+  width: auto;
+  height: 100%;
+  object-fit: none;
+  object-position: left top;
+}
 
+/* Old title gets out of the way quickly; new one fades in as it settles */
+::view-transition-old(page-title) {
+  animation: 90ms ease-out both vt-fade-out;
+}
+
+::view-transition-new(page-title) {
+  animation: 200ms ease-out 50ms both vt-fade-in;
+}
+
+/* Card <-> post morphs */
+::view-transition-group(*.post-image),
+::view-transition-group(*.post-title) {
+  animation-duration: 280ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Card and hero images have different aspect ratios: crop rather than squash */
+::view-transition-image-pair(*.post-image) {
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+::view-transition-old(*.post-image),
+::view-transition-new(*.post-image) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes vt-fade-out {
   to {
     opacity: 0;
-    transform: translateY(20px);
   }
 }
 
-@keyframes fade-in {
+@keyframes vt-fade-in {
   from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes blog-title-out {
-  from {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-
-  to {
-    transform: translateY(-30px) scale(0.95);
     opacity: 0;
   }
 }
 
-@keyframes blog-title-in {
-  from {
-    transform: translateY(30px) scale(1.05);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0) scale(1);
-    opacity: 1;
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
 </style>
