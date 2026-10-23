@@ -5,7 +5,7 @@ import type { StoryblokStory, BlogPostContent } from '~/types/storyblok'
 
 const route = useRoute();
 
-const { data: blog } = await useAsyncData(`page-${route.path}`, async () => {
+const { data: blog } = await useAsyncData(`post-${route.params.id}`, async () => {
   const storyblokApi = useStoryblokApi();
   const { data } = await storyblokApi.get(`cdn/stories/posts/${route.params.id}`, {
     version: 'published'
