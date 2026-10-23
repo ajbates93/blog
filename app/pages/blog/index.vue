@@ -49,6 +49,7 @@
           <NuxtImg 
             v-if="transformedBlogPosts[0]!.image" 
             :src="transformedBlogPosts[0]!.image" 
+            sizes="xs:100vw md:66vw xl:850px"
             :alt="transformedBlogPosts[0]!.title"
             :style="{ viewTransitionName: `post-image-${transformedBlogPosts[0]!.slug}`, viewTransitionClass: 'post-image' }"
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
@@ -87,6 +88,7 @@
           <NuxtImg 
             v-if="post.image" 
             :src="post.image" 
+            sizes="xs:100vw md:50vw lg:33vw xl:420px"
             :alt="post.title"
             :style="{ viewTransitionName: `post-image-${post.slug}`, viewTransitionClass: 'post-image' }"
             class="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"

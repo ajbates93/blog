@@ -10,13 +10,16 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/seo", "@nuxt/ui", "@nuxt/fonts", "@nuxt/image", "@nuxt/icon", "motion-v/nuxt", "nuxt-lottie", "@storyblok/nuxt"],
   ssr: true,
   nitro: {
-    preset: "netlify-static",
+    // Static output served by a Cloudflare Worker (see wrangler.jsonc).
+    preset: "cloudflare-pages-static",
   },
   site: {
     url: "https://alexbates.dev",
     name: "Alex Bates",
   },
   image: {
+    // Resize/convert via Storyblok's image service, which works on any host
+    provider: "storyblok",
     quality: 80,
     format: ['webp', 'avif', 'jpeg'],
     screens: {
@@ -29,6 +32,14 @@ export default defineNuxtConfig({
     },
   },
   hooks: {
+    // The preset writes `/* /404.html 404` to _redirects, which Workers rejects
+    // (only 200/3xx allowed). wrangler.jsonc's not_found_handling does the same job.
+    "nitro:init"(nitro) {
+      nitro.hooks.hook("compiled", async () => {
+        const { rm } = await import("node:fs/promises");
+        await rm(`${nitro.options.output.dir}/_redirects`, { force: true });
+      });
+    },
     // Prerender every published Storyblok post so each one gets real HTML
     // (and its own meta tags) instead of falling through to 404.html.
     async "nitro:config"(nitroConfig) {
@@ -88,18 +99,4 @@ export default defineNuxtConfig({
   storyblok: {
     accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
   },
-  // Configure caching for blog pages using Nuxt 4's advanced caching
-  routeRules: {
-    // Blog pages - use ISR for better performance and cache invalidation
-    "/blog/**": {
-      isr: 60 * 60, // Revalidate every hour
-    },
-    // Static assets - cache indefinitely (Nuxt 4 handles invalidation on deploy)
-    "/_nuxt/**": {
-      headers: {
-        "Cache-Control": "public, max-age=31536000, immutable",
-        "Netlify-CDN-Cache-Control": "public, max-age=31536000, stale-while-revalidate=31536000, durable",
-      },
-    },
-  }
 });
