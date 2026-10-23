@@ -1,0 +1,4 @@
+# Allow Netlify Image CDN (used by <NuxtImg>) to fetch Storyblok assets.
+# Without this, /.netlify/images returns 400 "not an allowed pattern".
+[images]
+  remote_images = ["https://a\\.storyblok\\.com/.*"]
