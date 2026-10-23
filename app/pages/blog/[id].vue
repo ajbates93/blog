@@ -102,10 +102,15 @@ const renderMarkdown = (markdown: string) => {
   </div>
 
   <div v-else class="w-full pb-10 bg-[#1e1d2c] py-5 sm:py-10" v-if="blog">
-    <div v-if="blog.content.banner_image?.filename" class="relative w-full max-w-[2000px] max-h-[400px] mx-auto mb-10 md:mb-20">
-      <img :src="blog.content.banner_image.filename" :alt="blog.content.banner_image.alt || 'Blog banner'" class="w-full h-[400px] object-cover"
-        width="1600" height="400" />
-      <div class="absolute inset-0 bg-black opacity-40 pointer-events-none"></div>
+    <!-- Hero: full-width strip on mobile; contained, rounded 2:1 image on wider screens
+         so it isn't cropped to a thin letterbox -->
+    <div v-if="blog.content.banner_image?.filename"
+      class="relative w-full h-[400px] md:h-auto md:aspect-[2/1] md:max-w-5xl md:px-10 mx-auto mb-10 md:mb-16">
+      <div class="relative w-full h-full overflow-hidden md:rounded-2xl md:shadow-2xl">
+        <img :src="blog.content.banner_image.filename" :alt="blog.content.banner_image.alt || 'Blog banner'"
+          class="w-full h-full object-cover" width="2000" height="1000" fetchpriority="high" />
+        <div class="absolute inset-0 bg-black/30 pointer-events-none"></div>
+      </div>
     </div>
     <div class="flex flex-col items-center mx-auto gap-10">
       <!-- Blog avatar,  Author and date-->
@@ -140,7 +145,7 @@ const renderMarkdown = (markdown: string) => {
             ← Back to blog
           </ULink>
           <div class="flex items-center gap-4">
-            <p>{{ new Date(blog.first_published_at).toLocaleString().split(",")[0] }}</p>
+            <p>{{ new Date(blog.first_published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) }}</p>
             <span class="w-1 h-1 bg-white rounded-full"></span>
             <p>{{ calculateReadingTime(blog.content.content) }} min read</p>
           </div>
@@ -192,7 +197,7 @@ const renderMarkdown = (markdown: string) => {
         class="blog-article max-w-prose text-[#eeeeee] px-5 sm:px-10"
         style="view-transition-name: blog-content"
       >
-        <div class="prose prose-invert max-w-none" v-html="renderMarkdown(blog.content.content)"></div>
+        <div v-html="renderMarkdown(blog.content.content)"></div>
       </motion.div>
 
       <!-- Social Sharing -->
@@ -210,62 +215,122 @@ const renderMarkdown = (markdown: string) => {
 </template>
 
 <style>
+/* Post body typography. Markdown comes from Storyblok via v-html, and the
+   Tailwind typography plugin isn't installed, so every element is styled here. */
 .blog-article {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
   line-height: 1.75;
-  font-size: 1.125rem;
-  /* text-lg */
+  font-size: 1.125rem; /* 18px */
 }
 
 @media (min-width: 768px) {
   .blog-article {
-    font-size: 1.25rem;
-    /* text-xl */
+    font-size: 1.25rem; /* 20px */
   }
+}
+
+.blog-article h2,
+.blog-article h3,
+.blog-article h4 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.3;
+  color: #ffffff;
+  margin-top: 2.25em;
+  margin-bottom: 0.75em;
+}
+
+.blog-article h2 { font-size: 1.75em; }
+.blog-article h3 { font-size: 1.4em; }
+.blog-article h4 { font-size: 1.15em; font-weight: 600; }
+
+.blog-article > :first-child > :first-child {
+  margin-top: 0;
 }
 
 .blog-article p,
 .blog-article hr {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.25em;
 }
 
 .blog-article hr {
   opacity: 0.2;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
 }
 
 .blog-article ul,
 .blog-article ol {
-  list-style-type: disc;
   margin-bottom: 1.25em;
   margin-top: 1.25em;
   padding-inline-start: 1.625em;
 }
 
+.blog-article ul { list-style-type: disc; }
+.blog-article ol { list-style-type: decimal; }
+
 .blog-article li {
-  margin: 8px 0;
-  padding-inline-start: .375em;
+  margin: 0.5em 0;
+  padding-inline-start: 0.375em;
+}
+
+.blog-article li::marker {
+  color: #9ca3af;
+}
+
+.blog-article strong {
+  font-weight: 700;
+  color: #ffffff;
 }
 
 .blog-article a {
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: underline;
+  text-underline-offset: 3px;
   color: #eeeeee;
+  transition: color 0.2s ease;
 }
 
 .blog-article a:hover {
-  color: #2b2b2b;
-  transition: color 0.2s ease;
+  color: #93c5fd;
+}
+
+.blog-article blockquote {
+  border-left: 3px solid #4278ba;
+  padding-left: 1em;
+  margin: 1.75em 0;
+  font-style: italic;
+  color: #d1d5db;
+}
+
+.blog-article code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: rgb(255 255 255 / 0.08);
+  border-radius: 0.3em;
+  padding: 0.15em 0.35em;
+}
+
+.blog-article pre {
+  font-size: 0.85em;
+  line-height: 1.6;
+  background: #15141f;
+  border-radius: 0.75em;
+  padding: 1em 1.25em;
+  margin: 1.75em 0;
+  overflow-x: auto;
+}
+
+.blog-article pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
 }
 
 .blog-article img {
   margin: 2.5em auto;
-  text-align: center;
   border-radius: 0.75em;
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-}
-
-.font-serif {
-  font-family: 'Lora', serif;
 }
 </style>

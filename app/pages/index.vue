@@ -350,7 +350,4 @@ html {
   scroll-behavior: smooth;
 }
 
-.font-serif {
-  font-family: 'Lora', serif;
-}
 </style>

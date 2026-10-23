@@ -6,7 +6,7 @@
     <main class="container mx-auto px-4 py-10 relative z-10">
       <div class="max-w-screen-xl mx-auto">
         <!-- Page Title -->
-        <h1 class="text-4xl md:text-6xl font-bold text-[#ffffff] mb-8">
+        <h1 class="text-4xl sm:text-7xl font-bold text-[#ffffff] mb-8">
           Work
         </h1>
 
@@ -17,7 +17,7 @@
         <!-- Back to Home -->
         <div class="mt-8 text-center">
           <ULink to="/"
-            class="inline-flex items-center text-[#2b2b2b] hover:text-white transition-colors font-semibold">
+            class="inline-flex items-center text-gray-300 hover:text-white transition-colors font-semibold">
             <UIcon name="i-heroicons:arrow-left" class="mr-2" />
             Back to Home
           </ULink>
@@ -25,8 +25,6 @@
       </div>
     </main>
 
-    <!-- Footer -->
-    <Footer />
   </div>
 </template>
 
