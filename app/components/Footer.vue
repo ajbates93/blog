@@ -43,7 +43,7 @@
               </a>
             </li>
             <li>
-              <a href="https://linkedin.com/in/alexbates" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:underline transition-colors">
+              <a href="https://www.linkedin.com/in/alex-bates-01b548a7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:underline transition-colors">
                 LinkedIn
               </a>
             </li>

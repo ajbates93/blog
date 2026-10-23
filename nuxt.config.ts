@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   },
   site: {
     url: "https://alexbates.dev",
+    name: "Alex Bates",
   },
   image: {
     quality: 80,
@@ -27,11 +28,31 @@ export default defineNuxtConfig({
       'xxl': 1536,
     },
   },
-  // nitro: {
-  //   prerender: {
-  //     routes: ['/sitemap.xml']
-  //   }
-  // },
+  hooks: {
+    // Prerender every published Storyblok post so each one gets real HTML
+    // (and its own meta tags) instead of falling through to 404.html.
+    async "nitro:config"(nitroConfig) {
+      if (nitroConfig.dev) return;
+      const token = process.env.STORYBLOK_ACCESS_TOKEN;
+      if (!token) throw new Error("STORYBLOK_ACCESS_TOKEN is required to prerender blog posts");
+
+      const slugs: string[] = [];
+      for (let page = 1; ; page++) {
+        const url = `https://api.storyblok.com/v2/cdn/stories?token=${token}&version=published&starts_with=posts/&per_page=100&page=${page}&cv=${Date.now()}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Storyblok request failed: ${res.status}`);
+        const { stories } = (await res.json()) as { stories: { slug: string }[] };
+        slugs.push(...stories.map((s) => s.slug));
+        if (stories.length < 100) break;
+      }
+
+      nitroConfig.prerender ??= {};
+      nitroConfig.prerender.routes = [
+        ...(nitroConfig.prerender.routes ?? []),
+        ...slugs.map((slug) => `/blog/${slug}`),
+      ];
+    },
+  },
   css: ["~/assets/css/main.css"],
   app: {
     head: {

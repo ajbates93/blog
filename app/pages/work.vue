@@ -37,7 +37,7 @@ definePageMeta({
 
 // Set page meta for SEO
 useHead({
-  title: 'My Work - Alex Bates',
+  title: 'My Work',
   meta: [
     { name: 'description', content: 'Portfolio and work showcase for Alex Bates, a software developer specializing in web and mobile applications.' }
   ]

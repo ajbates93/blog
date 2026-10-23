@@ -37,7 +37,7 @@
             I'm currently working at
             <a target="_blank" class="font-bold text-white hover:text-gray-200 transition-colors"
               href="https://www.pocketworks.co.uk">Pocketworks</a>
-            as a Full Stack Developer, where I build web and mobile applications for clients across various
+            as a Senior Full Stack Developer, where I build web and mobile applications for clients across various
             industries.
           </TextWrapper>
           <TextWrapper>
@@ -177,9 +177,10 @@ definePageMeta({
 
 // Set page meta for better SEO
 useHead({
-  title: 'Alex Bates - Software Developer',
+  title: 'Alex Bates | Software Developer',
+  titleTemplate: '%s',
   meta: [
-    { name: 'description', content: 'Software developer with over 9 years of experience. Currently working at Pocketworks building web and mobile applications.' }
+    { name: 'description', content: 'Senior full stack developer with over 10 years of experience. Currently working at Pocketworks building web and mobile applications.' }
   ]
 })
 
@@ -280,16 +281,18 @@ const workTimelineData = [
   {
     id: "pocketworks",
     label: "2023",
-    title: "Fullstack Web Developer, Pocketworks",
-    period: "10/2023 - Present (2 years)",
+    title: "Senior Fullstack Developer, Pocketworks",
+    period: "10/2023 - Present",
     location: "📍 Leeds, UK",
-    description: "Delivering full-stack solutions across diverse industries, working autonomously to make technical decisions and manage project timelines. Expanding technology capabilities with TypeScript, Vue/Nuxt, Alpine.js, Astro, Elixir/Phoenix, Python/Flask, and Go.",
+    description: "Delivering full-stack solutions from power-sector engineering to consumer apps in a flat, employee-owned studio, owning technical decisions, timelines and client relationships. Broadened the company's stack with production work in TypeScript, Python, Go, Vue/Nuxt, Astro and Elixir/Phoenix.",
     achievements: [
-      "Led web application development for electrical testing equipment",
-      "Delivered complex data visualisations using SciCharts",
-      "Created custom licensing integration with C libraries using Python",
-      "Migrated legacy systems to modern Astro/GraphQL/DatoCMS stack",
-      "Integrated AI tools into development workflow"
+      "Designed and shipped natural-language semantic search for the company website, rebuilt on every deploy and running at pennies per month",
+      "Architected an Elixir/Phoenix backend for a Flutter networking app, with end-to-end encryption so the server never sees contact data",
+      "Built an LLM-powered feedback analysis feature (Anthropic API), engineered for predictable cost and validated output",
+      "Led an offline-capable web app for power-industry engineers, with real-time SciCharts visualisations and a custom C licensing integration via Python",
+      "Acted as Product Owner on a client mobile engagement, owning scope and trade-offs against a fixed budget",
+      "Migrated the company website to Astro/GraphQL/DatoCMS, improving Lighthouse scores and search rankings",
+      "Led adoption of AI tooling (Claude Code, agentic workflows, MCP) and mentor colleagues as a professional development buddy"
     ]
   },
   {

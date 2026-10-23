@@ -13,9 +13,38 @@ const { data: blog } = await useAsyncData(`page-${route.path}`, async () => {
   return data.story as StoryblokStory;
 });
 
+if (!blog.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Post not found', fatal: true });
+}
 
-// useHead(blog.value?.head || {})
-// useSeoMeta(blog.value?.seo || {})
+// Per-post meta so link previews (Slack, LinkedIn, etc.) show the post, not the homepage
+const postUrl = `https://alexbates.dev/blog/${route.params.id}`;
+const bannerUrl = blog.value.content.banner_image?.filename;
+// Storyblok image service crops to the standard 1200x630 social card size
+const ogImage = bannerUrl
+  ? `${bannerUrl}/m/1200x630/smart`
+  : 'https://alexbates.dev/images/home-about-small.webp';
+const postTitle = blog.value.content.title || blog.value.name;
+const postDescription = blog.value.content.description;
+
+useSeoMeta({
+  title: postTitle,
+  description: postDescription,
+  ogType: 'article',
+  ogTitle: postTitle,
+  ogDescription: postDescription,
+  ogUrl: postUrl,
+  ogImage,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageAlt: blog.value.content.banner_image?.alt || postTitle,
+  twitterCard: 'summary_large_image',
+  twitterTitle: postTitle,
+  twitterDescription: postDescription,
+  twitterImage: ogImage,
+  articlePublishedTime: blog.value.first_published_at,
+  articleModifiedTime: blog.value.published_at,
+});
 
 // Loading state - show spinner until page is ready
 const pending = ref(true)

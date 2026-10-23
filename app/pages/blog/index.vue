@@ -141,6 +141,13 @@ definePageMeta({
   viewTransition: false
 })
 
+useSeoMeta({
+  title: 'Blog',
+  description: 'Writing from Alex Bates on web and mobile development, side projects and things learned along the way.',
+  ogTitle: 'Blog | Alex Bates',
+  ogUrl: 'https://alexbates.dev/blog',
+})
+
 // Loading state - show spinner until page is ready
 const pending = ref(true)
 
