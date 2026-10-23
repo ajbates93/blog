@@ -72,6 +72,14 @@ export default defineNuxtConfig({
       link: [
         { rel: "alternate", type: "application/rss+xml", title: "Alex Bates", href: "/rss.xml" },
       ],
+      script: [
+        // Cloudflare Web Analytics (cookieless). Auto-injection doesn't apply to Worker static assets.
+        {
+          src: "https://static.cloudflareinsights.com/beacon.min.js",
+          defer: true,
+          "data-cf-beacon": '{"token": "ac277e546c114998b33d176bda0690f5"}',
+        },
+      ],
       meta: [
         {
           name: "description",
