@@ -63,22 +63,21 @@
           <!-- Desktop version -->
           <div class="hidden md:flex bg-white/10 backdrop-blur-sm p-5 rounded-md gap-3">
             <p aria-hidden="true">
-              <span class="inline-block animate-pulse w-3 h-3 bg-green-500 rounded-full"></span>
+              <span class="inline-block w-3 h-3 bg-[#60A5FA] rounded-full"></span>
             </p>
             <div>
               <p class="text-md text-[#ffffff] font-serif rounded-md mt-0 mb-1">
-                Hooray! I'm currently available for new freelance work!<br />
-                Drop me an email at <a href="mailto:hello@alexbates.dev"
-                  class="font-bold text-white hover:text-gray-200 transition-colors">hello@alexbates.dev</a> to discuss
-                your project.</p>
+                I'm working full-time at Pocketworks at the moment, but I'm always glad to hear about an
+                interesting idea or project. Drop me a line at <a href="mailto:hello@alexbates.dev"
+                  class="font-bold text-white hover:text-gray-200 transition-colors">hello@alexbates.dev</a>.</p>
             </div>
           </div>
 
           <!-- Mobile version - compact status -->
           <div class="md:hidden flex flex-col items-center justify-center gap-6 mb-4">
             <div class="flex items-center gap-2">
-              <span class="inline-block animate-pulse w-2 h-2 bg-green-500 rounded-full"></span>
-              <span class="text-white font-serif">Available for work</span>
+              <span class="inline-block w-2 h-2 bg-[#60A5FA] rounded-full"></span>
+              <span class="text-white font-serif">Open to interesting ideas</span>
               <a href="mailto:hello@alexbates.dev"
                 class="text-white font-serif underline hover:text-gray-200 transition-colors">
                 hello@alexbates.dev

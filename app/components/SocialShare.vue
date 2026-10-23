@@ -5,7 +5,7 @@
       <!-- Twitter/X -->
       <button
         @click="shareOnTwitter"
-        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:cursor-pointer text-[#2b2b2b] rounded-lg transition-all duration-200"
+        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:bg-[#3a6aa6] hover:cursor-pointer text-white font-medium rounded-lg transition-colors duration-200"
       >
         <UIcon name="i-mdi-twitter" class="w-5 h-5" />
         <span class="hidden sm:inline">Twitter</span>
@@ -14,7 +14,7 @@
       <!-- LinkedIn -->
       <button
         @click="shareOnLinkedIn"
-        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:cursor-pointer text-[#2b2b2b] rounded-lg transition-all duration-200"
+        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:bg-[#3a6aa6] hover:cursor-pointer text-white font-medium rounded-lg transition-colors duration-200"
       >
         <UIcon name="i-mdi-linkedin" class="w-5 h-5" />
         <span class="hidden sm:inline">LinkedIn</span>
@@ -23,7 +23,7 @@
       <!-- Facebook -->
       <button
         @click="shareOnFacebook"
-        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:cursor-pointer text-[#2b2b2b] rounded-lg transition-all duration-200"
+        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:bg-[#3a6aa6] hover:cursor-pointer text-white font-medium rounded-lg transition-colors duration-200"
       >
         <UIcon name="i-mdi-facebook" class="w-5 h-5" />
         <span class="hidden sm:inline">Facebook</span>
@@ -32,8 +32,8 @@
       <!-- Copy Link -->
       <button
         @click="copyLink"
-        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:cursor-pointer text-[#2b2b2b] rounded-lg transition-all duration-200"
-        :class="{ 'bg-green-500 bg-opacity-20': linkCopied }"
+        class="flex items-center gap-2 px-4 py-2 bg-[#4278ba] hover:bg-[#3a6aa6] hover:cursor-pointer text-white font-medium rounded-lg transition-colors duration-200"
+        :class="{ '!bg-green-600': linkCopied }"
       >
         <UIcon :name="linkCopied ? 'i-heroicons-check' : 'i-heroicons-link'" class="w-5 h-5" />
         <span class="hidden sm:inline">{{ linkCopied ? 'Copied!' : 'Copy Link' }}</span>

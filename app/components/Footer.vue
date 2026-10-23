@@ -38,7 +38,7 @@
           <h3 class="text-xl font-bold text-slate-200 mb-3">Connect</h3>
           <ul class="space-y-2 text-sm">
             <li>
-              <a href="https://github.com/alexbates" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:underline transition-colors">
+              <a href="https://github.com/ajbates93" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:underline transition-colors">
                 GitHub
               </a>
             </li>
@@ -61,10 +61,10 @@
         <div class="text-slate-400">
           &copy; {{ year }} Alex Bates. All rights reserved.
         </div>
-        <div class="text-slate-500 flex items-center gap-2">
-          <Icon name="tabler:brand-nuxt" class="w-4 h-4" />
-          Built with Nuxt & Nuxt Content
-        </div>
+        <a href="/rss.xml" class="text-slate-500 hover:text-slate-300 flex items-center gap-2 transition-colors">
+          <UIcon name="i-heroicons-rss-20-solid" class="w-4 h-4" />
+          RSS feed
+        </a>
       </div>
     </div>
   </footer>

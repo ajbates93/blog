@@ -52,6 +52,30 @@ const { enter, enterFrom } = useEntrance()
 const morphsFromCard = computed(() => from.value === '/blog')
 const slug = route.params.id as string
 
+// Older / newer posts for the "Keep reading" links (post bodies excluded to keep the payload small)
+const { data: allPosts } = await useAsyncData('post-list-summary', async () => {
+  const storyblokApi = useStoryblokApi();
+  const { data } = await storyblokApi.get('cdn/stories', {
+    version: 'published',
+    starts_with: 'posts/',
+    sort_by: 'first_published_at:desc',
+    excluding_fields: 'content',
+    per_page: 100,
+  });
+  return (data.stories as StoryblokStory[]).map((story) => ({
+    slug: story.slug,
+    title: story.content.title || story.name,
+    description: story.content.description,
+  }));
+});
+
+const neighbours = computed(() => {
+  const posts = allPosts.value ?? [];
+  const index = posts.findIndex((post) => post.slug === slug);
+  if (index === -1) return { newer: undefined, older: undefined };
+  return { newer: posts[index - 1], older: posts[index + 1] };
+});
+
 const publishedDate = computed(() =>
   new Date(blog.value!.first_published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 );
@@ -257,8 +281,28 @@ const renderMarkdown = (markdown: string) => {
         class="px-5 sm:px-10"
       >
         <SocialShare :title="blog.content.title" :description="blog.content.description"
-          :url="`https://www.alexbates.dev${route.path}`" />
+          :url="postUrl" />
       </motion.div>
+
+      <!-- Keep reading: older / newer posts -->
+      <nav v-if="neighbours.older || neighbours.newer" aria-label="More posts"
+        class="w-full md:max-w-screen-md px-5 sm:px-10">
+        <h2 class="text-sm font-sans font-medium uppercase tracking-wider text-gray-400 mb-4">Keep reading</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <NuxtLink v-if="neighbours.older" :to="`/blog/${neighbours.older.slug}`"
+            class="group rounded-xl p-5 bg-white/5 ring-1 ring-white/10 hover:bg-white/10 transition-colors">
+            <span class="text-sm text-gray-400">← Previous post</span>
+            <span class="block mt-1 font-serif text-lg font-semibold text-white group-hover:underline underline-offset-4">{{ neighbours.older.title }}</span>
+            <span v-if="neighbours.older.description" class="block mt-1 text-sm text-gray-400 line-clamp-2">{{ neighbours.older.description }}</span>
+          </NuxtLink>
+          <NuxtLink v-if="neighbours.newer" :to="`/blog/${neighbours.newer.slug}`"
+            class="group rounded-xl p-5 bg-white/5 ring-1 ring-white/10 hover:bg-white/10 transition-colors sm:text-right sm:col-start-2">
+            <span class="text-sm text-gray-400">Next post →</span>
+            <span class="block mt-1 font-serif text-lg font-semibold text-white group-hover:underline underline-offset-4">{{ neighbours.newer.title }}</span>
+            <span v-if="neighbours.newer.description" class="block mt-1 text-sm text-gray-400 line-clamp-2">{{ neighbours.newer.description }}</span>
+          </NuxtLink>
+        </div>
+      </nav>
     </div>
   </div>
 </template>

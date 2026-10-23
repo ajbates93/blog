@@ -50,6 +50,7 @@ export default defineNuxtConfig({
       nitroConfig.prerender.routes = [
         ...(nitroConfig.prerender.routes ?? []),
         ...slugs.map((slug) => `/blog/${slug}`),
+        "/rss.xml",
       ];
     },
   },
@@ -57,6 +58,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Alex Bates | Software Developer",
+      link: [
+        { rel: "alternate", type: "application/rss+xml", title: "Alex Bates", href: "/rss.xml" },
+      ],
       meta: [
         {
           name: "description",
